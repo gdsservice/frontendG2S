@@ -29,7 +29,7 @@ export class LoginService {
       headers: new HttpHeaders().set("Content-Type", "application/json")
     };
     let body = { username: username, password: password };
-    return this.httpClient.post(`${environment.backendHost}/auth/login`, body, options);
+    return this.httpClient.post(`${environment.backendHost}/api/auth/login`, body, options);
   }
 
 
