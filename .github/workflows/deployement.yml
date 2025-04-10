@@ -22,7 +22,7 @@ jobs:
       - name: Copy files to VPS
         uses: appleboy/scp-action@v0.1.7
         with:
-          source: "./dist/frontend-gestion-stock/browser"
+          source: "./dist/frontend-gestion-stock/browser/*"
           target: "/var/www/angular-app"
           host: ${{ secrets.HOST }}
           username: ${{ secrets.USERNAME }}
