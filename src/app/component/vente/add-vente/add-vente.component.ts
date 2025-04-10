@@ -127,6 +127,7 @@ export class AddVenteComponent implements OnInit {
       panelClass: ['info'], 
     });
   }
+  // fnskdsd
 
   onSelectProduit(prod: ProduitModel) {
     // Vérifier si le produit est déjà sélectionné
