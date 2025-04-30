@@ -4,10 +4,10 @@ import { ClientInputModel } from "./clientInputModel.model ";
 import { ProduitModel } from "./produit.model";
 import { UserModel } from "./user.model";
 import { VenteModel } from "./vente.model";
+import { VenteProduitModel } from "./venteProduit.model";
 
 export interface VenteInputModel{
-  quantite: number,
-  reduction?: number,
-  produit: ProduitModel[],
-  clientInput: ClientInputModel,
+
+  vente?: VenteModel,
+  listVenteProduit: VenteProduitModel[],
 }

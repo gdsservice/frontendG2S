@@ -14,7 +14,6 @@ import {
   ConfirmationDialogVenteComponent
 } from "../popup-dialog/confirmation-dialog-vente/confirmation-dialog-vente.component";
 import { ConfirmationDialogSuppVenteComponent } from '../popup-dialog/confirmation-dialog-supp-vente/confirmation-dialog-supp-vente.component';
-import {ApprovisionModel} from "../../models/approvision.model";
 
 @Component({
   selector: 'app-vente',
@@ -47,7 +46,6 @@ export class VenteComponent implements OnInit{
         data => {
           this.listeVente = data;
           console.log(this.listeVente);
-          
           this.dataSource = new MatTableDataSource(this.listeVente);
           this.dataSource.paginator = this.paginator;
           this.dataSource.sort = this.sort;

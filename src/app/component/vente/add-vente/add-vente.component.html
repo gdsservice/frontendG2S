@@ -105,15 +105,15 @@
               <!-- Designation -->
               <ng-container matColumnDef="designation">
                 <th mat-header-cell *matHeaderCellDef> PRODUIT </th>
-                <td mat-cell *matCellDef="let produit"> {{ produit.designation }} </td>
+                <td mat-cell *matCellDef="let produitVente"> {{ produitVente.produit.designation }} </td>
               </ng-container>
 
               <!-- Quantite Colu -->
               <ng-container matColumnDef="quantite">
                 <th mat-header-cell *matHeaderCellDef> QUANTITÉ </th>
-                <td mat-cell *matCellDef="let produit">
+                <td mat-cell *matCellDef="let produitVente">
                   <mat-form-field class="input" appearance="outline">
-                    <input matInput formControlName="quantite" type="number" min="1" placeholder="0" maxlength="100"
+                    <input matInput (ngModelchange)="calculMontant(produitVente)" [(ngModel)]="produitVente.quantite" [ngModelOptions]="{standalone: true}" type="number" min="1" placeholder="0" maxlength="100"
                       minlength="1">
                   </mat-form-field>
                 </td>
@@ -122,9 +122,9 @@
               <!-- Prix Unitaire Column -->
               <ng-container matColumnDef="prixUnitaire">
                 <th mat-header-cell *matHeaderCellDef> PRIX UNITAIRE </th>
-                <td mat-cell *matCellDef="let produit">
+                <td mat-cell *matCellDef="let produitVente">
                   <mat-form-field class="input" appearance="outline">
-                    <input matInput [value]="produit.prixUnitaire" type="number" readonly>
+                    <input matInput [value]="produitVente.produit.prixUnitaire" type="number" readonly>
                   </mat-form-field>
                 </td>
               </ng-container>
@@ -132,9 +132,9 @@
               <!-- Reduction Column -->
               <ng-container matColumnDef="reduction">
                 <th mat-header-cell *matHeaderCellDef> REDUCTION </th>
-                <td mat-cell *matCellDef="let produit">
+                <td mat-cell *matCellDef="let produitVente">
                   <mat-form-field class="input" appearance="outline">
-                    <input matInput formControlName="reduction" type="number" placeholder="0" min="1" step="1"
+                    <input matInput [(ngModel)]="produitVente.reduction" [ngModelOptions]="{standalone: true}" type="number" placeholder="0" min="1" step="1"
                       maxlength="100" minlength="1">
                   </mat-form-field>
                 </td>
@@ -143,9 +143,9 @@
               <!-- Montant Column -->
               <ng-container matColumnDef="montant">
                 <th mat-header-cell *matHeaderCellDef> MONTANT </th>
-                <td mat-cell *matCellDef="let produit">
+                <td mat-cell *matCellDef="let produitVente">
                   <mat-form-field class="input" appearance="outline">
-                    <input matInput type="number" readonly>
+                    <input matInput [value]="produitVente.montant" type="number" readonly>
                   </mat-form-field>
                 </td>
               </ng-container>
@@ -153,8 +153,8 @@
               <!-- Action Column -->
               <ng-container matColumnDef="action">
                 <th mat-header-cell *matHeaderCellDef> ACTION </th>
-                <td mat-cell *matCellDef="let produit">
-                  <button class="supprimer" mat-icon-button (click)="supprimer(produit.idProd)">
+                <td mat-cell *matCellDef="let produitVente">
+                  <button class="supprimer" mat-icon-button (click)="supprimer(produitVente.produit.idProd)">
                     <mat-icon>delete</mat-icon>
                   </button>
                 </td>

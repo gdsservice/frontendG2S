@@ -7,9 +7,9 @@ export interface VenteModel{
   quantite: number,
   reduction: number | null,
   note: string | null,
-  clientDTO: ClientModel,
-  produitsVend: ProduitModel[],
-  montant?:number;
+  clientsVente: ClientModel,
+  produitsVend?: ProduitModel[],
+  montant:number;
   dateVente?:string;
   status?:string;
   utilisateurVente?:UserModel;

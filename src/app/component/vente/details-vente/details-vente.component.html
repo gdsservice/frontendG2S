@@ -18,13 +18,13 @@
         <h6>Informations du Client</h6>
       </mat-card-title>
       <div *ngIf="vente"> 
-        <p><strong>Nom:</strong> {{ vente.vente.clientDTO.nom }}</p>
-        <p><strong>Prénom:</strong> {{ vente.vente.clientDTO.prenom }}</p>
-        <p><strong>Adresse:</strong> {{ vente.vente.clientDTO.adresse }}</p>
-        <p><strong>Téléphone:</strong> {{ vente.vente.clientDTO.telephone }}</p>
-        <p><strong>Email:</strong> {{ vente.vente.clientDTO.email }}</p>
-        <p><strong>Date:</strong> {{ vente.vente.clientDTO.dateAjout | date: 'dd/MM/yyyy' }}</p>
-        <p><strong>Créé par:</strong> {{ vente.vente.clientDTO.utilisateurClient?.nom }}</p>
+        <p><strong>Nom:</strong> {{ vente.vente.clientsVente.nom }}</p>
+        <p><strong>Prénom:</strong> {{ vente.vente.clientsVente.prenom }}</p>
+        <p><strong>Adresse:</strong> {{ vente.vente.clientsVente.adresse }}</p>
+        <p><strong>Téléphone:</strong> {{ vente.vente.clientsVente.telephone }}</p>
+        <p><strong>Email:</strong> {{ vente.vente.clientsVente.email }}</p>
+        <p><strong>Date:</strong> {{ vente.vente.clientsVente.dateAjout | date: 'dd/MM/yyyy' }}</p>
+        <p><strong>Créé par:</strong> {{ vente.vente.clientsVente.utilisateurClient?.nom }}</p>
       </div>
     </mat-card-content>
   </mat-card>

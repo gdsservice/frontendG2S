@@ -7,5 +7,5 @@ export interface VenteProduitModel{
   quantite: number,
   reduction: number,
   produit: ProduitModel,
-  vente: VenteModel
+  vente?: VenteModel
 }
