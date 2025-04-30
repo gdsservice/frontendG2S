@@ -45,6 +45,7 @@ export class VenteComponent implements OnInit{
       .subscribe(
         data => {
           this.listeVente = data;
+          console.log(this.listeVente);
           this.dataSource = new MatTableDataSource(this.listeVente);
           this.dataSource.paginator = this.paginator;
           this.dataSource.sort = this.sort;
