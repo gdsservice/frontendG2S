@@ -14,6 +14,8 @@ import { VenteInputModel } from '../models/venteInput.model ';
 })
 export class VenteService {
 
+  public listeVente!: VenteDAOModel[];
+
   constructor(private http: HttpClient) { }
 
   public listVente(): Observable<VenteDAOModel[]> {

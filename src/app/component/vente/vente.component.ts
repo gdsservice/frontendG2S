@@ -41,7 +41,6 @@ export class VenteComponent implements OnInit{
   }
 
   ngOnInit(): void {
-    console.log("+++++++++++++++++++++++++");
     this.venteService.listVente()
       .subscribe(
         data => {

@@ -37,7 +37,7 @@ export class DetailsVenteComponent {
         (venteDAO: VenteDAOModel) => {
           this.vente = venteDAO;
           this.dataSource = new MatTableDataSource(this.vente.venteProduitList);
-          console.table(this.vente.venteProduitList);
+          // console.table(this.vente.venteProduitList);
 
         },
         error => {
