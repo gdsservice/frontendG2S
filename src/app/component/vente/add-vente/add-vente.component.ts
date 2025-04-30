@@ -172,15 +172,12 @@ export class AddVenteComponent implements OnInit {
   }
 
   calculMontant(produitVente: VenteProduitModel){
-    console.log("##########");
     
     let index = this.produitsSelectionnes.findIndex(el=> el.produit.idProd == produitVente.produit.idProd)
     if (index!= -1) {
       produitVente.montant = produitVente.quantite * produitVente.produit.prixUnitaire;
       this.produitsSelectionnes[index] = produitVente;
-      console.log("11111111111111");
     }
-    console.log(this.produitsSelectionnes[index]);
   }
 
 
@@ -216,9 +213,7 @@ export class AddVenteComponent implements OnInit {
         this.venteListForm.patchValue({
           clientInput: client,
         });
-        console.log(this.venteListForm.value);
-
-
+       
         // Enregistrer la vente avec le nouveau client
         this.enregistrerVente();
       },
@@ -270,11 +265,7 @@ export class AddVenteComponent implements OnInit {
       listVenteProduit: this.produitsSelectionnes,
     }; 
   
-    console.log("##########################################");
-    console.log(venteInput);
-    console.log("##########################################");
-
-    this.venteService.ajoutVente(venteInput).subscribe({
+   this.venteService.ajoutVente(venteInput).subscribe({
       next: (value) => {
         this.spinnerProgress = false;
         this.snackBar.open('Vente enregistrée avec succès!', 'Fermer', { duration: 3500 });
