@@ -40,6 +40,7 @@ export class UpdateVenteComponent implements OnInit{
               }
 
   ngOnInit(): void {
+    // try
     // this.venteId = this.router.snapshot.paramMap.get('idVente');
     // if (this.venteId) {
     //     this.venteService.afficher(this.venteId).subscribe(
