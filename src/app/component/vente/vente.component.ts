@@ -41,11 +41,11 @@ export class VenteComponent implements OnInit{
   }
 
   ngOnInit(): void {
+    console.log("+++++++++++++++++++++++++");
     this.venteService.listVente()
       .subscribe(
         data => {
           this.listeVente = data;
-          console.log(this.listeVente);
           this.dataSource = new MatTableDataSource(this.listeVente);
           this.dataSource.paginator = this.paginator;
           this.dataSource.sort = this.sort;
