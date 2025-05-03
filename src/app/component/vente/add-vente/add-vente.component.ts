@@ -121,6 +121,7 @@ export class AddVenteComponent implements OnInit {
 
   }
 
+  // fonction calcul
   calculMontant(produitVente: VenteProduitModel){
     let index = this.produitsSelectionnes.findIndex(el=> el.produit.idProd == produitVente.produit.idProd)
     if (index!= -1) {
