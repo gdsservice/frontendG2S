@@ -1,6 +1,6 @@
 import {CategorieModel} from "./categorie.model";
 
-export interface ProduitModel{
+export interface ProduitDAOModel{
   idProd: string | null,
   designation: string,
   quantite: number,

@@ -10,6 +10,7 @@ import {ProduitService} from "../../../services/produit.service";
 import {ProduitModel} from "../../../models/produit.model";
 import {ValidDialogProduitComponent} from "../../popup-dialog/valid-dialog-produit/valid-dialog.component";
 import {MatSnackBar} from "@angular/material/snack-bar";
+import { ProduitINPUTModel } from '../../../models/produitINPUT.model ';
 
 @Component({
   selector: 'app-add-prod',
@@ -21,6 +22,8 @@ export class AddProdComponent implements OnInit{
   prodListForm!: FormGroup;
   listCategorie!: CategorieModel[];
   spinnerProgress: boolean = false;
+  selectedFile: File | null = null;
+  imagePreview: string | ArrayBuffer | null = null;
   
 
   constructor(private dialog: MatDialog,
@@ -59,6 +62,41 @@ export class AddProdComponent implements OnInit{
     this.annulerProd();
   }
 
+  onFileSelected(event: any): void {
+    const file = event.target.files[0];
+    if (file) {
+      // Vérification du type de fichier
+      if (file.type.match('image.*')) {
+        alert('Seules les images sont autorisées');
+        return;
+      }
+
+      // Vérification de la taille (max 5MB)
+      if (file.size > 5 * 1024 * 1024) {
+        alert('La taille maximale est de 5MB');
+        return;
+      }
+
+      this.selectedFile = file;
+      
+      // Création de l'aperçu
+      const reader = new FileReader();
+      reader.onload = () => {
+        this.imagePreview = reader.result;
+      };
+      reader.readAsDataURL(file);
+    }
+  }
+
+  removeImage(): void {
+    this.selectedFile = null;
+    this.imagePreview = null;
+    // Réinitialiser l'input file si nécessaire
+    const fileInput = document.querySelector('input[type="file"]') as HTMLInputElement;
+    if (fileInput) fileInput.value = '';
+  }
+  
+
   retour() {
     this.location.back()
   }
@@ -66,47 +104,56 @@ export class AddProdComponent implements OnInit{
   ajoutProd() {
     if (this.prodListForm.valid) {
       this.spinnerProgress = true;
-      let prod: ProduitModel = {
+  
+      const produit:ProduitINPUTModel = {
         idProd: null,
         designation: this.prodListForm.value.designation,
         quantite: this.prodListForm.value.quantite,
         prixUnitaire: this.prodListForm.value.prixUnitaire,
-        image: this.prodListForm.value.image,
-        categorieStockProdDTO: this.prodListForm.value.cat,
         note: this.prodListForm.value.note,
+        categorieStockProdDTO: this.prodListForm.value.cat,
+        image: null
       };
-      this.prodService.ajoutCat(prod).subscribe({
+  
+      const formData = new FormData();
+      formData.append('produit', JSON.stringify(produit));
+      if (this.selectedFile) {
+        formData.append('image', this.selectedFile);
+      }
+  
+      this.prodService.ajoutProd(formData).subscribe({
         next: value => {
           this.spinnerProgress = false;
-          this.snackBar.open('Produit mis à jour avec succès!', 'Fermer', { duration: 3000 });
+          this.snackBar.open('Produit ajouté avec succès!', 'Fermer', { duration: 3000 });
           this.router.navigateByUrl('/admin/produit');
         },
-        error: err => {
-          // ProduitDuplicateException
+        error: (err) => {
+          // ClientDuplicateException
           if (err.status === 409) {
             this.dialog.open(ErrorDialogComponent, {
               data: { message: err.error }
             });
-            //  EmptyException
-          } else if(err.status === 404) {
+            //  ClientNotFoundException
+          } else if (err.status === 404) {
             this.dialog.open(ErrorDialogComponent, {
               data: { message: err.error }
             });
-            // MontantQuantiteNullException
-          }else if(err.status === 400) {
+            // EmailIncorrectException && EmptyException
+          } else if (err.status === 400) {
             this.dialog.open(ErrorDialogComponent, {
-              data: {message: err.error}
+              data: { message: err.error }
             });
-          }else{
+          } else {
             console.log(err);
           }
           this.spinnerProgress = false;
-        }
+        },
       });
     } else {
       this.prodListForm.markAllAsTouched();
     }
   }
+  
 
   annulerProd() {
     this.prodListForm = this.fb.group({

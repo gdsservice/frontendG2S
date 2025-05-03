@@ -19,6 +19,7 @@ import {
   ConfirmationDialogSuppProdComponent
 } from "../popup-dialog/confirmation-dialog-supp-prod/confirmation-dialog-supp-prod.component";
 import {ApprovisionModel} from "../../models/approvision.model";
+import { ProduitDAOModel } from '../../models/produitDAO.model ';
 
 @Component({
   selector: 'app-produit',
@@ -28,9 +29,9 @@ import {ApprovisionModel} from "../../models/approvision.model";
 })
 export class ProduitComponent implements OnInit{
 
-  public listProduits!: Array<ProduitModel> ;
+  public listProduits!: Array<ProduitDAOModel> ;
   public dataSource: any;
-  public displayedColumns = ['designation', 'quantite', 'prixUnitaire', 'montant', 'date', 'cat','utilisateurProd','action']
+  public displayedColumns = ['designation', 'quantite', 'prixUnitaire', 'montant', 'date', 'cat','utilisateurProd','image','action']
   spinnerProgress: boolean = false;
   isLoading: boolean = true;
 
@@ -41,24 +42,29 @@ export class ProduitComponent implements OnInit{
               private produitService: ProduitService,
               private router: Router,
               private dialog: MatDialog,
-              private snackBar: MatSnackBar,) {
+              private snackBar: MatSnackBar) {
   }
 
   ngOnInit(): void {
     this.produitService.listProduit()
       .subscribe(
         data => {
-          this.listProduits = data;
+          this.listProduits = data.map(produit => ({
+            ...produit,
+            imageUrl: this.produitService.getImageUrl(produit.idProd!)
+          }));
+          
           this.dataSource = new MatTableDataSource(this.listProduits);
+          // console.log(this.listProduits);
           this.dataSource.paginator = this.paginator;
           this.dataSource.sort = this.sort;
           this.isLoading = false;
         },
         error => {
-          console.log(error);
+          console.error('Erreur lors du chargement des produits', error);
           this.isLoading = false;
         }
-      )
+      );
   }
 
 

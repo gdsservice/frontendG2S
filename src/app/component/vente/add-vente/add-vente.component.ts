@@ -16,7 +16,7 @@ import { MatSort } from "@angular/material/sort";
 import { ErrorDialogComponent } from "../../popup-dialog/error-dialog/error-dialog.component";
 import { VenteProduitModel } from '../../../models/venteProduit.model';
 import { VenteInputModel } from '../../../models/venteInput.model ';
-import { MatTab } from '@angular/material/tabs';
+import { ProduitDAOModel } from '../../../models/produitDAO.model ';
 
 @Component({
   selector: 'app-add-vente',
@@ -26,7 +26,7 @@ import { MatTab } from '@angular/material/tabs';
 export class AddVenteComponent implements OnInit {
 
   venteListForm!: FormGroup;
-  listProd!: ProduitModel[];
+  listProd!: ProduitDAOModel[];
   listClient!: ClientModel[];
   produitsSelectionnes: VenteProduitModel[] = [];
   quantiteProd: any;
@@ -45,7 +45,6 @@ export class AddVenteComponent implements OnInit {
     private venteService: VenteService,
     private prodService: ProduitService,
     private clientService: ClientService) {
-    // this.dataSource = new MatTableDataSource([]);
   }
 
   ngOnInit(): void {
@@ -54,6 +53,7 @@ export class AddVenteComponent implements OnInit {
     this.prodService.listProduit()
       .subscribe(data => {
         this.listProd = data;
+        this.filteredProd = data;
       }, error => {
         console.log(error);
       });
@@ -70,7 +70,6 @@ export class AddVenteComponent implements OnInit {
       reduction: [''],
       quantite: ['', Validators.required],
       note: [''],
-      produitsVend: [[], Validators.required],
       clientInput: [''],
       // Ajoute les contrôles pour le nouveau client
       nom: [''],
@@ -80,24 +79,9 @@ export class AddVenteComponent implements OnInit {
       email: [''],
     });
 
-/*     this.venteListForm.value.subscribe(res => {
-      
-    }) */
-
     // Configuration du paginator et du sort
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
-
-    // Initialisation des produits
-    this.prodService.listProduit().subscribe(
-      (data) => {
-        this.listProd = data;
-        this.filteredProd = data;
-      },
-      (error) => {
-        console.log(error);
-      }
-    );
   }
 
   // Méthode pour filtrer les produits en fonction de la recherche
@@ -106,49 +90,16 @@ export class AddVenteComponent implements OnInit {
     this.filteredProd = this.listProd.filter((prod) =>
       prod.designation.toLowerCase().includes(searchValue)
     );
-
-  }
-
-  // Méthode pour afficher un SnackBar de succès
-  showSuccessSnackBar(message: string): void {
-    this.snackBar.open(message, 'Fermer', {
-      duration: 3500,
-      panelClass: ['success'],
-    });
-  }
-
-  // Méthode pour afficher un SnackBar d'erreur
-  showErrorSnackBar(message: string): void {
-    this.snackBar.open(message, 'Fermer', {
-      duration: 3500,
-      panelClass: ['error'],
-    });
-  }
-
-  // Méthode pour afficher un SnackBar d'information
-  showInfoSnackBar(message: string): void {
-    this.snackBar.open(message, 'Fermer', {
-      duration: 3500,
-      panelClass: ['info'],
-    });
   }
 
   onSelectProduit(prod: ProduitModel) {
     // Vérifier si le produit est déjà sélectionné
     const produitExiste = this.produitsSelectionnes.some(produitVente => produitVente.produit.idProd === prod.idProd);
-
     if (produitExiste) {
       // Afficher un message ou notifier l'utilisateur que le produit est déjà sélectionné
       this.snackBar.open("Le produit " + prod.designation + " est déjà sélectionné.", 'Fermer', { duration: 3500 });
       return;
-    } 
-
-    // Ajoutez le produit avec une quantité et un prix unitaire par défaut
-   /*  let produitAjoute = {
-      ...prod,
-       quantite: prod.quantite,
-      prixUnitaire: prod.prixUnitaire, 
-    }; */
+    }
 
     let produitAjoute:VenteProduitModel = {
       produit: prod,
@@ -161,7 +112,6 @@ export class AddVenteComponent implements OnInit {
     this.produitsSelectionnes.push(produitAjoute)
 
     // Mettre à jour la dataSource du tableau avec les produits sélectionnés
-    // this.dataSource.data = this.produitsSelectionnes;
     this.dataSource = new MatTableDataSource(this.produitsSelectionnes);
     // Mettre à jour les produits sélectionnés dans le formulaire
     this.venteListForm.patchValue({
@@ -172,7 +122,6 @@ export class AddVenteComponent implements OnInit {
   }
 
   calculMontant(produitVente: VenteProduitModel){
-    
     let index = this.produitsSelectionnes.findIndex(el=> el.produit.idProd == produitVente.produit.idProd)
     if (index!= -1) {
       produitVente.montant = produitVente.quantite * produitVente.produit.prixUnitaire;

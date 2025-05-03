@@ -64,7 +64,16 @@ button{
   background-color: rgba(107, 60, 92, 0.75);
 }
 
+.image-preview {
+  margin: 1rem 0;
+}
 
+.image-preview img {
+  max-height: 200px;
+  max-width: 100%;
+  border-radius: 4px;
+  border: 1px solid #ddd;
+}
 
 /*Version mobile*/
 @media (max-width: 768px) {

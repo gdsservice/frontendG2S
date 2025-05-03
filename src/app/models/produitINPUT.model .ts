@@ -1,6 +1,6 @@
 import {CategorieModel} from "./categorie.model";
 
-export interface ProduitModel{
+export interface ProduitINPUTModel{
   idProd: string | null,
   designation: string,
   quantite: number,
@@ -8,5 +8,4 @@ export interface ProduitModel{
   image: any,
   categorieStockProdDTO: CategorieModel,
   note: string,
-  imageUrl?: string;
 }

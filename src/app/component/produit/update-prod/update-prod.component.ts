@@ -10,6 +10,8 @@ import {StockModel} from "../../../models/stock.model";
 import {ProduitModel} from "../../../models/produit.model";
 import {MatSnackBar} from "@angular/material/snack-bar";
 import {ErrorDialogComponent} from "../../popup-dialog/error-dialog/error-dialog.component";
+import { ProduitDAOModel } from '../../../models/produitDAO.model ';
+import { ProduitINPUTModel } from '../../../models/produitINPUT.model ';
 
 @Component({
   selector: 'app-update-prod',
@@ -35,6 +37,7 @@ export class UpdateProdComponent implements OnInit{
       designation: [''],
       quantite: [0],
       prixUnitaire: [0],
+      imageUrl: [''],
       image: [''],
       note: [''],
       categorieStockProdDTO:[],
@@ -48,7 +51,7 @@ export class UpdateProdComponent implements OnInit{
     this.prodId = this.route.snapshot.paramMap.get('idProd');
     if (this.prodId) {
       this.prodService.afficher(this.prodId).subscribe(
-        (prod: ProduitModel) => {
+        (prod: ProduitDAOModel) => {
           this.prodListForm.patchValue(prod);
         },
         error => {
@@ -75,7 +78,7 @@ export class UpdateProdComponent implements OnInit{
   modifierProd() {
     if (this.prodListForm.valid) {
       this.spinnerProgress=true;
-      const prod: ProduitModel = this.prodListForm.value;
+      const prod: ProduitINPUTModel = this.prodListForm.value;
       if (this.prodId) {
         prod.idProd = this.prodId;
         this.prodService.modifierProd(prod).subscribe(

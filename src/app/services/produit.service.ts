@@ -6,6 +6,8 @@ import {ProduitModel} from "../models/produit.model";
 import {UserModel} from "../models/user.model";
 import {StockModel} from "../models/stock.model";
 import {ApprovisionModel} from "../models/approvision.model";
+import { ProduitINPUTModel } from '../models/produitINPUT.model ';
+import { ProduitDAOModel } from '../models/produitDAO.model ';
 
 @Injectable({
   providedIn: 'root'
@@ -15,28 +17,31 @@ export class ProduitService {
   constructor(private http: HttpClient) { }
 
   // methode recuperation de la liste
-  public listProduit():Observable<Array<ProduitModel>>{
-    return this.http.get<Array<ProduitModel>>(`${environment.backendHost}/produit/listeProd`);
+  public listProduit():Observable<Array<ProduitDAOModel>>{
+    return this.http.get<Array<ProduitDAOModel>>(`${environment.backendHost}/produit/listeProd`);
   }
 
-  ajoutCat(prod: ProduitModel): Observable<ProduitModel> {
-    return this.http.post<ProduitModel>(`${environment.backendHost}/produit/enregistrerProd`,(prod), {
+  ajoutProd(formData: FormData): Observable<ProduitINPUTModel> {
+    return this.http.post<ProduitINPUTModel>(`${environment.backendHost}/produit/enregistrerProd`, formData);
+  }
+  
+
+  getImageUrl(idProd: string): string {
+    return `${environment.backendHost}/produit/image/${idProd}`;
+  }
+
+  modifierProd(prod: ProduitINPUTModel) : Observable<ProduitINPUTModel> {
+    return this.http.put<ProduitINPUTModel>(`${environment.backendHost}/produit/modifierProd/${prod.idProd}`, prod, {
       headers: new HttpHeaders().set('Content-Type', 'application/json')
     });
   }
 
-  modifierProd(prod: ProduitModel) : Observable<ProduitModel> {
-    return this.http.put<ProduitModel>(`${environment.backendHost}/produit/modifierProd/${prod.idProd}`, prod, {
-      headers: new HttpHeaders().set('Content-Type', 'application/json')
-    });
-  }
-
-  afficher(idProd: string) : Observable<ProduitModel> {
-    return this.http.get<ProduitModel>(`${environment.backendHost}/produit/afficherProd/${idProd}`);
+  afficher(idProd: string) : Observable<ProduitDAOModel> {
+    return this.http.get<ProduitDAOModel>(`${environment.backendHost}/produit/afficherProd/${idProd}`);
   }
 
   supprimerProod(idProd: string) {
-    return this.http.put<ProduitModel>(`${environment.backendHost}/produit/supprimerProd`, (idProd), {
+    return this.http.put<ProduitINPUTModel>(`${environment.backendHost}/produit/supprimerProd`, (idProd), {
       headers: new HttpHeaders().set('Content-Type', 'application/json')
     });
   }

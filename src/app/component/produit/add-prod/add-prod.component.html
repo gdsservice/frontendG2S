@@ -52,11 +52,31 @@
         </mat-error>
       </mat-form-field>
 
-      <mat-form-field appearance="outline">
-        <mat-label>Image</mat-label>
-        <input matInput formControlName="image" maxlength="100" minlength="1" >
-        <mat-icon matPrefix>description</mat-icon>
-      </mat-form-field>
+      <div class="upload-container">
+        <!-- Bouton de sélection -->
+        <div class="upload-button-wrapper">
+          <button mat-raised-button color="primary" (click)="fileInput.click()">
+            Choisir une image
+            <mat-icon>image</mat-icon>
+          </button>
+          <input #fileInput type="file" (change)="onFileSelected($event)" accept="image/*" hidden />
+        </div>
+      
+        <!-- Aperçu de l'image -->
+        <div class="image-preview-container" *ngIf="imagePreview">
+          <div class="image-frame">
+            <img [src]="imagePreview" alt="Aperçu de l'image sélectionnée" class="preview-image">
+            <button mat-icon-button class="remove-button" (click)="removeImage()">
+              <mat-icon>close</mat-icon>
+            </button>
+            <h5 class="image-name">
+              {{selectedFile?.name}}
+            </h5>
+          </div>
+        </div>
+      </div>
+      
+      
 
     </mat-card-content>
     <mat-form-field class="note" appearance="outline">

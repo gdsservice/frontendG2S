@@ -32,8 +32,8 @@ export class VenteService {
     });
   }
 
-  public modifierVente(vente: VenteModel): Observable<VenteModel> {
-    return this.http.put<VenteModel>(`${environment.backendHost}/vente/modifier/${vente.idVente}`, vente, {
+  public modifierVente(venteProduit: VenteInputModel): Observable<VenteInputModel> {
+    return this.http.put<VenteInputModel>(`${environment.backendHost}/vente/modifier/${venteProduit.vente!.idVente}`, venteProduit, {
       headers: new HttpHeaders().set('Content-Type', 'application/json')
     });
   }
