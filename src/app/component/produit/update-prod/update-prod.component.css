@@ -84,6 +84,77 @@ mat-spinner{
   margin: 15px;
 }
 
+
+/* Conteneur principal */
+.upload-container {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin: 20px 0;
+}
+
+/* Bouton de téléchargement */
+.upload-button-wrapper button {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* Cadre de l'image */
+.image-preview-container {
+  margin-top: 16px;
+}
+
+.image-frame {
+  position: relative;
+  border: 2px dashed #ccc;
+  border-radius: 8px;
+  padding: 10px;
+  max-width: 300px;
+  display: inline-block;
+}
+
+.preview-image {
+  max-width: 100%;
+  max-height: 200px;
+  display: block;
+  border-radius: 4px;
+}
+
+/* Bouton de suppression */
+.remove-button {
+  position: absolute;
+  top: -10px;
+  right: -10px;
+  background-color: white;
+  border-radius: 50%;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+}
+
+.remove-button mat-icon {
+  font-size: 18px;
+  color: #f44336; /* Rouge Material */
+}
+
+/* Champ du nom de fichier */
+.file-name-field {
+  width: 100%;
+  max-width: 400px;
+}
+
+/* Animation au survol */
+.image-frame:hover {
+  border-color: #3f51b5; /* Bleu Material */
+  transition: border-color 0.3s ease;
+}
+
+.file-icon {
+  font-size: 18px;
+  vertical-align: middle;
+  margin-right: 8px;
+  color: #3f51b5; /* Couleur Material primary */
+}
+
 /* Cacher les flèches dans Chrome, Edge, et Safari */
 input[type="number"]::-webkit-inner-spin-button,
 input[type="number"]::-webkit-outer-spin-button {

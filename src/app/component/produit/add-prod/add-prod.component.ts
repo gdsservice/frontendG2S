@@ -66,10 +66,10 @@ export class AddProdComponent implements OnInit{
     const file = event.target.files[0];
     if (file) {
       // Vérification du type de fichier
-      if (file.type.match('image.*')) {
-        alert('Seules les images sont autorisées');
-        return;
-      }
+      // if (file.type.match('.*')) {
+      //   alert('Seules les images sont autorisées');
+      //   return;
+      // }
 
       // Vérification de la taille (max 5MB)
       if (file.size > 5 * 1024 * 1024) {
