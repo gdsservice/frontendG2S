@@ -89,11 +89,17 @@ export class UpdateProdComponent implements OnInit {
   onFileSelected(event: any): void {
     const file = event.target.files[0];
     if (file) {
-      // Vérification du type de fichier
-      // if (file.type.match('.*')) {
-      //   alert('Seules les images sont autorisées');
-      //   return;
-      // }
+      // Vérification du type de fichier (seulement PNG et JPEG/JPG)
+      const allowedTypes = ['image/png', 'image/jpeg', 'image/jpg'];
+      if (!allowedTypes.includes(file.type)) {
+        this.snackBar.open('Seules les images PNG, JPG et JPEG sont autorisées', 'Fermer', { duration: 3000 });
+        return;
+      }
+
+      if (file.tyle == '') {
+        this.snackBar.open('Impossible d\'importer. Utilisez une image dans l\'un de ces formats : .jpg, .png, ou .jpeg', 'Fermer', { duration: 4000 });
+        return;
+      }
 
       // Vérification de la taille (max 5MB)
       if (file.size > 5 * 1024 * 1024) {
@@ -132,11 +138,23 @@ export class UpdateProdComponent implements OnInit {
 
   modifierProd() {
     if (this.prodListForm.valid) {
+
       this.spinnerProgress = true;
       const prod: ProduitINPUTModel = this.prodListForm.value;
+      const formData = new FormData();
+      formData.append('produit', new Blob([JSON.stringify(prod)], { type: 'application/json' }));
+
+      if (this.selectedFile) {
+        formData.append('image', this.selectedFile);
+      }
+
+      if (this.selectedFile) {
+        formData.append('image', this.selectedFile);
+      }
+
       if (this.prodId) {
         prod.idProd = this.prodId;
-        this.prodService.modifierProd(prod).subscribe(
+        this.prodService.modifierProdAvecImage(formData, this.prodId).subscribe(
           () => {
             this.spinnerProgress = false;
             this.snackBar.open('Produit mis à jour avec succès!', 'Fermer', {

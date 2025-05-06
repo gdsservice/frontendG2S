@@ -30,11 +30,10 @@ export class ProduitService {
     return `${environment.backendHost}/produit/image/${idProd}`;
   }
 
-  modifierProd(prod: ProduitINPUTModel) : Observable<ProduitINPUTModel> {
-    return this.http.put<ProduitINPUTModel>(`${environment.backendHost}/produit/modifierProd/${prod.idProd}`, prod, {
-      headers: new HttpHeaders().set('Content-Type', 'application/json')
-    });
+  modifierProdAvecImage(formData: FormData, idProd: string): Observable<any> {
+    return this.http.put(`${environment.backendHost}/produit/modifierProd/${idProd}`, formData);
   }
+  
 
   afficher(idProd: string) : Observable<ProduitDAOModel> {
     return this.http.get<ProduitDAOModel>(`${environment.backendHost}/produit/afficherProd/${idProd}`);

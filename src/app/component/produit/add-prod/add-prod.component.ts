@@ -65,15 +65,21 @@ export class AddProdComponent implements OnInit{
   onFileSelected(event: any): void {
     const file = event.target.files[0];
     if (file) {
-      // Vérification du type de fichier
-      // if (file.type.match('.*')) {
-      //   alert('Seules les images sont autorisées');
-      //   return;
-      // }
+      // Vérification du type de fichier (seulement PNG et JPEG/JPG)
+      const allowedTypes = ['image/png', 'image/jpeg', 'image/jpg'];
+      if (!allowedTypes.includes(file.type) ) {
+        this.snackBar.open('Seules les images PNG, JPG et JPEG sont autorisées', 'Fermer', { duration: 3000 });
+        return;
+      }
+
+      if (file.tyle == '') {
+        this.snackBar.open('Impossible d\'importer. Utilisez une image dans l\'un de ces formats : .jpg, .png, ou .jpeg', 'Fermer', { duration: 4000 });
+       return;
+      }
 
       // Vérification de la taille (max 5MB)
       if (file.size > 5 * 1024 * 1024) {
-        alert('La taille maximale est de 5MB');
+        this.snackBar.open('La taille maximale est de 5MB', 'Fermer', { duration: 3000 });
         return;
       }
 
