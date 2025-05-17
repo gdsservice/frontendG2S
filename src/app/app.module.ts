@@ -11,8 +11,8 @@ import { MatIcon, MatIconModule } from "@angular/material/icon";
 import { MatMenu, MatMenuModule } from "@angular/material/menu";
 import { MatSidenavModule } from "@angular/material/sidenav";
 import { MatList, MatListModule } from "@angular/material/list";
-import {MatTabsModule} from '@angular/material/tabs';
-import {MatProgressBarModule} from '@angular/material/progress-bar';
+import { MatTabsModule } from '@angular/material/tabs';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
 
 import { MatCard, MatCardAvatar, MatCardModule } from "@angular/material/card";
 import { MatFormField, MatFormFieldModule } from "@angular/material/form-field";
@@ -71,8 +71,9 @@ import { ConfirmationDialogSuppUserComponent } from './component/popup-dialog/co
 import { LoadingComponent } from './component/loading/loading.component';
 import { SpinnerComponent } from './component/spinner/spinner.component';
 import { DetailsVenteComponent } from './component/vente/details-vente/details-vente.component';
-import {MatButtonToggleModule} from '@angular/material/button-toggle';
-import {MatCheckboxModule} from '@angular/material/checkbox';
+import { MatButtonToggleModule } from '@angular/material/button-toggle';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import {MatRadioModule} from '@angular/material/radio';
 
 
 @NgModule({
@@ -103,18 +104,18 @@ import {MatCheckboxModule} from '@angular/material/checkbox';
 		UpdateClientComponent,
 		UpdateApprovComponent,
 		UpdateDetteComponent,
-  ProduitDialogComponent,
-  ConfirmationDialogSuppVenteComponent,
-  ConfirmationDialogSuppDetteComponent,
-  ConfirmationDialogSuppApprovComponent,
-  ConfirmationDialogSuppClientComponent,
-  ConfirmationDialogSuppProdComponent,
-  ConfirmationDialogSuppCatComponent,
-  UpdateUserComponent,
-  ConfirmationDialogSuppUserComponent,
-  LoadingComponent,
-  SpinnerComponent,
-  DetailsVenteComponent,
+		ProduitDialogComponent,
+		ConfirmationDialogSuppVenteComponent,
+		ConfirmationDialogSuppDetteComponent,
+		ConfirmationDialogSuppApprovComponent,
+		ConfirmationDialogSuppClientComponent,
+		ConfirmationDialogSuppProdComponent,
+		ConfirmationDialogSuppCatComponent,
+		UpdateUserComponent,
+		ConfirmationDialogSuppUserComponent,
+		LoadingComponent,
+		SpinnerComponent,
+		DetailsVenteComponent,
 
 	],
 	imports: [BrowserModule,
@@ -151,7 +152,8 @@ import {MatCheckboxModule} from '@angular/material/checkbox';
 		MatTabsModule,
 		MatProgressBarModule,
 		MatButtonToggleModule,
-		MatCheckboxModule
+		MatCheckboxModule,
+		MatRadioModule
 
 	],
 	providers: [

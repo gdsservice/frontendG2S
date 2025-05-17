@@ -23,7 +23,7 @@ export class ProduitComponent implements OnInit{
 
   public listProduits!: Array<ProduitDAOModel> ;
   public dataSource: any;
-  public displayedColumns = ['designation', 'quantite', 'prixUnitaire', 'montant', 'date', 'cat','utilisateurProd','image','action']
+  public displayedColumns = ['designation', 'quantite', 'prixUnitaire','prixRegulier', 'montant', 'date', 'cat','utilisateurProd','nouveaute','offreSpeciale','vedette','image','action']
   spinnerProgress: boolean = false;
   isLoading: boolean = true;
 
@@ -45,7 +45,6 @@ export class ProduitComponent implements OnInit{
             ...produit,
             imageUrl: this.produitService.getImageUrl(produit.idProd!)
           }));
-          console.log(this.listProduits);
           
           this.dataSource = new MatTableDataSource(this.listProduits);
           this.dataSource.paginator = this.paginator;

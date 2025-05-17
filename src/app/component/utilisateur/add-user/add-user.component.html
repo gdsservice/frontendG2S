@@ -5,7 +5,7 @@
         <button mat-icon-button (click)="retour()">
           <mat-icon>arrow_back_ios</mat-icon>
         </button>
-          Ajouter Utilisateur
+        Ajouter Utilisateur
       </mat-card-title>
     </mat-card-header>
     <mat-divider></mat-divider>
@@ -31,7 +31,8 @@
 
       <mat-form-field appearance="outline">
         <mat-label>Email</mat-label>
-        <input matInput formControlName="email" maxlength="80" minlength="2" pattern="[a-zA-Z0-9.-_]{1,}@[a-zA-Z.-]{2,}[.]{1}[a-zA-Z]{2,}" required>
+        <input matInput formControlName="email" maxlength="80" minlength="2"
+          pattern="[a-zA-Z0-9._-]+@[a-zA-Z.-]+\.[a-zA-Z]{2,}" required>
         <mat-icon matPrefix>email</mat-icon>
         <mat-error *ngIf="userListForm.get('email')?.hasError('required') && userListForm.get('email')">
           L'email est requis.
@@ -44,7 +45,7 @@
       <mat-form-field appearance="outline">
         <mat-label>Mot de passe</mat-label>
         <input matInput [type]="hide ? 'password' : 'text'" formControlName="password" required
-               pattern="^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{6,}$" minlength="6" maxlength="80">
+          pattern="^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{6,}$" minlength="6" maxlength="80">
         <mat-icon matPrefix>key</mat-icon>
         <button mat-icon-button matSuffix type="button" (click)="togglePasswordVisibility()">
           <mat-icon>{{ hide ? 'visibility_off' : 'visibility' }}</mat-icon>
@@ -61,7 +62,7 @@
         <mat-label>Telephone</mat-label>
         <span matTextPrefix>+223 &nbsp;</span>
         <input type="tel" matInput placeholder="83-52-28-56" formControlName="telephone"
-               (input)="formatTelephone($event)" required>
+          (input)="formatTelephone($event)" required>
         <mat-icon matSuffix>phone</mat-icon>
         <mat-error *ngIf="userListForm.get('telephone')?.hasError('required') && userListForm.get('telephone')">
           Le téléphone est requis.

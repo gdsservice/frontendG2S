@@ -1,15 +1,15 @@
-import {Component, OnInit} from '@angular/core';
-import {FormBuilder, FormGroup, Validators} from "@angular/forms";
-import {MatDialog} from "@angular/material/dialog";
-import {Router} from "@angular/router";
-import {Location} from "@angular/common";
-import {CategorieService} from "../../../services/categorie.service";
-import {CategorieModel} from "../../../models/categorie.model";
-import {ErrorDialogComponent} from "../../popup-dialog/error-dialog/error-dialog.component";
-import {ProduitService} from "../../../services/produit.service";
-import {ProduitModel} from "../../../models/produit.model";
-import {ValidDialogProduitComponent} from "../../popup-dialog/valid-dialog-produit/valid-dialog.component";
-import {MatSnackBar} from "@angular/material/snack-bar";
+import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from "@angular/forms";
+import { MatDialog } from "@angular/material/dialog";
+import { Router } from "@angular/router";
+import { Location } from "@angular/common";
+import { CategorieService } from "../../../services/categorie.service";
+import { CategorieModel } from "../../../models/categorie.model";
+import { ErrorDialogComponent } from "../../popup-dialog/error-dialog/error-dialog.component";
+import { ProduitService } from "../../../services/produit.service";
+import { ProduitModel } from "../../../models/produit.model";
+import { ValidDialogProduitComponent } from "../../popup-dialog/valid-dialog-produit/valid-dialog.component";
+import { MatSnackBar } from "@angular/material/snack-bar";
 import { ProduitINPUTModel } from '../../../models/produitINPUT.model ';
 
 @Component({
@@ -17,23 +17,23 @@ import { ProduitINPUTModel } from '../../../models/produitINPUT.model ';
   templateUrl: './add-prod.component.html',
   styleUrl: './add-prod.component.css'
 })
-export class AddProdComponent implements OnInit{
+export class AddProdComponent implements OnInit {
 
   prodListForm!: FormGroup;
   listCategorie!: CategorieModel[];
   spinnerProgress: boolean = false;
   selectedFile: File | null = null;
   imagePreview: string | ArrayBuffer | null = null;
-  
+
 
   constructor(private dialog: MatDialog,
-              private route: Router,
-              protected router: Router,
-              private snackBar: MatSnackBar,
-              private location: Location,
-              private fb: FormBuilder,
-              private catService: CategorieService,
-              private prodService: ProduitService) {
+    private route: Router,
+    protected router: Router,
+    private snackBar: MatSnackBar,
+    private location: Location,
+    private fb: FormBuilder,
+    private catService: CategorieService,
+    private prodService: ProduitService) {
   }
 
 
@@ -42,7 +42,7 @@ export class AddProdComponent implements OnInit{
 
     this.catService.listeCat()
       .subscribe(
-        data =>{
+        data => {
           this.listCategorie = data;
         },
         error => {
@@ -54,7 +54,12 @@ export class AddProdComponent implements OnInit{
       designation: ['', Validators.required],
       quantite: ['', Validators.required],
       prixUnitaire: ['', Validators.required],
-      image: [''],
+      prixRegulier: ['', Validators.required],
+      nouveaute: [false],
+      offreSpeciale: [false],
+      vedette: [false],
+      image: ['', Validators.required],
+      description: [''],
       note: [''],
       cat: ['', Validators.required],
     })
@@ -67,14 +72,14 @@ export class AddProdComponent implements OnInit{
     if (file) {
       // Vérification du type de fichier (seulement PNG et JPEG/JPG)
       const allowedTypes = ['image/png', 'image/jpeg', 'image/jpg'];
-      if (!allowedTypes.includes(file.type) ) {
+      if (!allowedTypes.includes(file.type)) {
         this.snackBar.open('Seules les images PNG, JPG et JPEG sont autorisées', 'Fermer', { duration: 3000 });
         return;
       }
 
       if (file.tyle == '') {
         this.snackBar.open('Impossible d\'importer. Utilisez une image dans l\'un de ces formats : .jpg, .png, ou .jpeg', 'Fermer', { duration: 4000 });
-       return;
+        return;
       }
 
       // Vérification de la taille (max 5MB)
@@ -84,7 +89,7 @@ export class AddProdComponent implements OnInit{
       }
 
       this.selectedFile = file;
-      
+
       // Création de l'aperçu
       const reader = new FileReader();
       reader.onload = () => {
@@ -101,7 +106,7 @@ export class AddProdComponent implements OnInit{
     const fileInput = document.querySelector('input[type="file"]') as HTMLInputElement;
     if (fileInput) fileInput.value = '';
   }
-  
+
 
   retour() {
     this.location.back()
@@ -110,23 +115,28 @@ export class AddProdComponent implements OnInit{
   ajoutProd() {
     if (this.prodListForm.valid) {
       this.spinnerProgress = true;
-  
-      const produit:ProduitINPUTModel = {
+
+      const produit: ProduitINPUTModel = {
         idProd: null,
         designation: this.prodListForm.value.designation,
         quantite: this.prodListForm.value.quantite,
         prixUnitaire: this.prodListForm.value.prixUnitaire,
+        prixRegulier: this.prodListForm.value.prixRegulier,
+        nouveaute: this.prodListForm.value.nouveaute,
+        offreSpeciale: this.prodListForm.value.offreSpeciale,
+        vedette: this.prodListForm.value.vedette,
+        description: this.prodListForm.value.description,
         note: this.prodListForm.value.note,
         categorieStockProdDTO: this.prodListForm.value.cat,
         image: null
       };
-  
+
       const formData = new FormData();
       formData.append('produit', JSON.stringify(produit));
       if (this.selectedFile) {
         formData.append('image', this.selectedFile);
       }
-  
+
       this.prodService.ajoutProd(formData).subscribe({
         next: value => {
           this.spinnerProgress = false;
@@ -159,16 +169,22 @@ export class AddProdComponent implements OnInit{
       this.prodListForm.markAllAsTouched();
     }
   }
-  
+
 
   annulerProd() {
     this.prodListForm = this.fb.group({
       designation: [''],
       quantite: [''],
       prixUnitaire: [''],
+      prixRegulier: [''],
+      nouveaute: [false],
+      offreSpeciale: [false],
+      vedette: [false],
       image: [''],
+      description: [''],
       note: [''],
       cat: [''],
-    })
+    });
   }
+
 }

@@ -13,7 +13,7 @@
 
       <mat-form-field appearance="outline">
         <mat-label>Nom du produit</mat-label>
-        <input matInput formControlName="designation" placeholder="Entrez une Designation" maxlength="60" minlength="2" >
+        <input matInput formControlName="designation" placeholder="Entrez une Designation" maxlength="60" minlength="2">
         <mat-icon matPrefix>format_align_left</mat-icon>
         <mat-error *ngIf="prodListForm.get('designation')?.hasError('required') && prodListForm.get('designation')">
           La designation est requis.
@@ -22,8 +22,7 @@
 
       <mat-form-field appearance="outline">
         <mat-label>Quantite</mat-label>
-        <input matInput formControlName="quantite" type="number"
-               placeholder="0" min="1" step="1" >
+        <input matInput formControlName="quantite" type="number" placeholder="0" min="1" step="1">
         <mat-icon matPrefix>exposure</mat-icon>
         <mat-error *ngIf="prodListForm.get('quantite')?.hasError('required') && prodListForm.get('quantite')">
           La quantite est requis.
@@ -32,12 +31,21 @@
 
       <mat-form-field appearance="outline">
         <mat-label>Prix Unitaire</mat-label>
-        <input matInput formControlName="prixUnitaire"  type="number"
-               placeholder="0" min="1"
-               step="1" maxlength="100" minlength="1" >
+        <input matInput formControlName="prixUnitaire" type="number" placeholder="0" min="1" step="1" maxlength="100"
+          minlength="1">
         <mat-icon matPrefix>account_balance_walle</mat-icon>
         <mat-error *ngIf="prodListForm.get('prixUnitaire')?.hasError('required') && prodListForm.get('prixUnitaire')">
-          La quantite est requis.
+          La prix unitaire est requis.
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Prix Regulier</mat-label>
+        <input matInput formControlName="prixRegulier" type="number" placeholder="0" min="1" step="1" maxlength="100"
+          minlength="1">
+        <mat-icon matPrefix>account_balance_walle</mat-icon>
+        <mat-error *ngIf="prodListForm.get('prixRegulier')?.hasError('required') && prodListForm.get('prixRegulier')">
+          La prix regulier est requis.
         </mat-error>
       </mat-form-field>
 
@@ -52,16 +60,50 @@
         </mat-error>
       </mat-form-field>
 
-      <div class="upload-container">
+      <mat-radio-group formControlName="nouveaute" aria-label="Select an option">
+        <mat-label>Status Nouveaute</mat-label>
+        <mat-radio-button [value]="true">ACTIVÉ</mat-radio-button>
+        <mat-radio-button [value]="false">DÉSACTIVÉ</mat-radio-button>
+      </mat-radio-group>
+
+      <mat-radio-group formControlName="offreSpeciale" aria-label="Select an option">
+        <mat-label>Status Offre Speciale</mat-label>
+        <mat-radio-button [value]="true">ACTIVÉ</mat-radio-button>
+        <mat-radio-button [value]="false">DÉSACTIVÉ</mat-radio-button>
+      </mat-radio-group>
+
+      <mat-radio-group formControlName="vedette" aria-label="Select an option">
+        <mat-label>Status Vedette</mat-label>
+        <mat-radio-button [value]="true">ACTIVÉ</mat-radio-button>
+        <mat-radio-button [value]="false">DÉSACTIVÉ</mat-radio-button>
+      </mat-radio-group>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Description</mat-label>
+        <textarea matInput formControlName="description" placeholder="Entrez une description" maxlength="255"
+          minlength="2"></textarea>
+        <mat-icon matPrefix>description</mat-icon>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Note</mat-label>
+        <textarea matInput formControlName="note" placeholder="Entrez une note" maxlength="255"
+          minlength="2"></textarea>
+        <mat-icon matPrefix>description</mat-icon>
+      </mat-form-field>
+
+    </mat-card-content>
+
+    <div class="upload-container">
         <!-- Bouton de sélection -->
         <div class="upload-button-wrapper">
           <button mat-raised-button color="primary" (click)="fileInput.click()">
             Choisir une image
             <mat-icon>image</mat-icon>
           </button>
-          <input #fileInput type="file" (change)="onFileSelected($event)" accept="image/*"  hidden />
+          <input #fileInput type="file" (change)="onFileSelected($event)" accept="image/*" hidden />
         </div>
-      
+
         <!-- Aperçu de l'image -->
         <div class="image-preview-container" *ngIf="imagePreview">
           <div class="image-frame">
@@ -75,22 +117,14 @@
           </div>
         </div>
       </div>
-      
-      
 
-    </mat-card-content>
-    <mat-form-field class="note" appearance="outline">
-      <mat-label>Note</mat-label>
-      <textarea matInput formControlName="note" placeholder="Entrez une note" maxlength="255" minlength="2" ></textarea>
-      <mat-icon matPrefix>description</mat-icon>
-    </mat-form-field>
     <mat-card-actions>
       <button (click)="annulerProd()" class="annuler" mat-raised-button>Annuler</button>
       <button (click)="ajoutProd()" class="enregistrer" mat-raised-button>
         <div class="save">
           Enregistrer
           <div *ngIf="spinnerProgress">
-            <app-spinner/>
+            <app-spinner />
           </div>
         </div>
       </button>

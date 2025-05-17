@@ -75,6 +75,17 @@ button{
   border: 1px solid #ddd;
 }
 
+.text-vert {
+  color: green;
+  font-weight: bold;
+}
+
+.text-rouge {
+  color: red;
+  font-weight: bold;
+}
+
+
 /*Version mobile*/
 @media (max-width: 768px) {
   .card-content {
