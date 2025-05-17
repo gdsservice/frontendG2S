@@ -47,7 +47,7 @@ export class UpdateUserComponent implements OnInit {
           this.roleList = data;
         },
         error => {
-          console.log(error)
+          // console.log(error)
         }
       )
 
@@ -87,7 +87,7 @@ export class UpdateUserComponent implements OnInit {
 
   modifier() {
     if (this.userListForm.valid) {
-      console.log("PPPPPPPPPPPPPPPPPP")
+      // console.log("PPPPPPPPPPPPPPPPPP")
       this.spinnerProgress=true;
       const user: UserModel = this.userListForm.value;
       if (this.userId) {
@@ -113,7 +113,7 @@ export class UpdateUserComponent implements OnInit {
                 data: {message: error.error}
               });
             }else{
-              console.log(error);
+              // console.log(error);
             }
             this.spinnerProgress=false;
             this.snackBar.open('Erreur lors de la mise à jour du produit.', 'Fermer', { duration: 3000 });

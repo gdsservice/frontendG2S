@@ -51,7 +51,7 @@ export class DetteComponent implements OnInit{
           this.isLoading = false;
         },
         error => {
-          console.log(error);
+          // console.log(error);
           this.isLoading = false;
         }
       )
@@ -101,7 +101,7 @@ export class DetteComponent implements OnInit{
                 data: {message: error.error}
               });
             }else{
-              console.log(error);
+              // console.log(error);
             }
             this.spinnerProgress = false;
           }

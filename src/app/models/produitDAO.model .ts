@@ -9,4 +9,13 @@ export interface ProduitDAOModel{
   categorieStockProdDTO: CategorieModel,
   note: string,
   imageUrl?: string;
+
+
+    // Nouveau attribut
+    slug?: string,
+    prixRegulier?: number,
+    description?: string,
+    nouveaute?: boolean,
+    vedette?: boolean,
+    offreSpeciale?: boolean,
 }

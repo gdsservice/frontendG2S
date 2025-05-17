@@ -32,11 +32,10 @@ export class AddUserComponent implements OnInit{
   ngOnInit(): void {
       this.userService.listeRole()
       .subscribe(
-        data=>{
-           this.roleList = data;
+        data=>{this.roleList = data;
         },
         error => {
-          console.log(error)
+          // console.log(error)
         }
       )
 
@@ -89,7 +88,7 @@ export class AddUserComponent implements OnInit{
               data: {message: err.error}
             });
           }else{
-            console.log(err);
+            // console.log(err);
           }
           this.spinnerProgress = false;
         }

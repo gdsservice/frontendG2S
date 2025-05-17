@@ -1,24 +1,16 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
-import {HttpClient} from "@angular/common/http";
 import {MatTableDataSource, MatTableModule} from "@angular/material/table";
 import {MatPaginator} from "@angular/material/paginator";
 import {MatSort} from "@angular/material/sort";
 import {ProduitService} from "../../services/produit.service";
 import {Router} from "@angular/router";
-import {CategorieService} from "../../services/categorie.service";
-import {CategorieModel} from "../../models/categorie.model";
-import {ProduitModel} from "../../models/produit.model";
 import {DatePipe} from "@angular/common";
-import {
-  ConfirmationDialogSuppDetteComponent
-} from "../popup-dialog/confirmation-dialog-supp-dette/confirmation-dialog-supp-dette.component";
 import {ErrorDialogComponent} from "../popup-dialog/error-dialog/error-dialog.component";
 import {MatDialog} from "@angular/material/dialog";
 import {MatSnackBar} from "@angular/material/snack-bar";
 import {
   ConfirmationDialogSuppProdComponent
 } from "../popup-dialog/confirmation-dialog-supp-prod/confirmation-dialog-supp-prod.component";
-import {ApprovisionModel} from "../../models/approvision.model";
 import { ProduitDAOModel } from '../../models/produitDAO.model ';
 
 @Component({
@@ -53,9 +45,9 @@ export class ProduitComponent implements OnInit{
             ...produit,
             imageUrl: this.produitService.getImageUrl(produit.idProd!)
           }));
+          console.log(this.listProduits);
           
           this.dataSource = new MatTableDataSource(this.listProduits);
-          // console.log(this.listProduits);
           this.dataSource.paginator = this.paginator;
           this.dataSource.sort = this.sort;
           this.isLoading = false;
@@ -116,7 +108,7 @@ export class ProduitComponent implements OnInit{
                 data: {message: error.error}
               });
             }else{
-              console.log(error);
+              // console.log(error);
             }
             this.spinnerProgress = false;
           }

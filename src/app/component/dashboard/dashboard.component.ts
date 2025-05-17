@@ -33,7 +33,7 @@ export class DashboardComponent implements OnInit{
         },
         error => {
           this.isLoading = false;
-          console.log(error)
+          // console.log(error)
         }
       )
 
@@ -43,7 +43,7 @@ export class DashboardComponent implements OnInit{
           this.totalClient = data;
         },
         error => {
-          console.log(error)
+          // console.log(error)
         }
       )
 
@@ -54,7 +54,7 @@ export class DashboardComponent implements OnInit{
           this.calculateTotalMontant();  // Calculer le montant total ici
         },
         error => {
-          console.log(error)
+          // console.log(error)
         }
       )
   }

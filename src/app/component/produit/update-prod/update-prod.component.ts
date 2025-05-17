@@ -65,10 +65,10 @@ export class UpdateProdComponent implements OnInit {
             imageUrl: this.existingImageUrl
           });
 
-          console.log(this.prodListForm.value);
+          // console.log(this.prodListForm.value);
         },
         error => {
-          console.error('Erreur lors du chargement du produit:', error);
+          // console.error('Erreur lors du chargement du produit:', error);
         }
       );
     }
@@ -81,7 +81,7 @@ export class UpdateProdComponent implements OnInit {
           this.listCategorie = data;
         },
         error => {
-          console.log(error)
+          // console.log(error)
         }
       )
   }
@@ -148,10 +148,6 @@ export class UpdateProdComponent implements OnInit {
         formData.append('image', this.selectedFile);
       }
 
-      if (this.selectedFile) {
-        formData.append('image', this.selectedFile);
-      }
-
       if (this.prodId) {
         prod.idProd = this.prodId;
         this.prodService.modifierProdAvecImage(formData, this.prodId).subscribe(
@@ -178,7 +174,7 @@ export class UpdateProdComponent implements OnInit {
                 data: { message: error.error }
               });
             } else {
-              console.log(error);
+              // console.log(error);
             }
             this.spinnerProgress = false;
             this.snackBar.open('Erreur lors de la mise à jour du produit.', 'Fermer', { duration: 3000 });

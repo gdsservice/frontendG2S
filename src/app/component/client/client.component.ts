@@ -58,7 +58,6 @@ export class ClientComponent implements OnInit{
         },
         error => {
           this.isLoading = false;
-          console.log(error)
         }
       )
   }
@@ -107,7 +106,7 @@ export class ClientComponent implements OnInit{
                 data: {message: error.error}
               });
             }else{
-              console.log(error);
+              // console.log(error);
             }
             this.spinnerProgress = false;
           }

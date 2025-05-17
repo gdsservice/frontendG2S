@@ -22,6 +22,7 @@ export class LoginService {
 
   ngOnInit(){
     this.loadJwtTokenLocalStorage();
+    this.logout();
   }
 
   public login(username: string, password: string) {
@@ -69,7 +70,7 @@ export class LoginService {
       if (now - parseInt(timestamp) > oneDay) {
         window.localStorage.removeItem("jwt-token");
         window.localStorage.removeItem("jwt-timestamp");
-        // this.router.navigateByUrl("/admin/dashboard");
+        this.router.navigateByUrl("/login");
         this.logout();
         
         // console.log("Token expiré et supprimé");

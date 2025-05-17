@@ -67,14 +67,14 @@ export class UpdateVenteComponent implements OnInit {
       .subscribe(data => {
         this.listProd = data;
       }, error => {
-        console.log(error);
+        // console.log(error);
       });
 
     this.clientService.listClient()
       .subscribe(data => {
         this.listClient = data;
       }, error => {
-        console.log(error);
+        // console.log(error);
       });
 
     // Initialisation du formulaire
@@ -93,11 +93,11 @@ export class UpdateVenteComponent implements OnInit {
     });
 
     this.venteId = this.router.snapshot.paramMap.get('idVente');
-    console.log(this.venteId);
+    // console.log(this.venteId);
     if (this.venteId) {
       this.venteService.afficher(this.venteId).subscribe(
         (venteProduit: VenteDAOModel) => {
-          console.log(venteProduit);
+          // console.log(venteProduit);
           const vente = venteProduit.vente;
           this.venteListForm.patchValue({
             montant: vente.montant,

@@ -62,7 +62,7 @@ export class UpdateDetteComponent implements OnInit{
   }
 
   modifierDette() {
-    console.log(this.detteListForm)
+    // console.log(this.detteListForm)
     if (this.detteListForm.valid) {
       this.spinnerProgress=true;
       const dette: DetteModel = this.detteListForm.value;

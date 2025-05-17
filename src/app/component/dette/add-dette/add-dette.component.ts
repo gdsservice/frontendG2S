@@ -51,7 +51,7 @@ export class AddDetteComponent implements OnInit{
           this.listProd = data;
         },
         error => {
-          console.log(error)
+          // console.log(error)
         }
       )
 
@@ -61,7 +61,7 @@ export class AddDetteComponent implements OnInit{
           this.listClient = data;
         },
         error => {
-          console.log(error)
+          // console.log(error)
         }
       )
 
@@ -128,7 +128,7 @@ export class AddDetteComponent implements OnInit{
         produitDTOS: this.detteListForm.value.produitDTOS,
         clientDTO: this.detteListForm.value.clientDTO,
       };
-      console.log(dette)
+      // console.log(dette)
       this.detteService.ajoutDette(dette).subscribe({
         next: value => {
           this.spinnerProgress = false;
@@ -151,7 +151,7 @@ export class AddDetteComponent implements OnInit{
               data: {message: err.error}
             });
           }else{
-            console.log(err);
+            // console.log(err);
           }
           this.spinnerProgress = false;
         }

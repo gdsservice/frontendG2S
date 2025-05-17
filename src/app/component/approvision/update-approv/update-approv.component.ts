@@ -93,14 +93,14 @@ export class UpdateApprovComponent implements OnInit{
                 data: {message: error.error}
               });
             }else{
-              console.log(error);
+              // console.log(error);
             }
             this.spinnerProgress = false;
           }
         );
       }
     }else {
-      console.log("formulaire invalid")
+      // console.log("formulaire invalid")
     }
   }
 }

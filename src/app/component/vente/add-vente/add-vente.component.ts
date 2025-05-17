@@ -55,14 +55,14 @@ export class AddVenteComponent implements OnInit {
         this.listProd = data;
         this.filteredProd = data;
       }, error => {
-        console.log(error);
+        // console.log(error);
       });
 
     this.clientService.listClient()
       .subscribe(data => {
         this.listClient = data;
       }, error => {
-        console.log(error);
+        // console.log(error);
       });
 
     // Initialisation du formulaire
@@ -184,7 +184,7 @@ export class AddVenteComponent implements OnInit {
             data: { message: err.error }
           });
         } else {
-          console.log(err);
+          // console.log(err);
         }
         this.spinnerProgress = false;
       },
@@ -242,7 +242,7 @@ export class AddVenteComponent implements OnInit {
         data: { message: err.error },
       });
     } else {
-      console.log(err);
+      // console.log(err);
     }
   }
 

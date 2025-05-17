@@ -82,7 +82,7 @@ export class UpdateCatComponent implements OnInit{
                 data: {message: error.error}
               });
             }else{
-              console.log(error);
+              // console.log(error);
             }
             this.snackBar.open('Erreur lors de la mise à jour du categorie.', 'Fermer', { duration: 3000 });
           }

@@ -59,7 +59,6 @@ export class ApprovisionComponent implements OnInit{
           
         },
         error => {
-          console.log(error)
           this.isLoading = false;
         }
       )
@@ -137,7 +136,7 @@ export class ApprovisionComponent implements OnInit{
                 data: {message: error.error}
               });
             }else{
-              console.log(error);
+              // console.log(error);
             }
             this.spinnerProgress = false;
           }

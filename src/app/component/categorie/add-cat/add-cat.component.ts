@@ -65,7 +65,7 @@ export class AddCatComponent implements OnInit{
               data: { message: err.error }
             });
           }else{
-            console.log(err);
+            // console.log(err);
           }
           this.spinnerProgress = false;
         }

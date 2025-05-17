@@ -41,7 +41,6 @@ export class UpdateClientComponent implements OnInit{
 
   ngOnInit(): void {
     this.clientId = this.router.snapshot.paramMap.get('idClient');
-    console.log(this.clientId)
     if (this.clientId) {
       this.clientService.afficher(this.clientId).subscribe(
         (client: ClientModel) => {

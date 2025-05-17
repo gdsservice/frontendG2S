@@ -40,7 +40,7 @@ export class AddApprovComponent implements OnInit{
           this.listProd = data;
         },
         error => {
-          console.log(error)
+          // console.log(error)
         }
       )
 
@@ -101,7 +101,7 @@ export class AddApprovComponent implements OnInit{
               data: {message: err.error}
             });
           }else{
-            console.log(err);
+            // console.log(err);
           }
           this.spinnerProgress = false;
         }
