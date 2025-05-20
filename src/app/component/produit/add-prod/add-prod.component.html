@@ -62,6 +62,12 @@
     </mat-card-content>
 
     <mat-card-content>
+            <mat-radio-group formControlName="nouveaute" aria-label="Select an option">
+        <mat-label>Plus Nouveaute</mat-label>
+        <mat-radio-button [value]="true">ACTIVÉ</mat-radio-button>
+        <mat-radio-button [value]="false">DÉSACTIVÉ</mat-radio-button>
+      </mat-radio-group>
+
       <mat-radio-group formControlName="plusVendu" aria-label="Select an option">
         <mat-label>Plus Vendu</mat-label>
         <mat-radio-button [value]="true">ACTIVÉ</mat-radio-button>

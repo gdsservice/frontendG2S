@@ -7,8 +7,6 @@ import { CategorieService } from "../../../services/categorie.service";
 import { CategorieModel } from "../../../models/categorie.model";
 import { ErrorDialogComponent } from "../../popup-dialog/error-dialog/error-dialog.component";
 import { ProduitService } from "../../../services/produit.service";
-import { ProduitModel } from "../../../models/produit.model";
-import { ValidDialogProduitComponent } from "../../popup-dialog/valid-dialog-produit/valid-dialog.component";
 import { MatSnackBar } from "@angular/material/snack-bar";
 import { ProduitINPUTModel } from '../../../models/produitINPUT.model ';
 
@@ -51,16 +49,17 @@ export class AddProdComponent implements OnInit {
       )
 
     this.prodListForm = this.fb.group({
-      designation: ['', Validators.required],
-      quantite: ['', Validators.required],
-      prixUnitaire: ['', Validators.required],
-      prixRegulier: ['', Validators.required],
-      cat: ['', Validators.required],
+      designation: [''],
+      quantite: [''],
+      prixUnitaire: [''],
+      prixRegulier: [''],
+      cat: [''],
+      nouveaute:[true],
       plusVendu: [false],
       offreSpeciale: [false],
       vedette: [false],
       publier: [true],
-      image: ['', Validators.required],
+      image: [''],
       description: [''],
       note: [''],
 
@@ -115,16 +114,15 @@ export class AddProdComponent implements OnInit {
   }
 
   ajoutProd() {
-    if (this.prodListForm.valid) {
+    if (this.prodListForm.valid) {     
       this.spinnerProgress = true;
-
       const produit: ProduitINPUTModel = {
         idProd: null,
         designation: this.prodListForm.value.designation,
         quantite: this.prodListForm.value.quantite,
         prixUnitaire: this.prodListForm.value.prixUnitaire,
         prixRegulier: this.prodListForm.value.prixRegulier,
-        nouveaute: true,
+        nouveaute:this.prodListForm.value.nouveaute,
         offreSpeciale: this.prodListForm.value.offreSpeciale,
         vedette: this.prodListForm.value.vedette,
         plusVendu: this.prodListForm.value.plusVendu,
@@ -177,16 +175,17 @@ export class AddProdComponent implements OnInit {
 
   annulerProd() {
     this.prodListForm = this.fb.group({
-      designation: ['', Validators.required],
-      quantite: ['', Validators.required],
-      prixUnitaire: ['', Validators.required],
-      prixRegulier: ['', Validators.required],
-      cat: ['', Validators.required],
+      designation: [''],
+      quantite: [''],
+      prixUnitaire: [''],
+      prixRegulier: [''],
+      cat: [''],
       plusVendu: [false],
+      nouveaute: [true],
       offreSpeciale: [false],
       vedette: [false],
       publier: [true],
-      image: ['', Validators.required],
+      image: [''],
       description: [''],
       note: [''],
     })
