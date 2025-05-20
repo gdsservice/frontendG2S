@@ -55,13 +55,15 @@ export class AddProdComponent implements OnInit {
       quantite: ['', Validators.required],
       prixUnitaire: ['', Validators.required],
       prixRegulier: ['', Validators.required],
-      nouveaute: [false],
+      cat: ['', Validators.required],
+      plusVendu: [false],
       offreSpeciale: [false],
       vedette: [false],
+      publier: [true],
       image: ['', Validators.required],
       description: [''],
       note: [''],
-      cat: ['', Validators.required],
+
     })
 
     this.annulerProd();
@@ -122,9 +124,11 @@ export class AddProdComponent implements OnInit {
         quantite: this.prodListForm.value.quantite,
         prixUnitaire: this.prodListForm.value.prixUnitaire,
         prixRegulier: this.prodListForm.value.prixRegulier,
-        nouveaute: this.prodListForm.value.nouveaute,
+        nouveaute: true,
         offreSpeciale: this.prodListForm.value.offreSpeciale,
         vedette: this.prodListForm.value.vedette,
+        plusVendu: this.prodListForm.value.plusVendu,
+        publier: this.prodListForm.value.publier,
         description: this.prodListForm.value.description,
         note: this.prodListForm.value.note,
         categorieStockProdDTO: this.prodListForm.value.cat,
@@ -173,18 +177,20 @@ export class AddProdComponent implements OnInit {
 
   annulerProd() {
     this.prodListForm = this.fb.group({
-      designation: [''],
-      quantite: [''],
-      prixUnitaire: [''],
-      prixRegulier: [''],
-      nouveaute: [false],
+      designation: ['', Validators.required],
+      quantite: ['', Validators.required],
+      prixUnitaire: ['', Validators.required],
+      prixRegulier: ['', Validators.required],
+      cat: ['', Validators.required],
+      plusVendu: [false],
       offreSpeciale: [false],
       vedette: [false],
-      image: [''],
+      publier: [true],
+      image: ['', Validators.required],
       description: [''],
       note: [''],
-      cat: [''],
-    });
+    })
+
   }
 
 }

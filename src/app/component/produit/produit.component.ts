@@ -12,6 +12,7 @@ import {
   ConfirmationDialogSuppProdComponent
 } from "../popup-dialog/confirmation-dialog-supp-prod/confirmation-dialog-supp-prod.component";
 import { ProduitDAOModel } from '../../models/produitDAO.model ';
+import { SelectionModel } from '@angular/cdk/collections';
 
 @Component({
   selector: 'app-produit',
@@ -23,9 +24,10 @@ export class ProduitComponent implements OnInit{
 
   public listProduits!: Array<ProduitDAOModel> ;
   public dataSource: any;
-  public displayedColumns = ['designation', 'quantite', 'prixUnitaire','prixRegulier', 'montant', 'date', 'cat','utilisateurProd','nouveaute','offreSpeciale','vedette','image','action']
+  public displayedColumns = ['select','image','designation', 'quantite', 'prixUnitaire','prixRegulier', 'montant', 'date', 'cat','utilisateurProd','publier','nouveaute','plusVendu','offreSpeciale','vedette','action']
   spinnerProgress: boolean = false;
   isLoading: boolean = true;
+  selection = new SelectionModel<ProduitDAOModel>(true, []);
 
   @ViewChild(MatPaginator) paginator! : MatPaginator;
   @ViewChild(MatSort) sort! : MatSort;
@@ -56,6 +58,31 @@ export class ProduitComponent implements OnInit{
           this.isLoading = false;
         }
       );
+  }
+
+  /** Whether the number of selected elements matches the total number of rows. */
+  isAllSelected() {
+    const numSelected = this.selection.selected.length;
+    const numRows = this.dataSource.data.length;
+    return numSelected === numRows;
+  }
+
+  /** Selects all rows if they are not all selected; otherwise clear selection. */
+  toggleAllRows() {
+    if (this.isAllSelected()) {
+      this.selection.clear();
+      return;
+    }
+
+    this.selection.select(...this.dataSource.data);
+  }
+
+  /** The label for the checkbox on the passed row */
+  checkboxLabel(row?: ProduitDAOModel): string {
+    if (!row) {
+      return `${this.isAllSelected() ? 'deselect' : 'select'} all`;
+    }
+    return `${this.selection.isSelected(row) ? 'deselect' : 'select'} row ${row.designation + 1}`;
   }
 
 

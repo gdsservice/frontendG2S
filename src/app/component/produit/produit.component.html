@@ -25,6 +25,29 @@
         <app-loading *ngIf="isLoading" />
         <table *ngIf="!isLoading" matSort mat-table [dataSource]="dataSource">
 
+          <!-- Checkbox Column -->
+          <ng-container matColumnDef="select">
+            <th mat-header-cell *matHeaderCellDef>
+              <mat-checkbox (change)="$event ? toggleAllRows() : null"
+                [checked]="selection.hasValue() && isAllSelected()"
+                [indeterminate]="selection.hasValue() && !isAllSelected()" [aria-label]="checkboxLabel()">
+              </mat-checkbox>
+            </th>
+            <td mat-cell *matCellDef="let row">
+              <mat-checkbox (click)="$event.stopPropagation()" (change)="$event ? selection.toggle(row) : null"
+                [checked]="selection.isSelected(row)" [aria-label]="checkboxLabel(row)">
+              </mat-checkbox>
+            </td>
+          </ng-container>
+
+          <!-- Ajouter cette colonne -->
+          <ng-container class="image-container" matColumnDef="image">
+            <th mat-header-cell *matHeaderCellDef> IMAGE </th>
+            <td mat-cell *matCellDef="let produit" class="image-td">
+              <img *ngIf="produit.imageUrl" [src]="produit.imageUrl" class="image-produit">
+            </td>
+          </ng-container>
+
           <!-- designation Column -->
           <ng-container matColumnDef="designation" class="mat-elevation-z8">
             <th mat-header-cell *matHeaderCellDef mat-sort-header> DESIGNATION </th>
@@ -73,18 +96,32 @@
             <td mat-cell *matCellDef="let produit"> {{produit.utilisateurProd?.nom}} </td>
           </ng-container>
 
-          <!-- description Column
-          <ng-container matColumnDef="description" class="mat-elevation-z8">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header> DESCRIPTION </th>
-            <td mat-cell *matCellDef="let produit"> {{produit.description}} </td>
-          </ng-container> -->
+          <!-- publier Column -->
+          <ng-container matColumnDef="publier" class="mat-elevation-z8">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> PUBLIER </th>
+            <td mat-cell *matCellDef="let produit">
+              <span [ngClass]="produit.publier ? 'text-vert' : 'text-rouge'">
+                {{ produit.publier ? 'ACTIVÉ' : 'DÉSACTIVÉ' }}
+              </span>
+            </td>
+          </ng-container>
 
           <!-- nouveaute Column -->
           <ng-container matColumnDef="nouveaute" class="mat-elevation-z8">
             <th mat-header-cell *matHeaderCellDef mat-sort-header> NOUVEAUTE </th>
             <td mat-cell *matCellDef="let produit">
               <span [ngClass]="produit.nouveaute ? 'text-vert' : 'text-rouge'">
-              {{ produit.nouveaute ? 'ACTIVÉ' : 'DÉSACTIVÉ' }}
+                {{ produit.nouveaute ? 'ACTIVÉ' : 'DÉSACTIVÉ' }}
+              </span>
+            </td>
+          </ng-container>
+
+          <!-- plusVendu Column -->
+          <ng-container matColumnDef="plusVendu" class="mat-elevation-z8">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> PLUS VENDU </th>
+            <td mat-cell *matCellDef="let produit">
+              <span [ngClass]="produit.plusVendu ? 'text-vert' : 'text-rouge'">
+                {{ produit.plusVendu ? 'ACTIVÉ' : 'DÉSACTIVÉ' }}
               </span>
             </td>
           </ng-container>
@@ -94,7 +131,7 @@
             <th mat-header-cell *matHeaderCellDef mat-sort-header> OFFRE SPECIALE </th>
             <td mat-cell *matCellDef="let produit">
               <span [ngClass]="produit.offreSpeciale ? 'text-vert' : 'text-rouge'">
-              {{ produit.offreSpeciale ? 'ACTIVÉ' : 'DÉSACTIVÉ' }}
+                {{ produit.offreSpeciale ? 'ACTIVÉ' : 'DÉSACTIVÉ' }}
               </span>
             </td>
           </ng-container>
@@ -103,19 +140,13 @@
           <ng-container matColumnDef="vedette" class="mat-elevation-z8">
             <th mat-header-cell *matHeaderCellDef mat-sort-header> VEDETTE </th>
             <td mat-cell *matCellDef="let produit">
-       <span [ngClass]="produit.vedette ? 'text-vert' : 'text-rouge'">
-      {{ produit.vedette ? 'ACTIVÉ' : 'DÉSACTIVÉ' }}
-    </span>
+              <span [ngClass]="produit.vedette ? 'text-vert' : 'text-rouge'">
+                {{ produit.vedette ? 'ACTIVÉ' : 'DÉSACTIVÉ' }}
+              </span>
             </td>
           </ng-container>
 
-          <!-- Ajouter cette colonne -->
-          <ng-container matColumnDef="image">
-            <th mat-header-cell *matHeaderCellDef> IMAGE </th>
-            <td mat-cell *matCellDef="let produit">
-              <img *ngIf="produit.imageUrl" [src]="produit.imageUrl" style="max-height: 50px;">
-            </td>
-          </ng-container>
+
 
           <ng-container matColumnDef="action" class="mat-elevation-z8">
             <th mat-header-cell *matHeaderCellDef> ACTION </th>
@@ -142,7 +173,7 @@
 
 
           <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-          <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns;" (click)="selection.toggle(row)"></tr>
         </table>
         <app-loading *ngIf="isLoading" />
         <mat-paginator *ngIf="!isLoading" [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons

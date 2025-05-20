@@ -32,7 +32,7 @@ export class AddVenteComponent implements OnInit {
   quantiteProd: any;
   spinnerProgress: boolean = false;
   dataSource = new MatTableDataSource(this.produitsSelectionnes);
-  filteredProd: ProduitModel[] = [];
+  filteredProd: ProduitDAOModel[] = [];
   displayedColumns = ['designation', 'quantite', "prixUnitaire", 'reduction', 'montant', 'action'];
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
@@ -92,7 +92,7 @@ export class AddVenteComponent implements OnInit {
     );
   }
 
-  onSelectProduit(prod: ProduitModel) {
+  onSelectProduit(prod: any) {
     // Vérifier si le produit est déjà sélectionné
     const produitExiste = this.produitsSelectionnes.some(produitVente => produitVente.produit.idProd === prod.idProd);
     if (produitExiste) {

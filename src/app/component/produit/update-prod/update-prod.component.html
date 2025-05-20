@@ -5,7 +5,7 @@
         <button mat-icon-button (click)="retour()">
           <mat-icon>arrow_back_ios</mat-icon>
         </button>
-        Modifier un produit
+        Modifier Produit
       </mat-card-title>
     </mat-card-header>
     <mat-divider></mat-divider>
@@ -13,8 +13,7 @@
 
       <mat-form-field appearance="outline">
         <mat-label>Nom du produit</mat-label>
-        <input matInput formControlName="designation" placeholder="Entrez une Designation" maxlength="120"
-          minlength="2">
+        <input matInput formControlName="designation" placeholder="Entrez une Designation" maxlength="60" minlength="2">
         <mat-icon matPrefix>format_align_left</mat-icon>
         <mat-error *ngIf="prodListForm.get('designation')?.hasError('required') && prodListForm.get('designation')">
           La designation est requis.
@@ -23,8 +22,7 @@
 
       <mat-form-field appearance="outline">
         <mat-label>Quantite</mat-label>
-        <input matInput formControlName="quantite" type="number" placeholder="Entrez une Quantite" min="1" step="1"
-          maxlength="100" minlength="1">
+        <input matInput formControlName="quantite" type="number" placeholder="0" min="1" step="1">
         <mat-icon matPrefix>exposure</mat-icon>
         <mat-error *ngIf="prodListForm.get('quantite')?.hasError('required') && prodListForm.get('quantite')">
           La quantite est requis.
@@ -33,12 +31,81 @@
 
       <mat-form-field appearance="outline">
         <mat-label>Prix Unitaire</mat-label>
-        <input matInput formControlName="prixUnitaire" type="number" placeholder="Entrez un Prix Unitaire" min="1"
-          step="1" maxlength="100" minlength="1">
+        <input matInput formControlName="prixUnitaire" type="number" placeholder="0" min="1" step="1" maxlength="100"
+          minlength="1">
         <mat-icon matPrefix>account_balance_walle</mat-icon>
         <mat-error *ngIf="prodListForm.get('prixUnitaire')?.hasError('required') && prodListForm.get('prixUnitaire')">
-          La quantite est requis.
+          La prix unitaire est requis.
         </mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Prix Regulier</mat-label>
+        <input matInput formControlName="prixRegulier" type="number" placeholder="0" min="1" step="1" maxlength="100"
+          minlength="1">
+        <mat-icon matPrefix>account_balance_walle</mat-icon>
+        <mat-error *ngIf="prodListForm.get('prixRegulier')?.hasError('required') && prodListForm.get('prixRegulier')">
+          La prix regulier est requis.
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Choisir la categorie</mat-label>
+        <mat-select formControlName="categorieStockProdDTO" placeholder="Choisir la categorie" required>
+          <mat-option *ngFor="let cat of listCategorie" [value]="catExist">{{ cat.nom }}</mat-option>
+        </mat-select>
+        <mat-icon matPrefix>category</mat-icon>
+        <mat-error *ngIf="prodListForm.get('cat')?.hasError('required') && prodListForm.get('cat')">
+          La categorie est requis.
+        </mat-error>
+      </mat-form-field>
+    </mat-card-content>
+
+    <mat-card-content class="radio-group-content">
+      <mat-radio-group formControlName="nouveaute" aria-label="Select an option">
+        <mat-label>Nouveauté</mat-label>
+        <mat-radio-button [value]="true">ACTIVÉ</mat-radio-button>
+        <mat-radio-button [value]="false">DÉSACTIVÉ</mat-radio-button>
+      </mat-radio-group>
+
+      <mat-radio-group formControlName="plusVendu" aria-label="Select an option">
+        <mat-label>Plus Vendu</mat-label>
+        <mat-radio-button [value]="true">ACTIVÉ</mat-radio-button>
+        <mat-radio-button [value]="false">DÉSACTIVÉ</mat-radio-button>
+      </mat-radio-group>
+
+      <mat-radio-group formControlName="offreSpeciale" aria-label="Select an option">
+        <mat-label>Offre Speciale</mat-label>
+        <mat-radio-button [value]="true">ACTIVÉ</mat-radio-button>
+        <mat-radio-button [value]="false">DÉSACTIVÉ</mat-radio-button>
+      </mat-radio-group>
+
+      <mat-radio-group formControlName="vedette" aria-label="Select an option">
+        <mat-label>Vedette</mat-label>
+        <mat-radio-button [value]="true">ACTIVÉ</mat-radio-button>
+        <mat-radio-button [value]="false">DÉSACTIVÉ</mat-radio-button>
+      </mat-radio-group>
+
+      <mat-radio-group formControlName="publier" aria-label="Select an option">
+        <mat-label>Publier dans le site</mat-label>
+        <mat-radio-button [value]="true">ACTIVÉ</mat-radio-button>
+        <mat-radio-button [value]="false">DÉSACTIVÉ</mat-radio-button>
+      </mat-radio-group>
+    </mat-card-content>
+
+    <mat-card-content>
+      <mat-form-field appearance="outline">
+        <mat-label>Description</mat-label>
+        <textarea matInput formControlName="description" placeholder="Entrez une description" maxlength="255"
+          minlength="2"></textarea>
+        <mat-icon matPrefix>description</mat-icon>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Note</mat-label>
+        <textarea matInput formControlName="note" placeholder="Entrez une note" maxlength="255"
+          minlength="2"></textarea>
+        <mat-icon matPrefix>description</mat-icon>
       </mat-form-field>
     </mat-card-content>
 
@@ -81,16 +148,12 @@
         </div>
       </div>
     </mat-card-content>
-      <mat-form-field class="note" appearance="outline">
-        <mat-label>Note</mat-label>
-        <textarea matInput formControlName="note" placeholder="Entrez une note" maxlength="255" minlength="2"></textarea>
-        <mat-icon matPrefix>description</mat-icon>
-      </mat-form-field>
+
     <mat-card-actions>
-      <button (click)="retour()" class="annuler" mat-raised-button>Annuler</button>
+      <!-- <button (click)="annulerProd()" class="annuler" mat-raised-button>Annuler</button> -->
       <button (click)="modifierProd()" class="enregistrer" mat-raised-button>
         <div class="save">
-          Modifier
+          Enregistrer
           <div *ngIf="spinnerProgress">
             <app-spinner />
           </div>

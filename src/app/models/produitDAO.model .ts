@@ -6,7 +6,7 @@ export interface ProduitDAOModel{
   quantite: number,
   prixUnitaire: number,
   image: any,
-  categorieStockProdDTO: CategorieModel,
+  categorieStockProdDTO?: CategorieModel,
   note: string,
   imageUrl?: string;
 
@@ -18,4 +18,6 @@ export interface ProduitDAOModel{
     nouveaute?: boolean,
     vedette?: boolean,
     offreSpeciale?: boolean,
+    plusVendu?: boolean,
+    publier?: boolean,
 }

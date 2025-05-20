@@ -59,25 +59,35 @@
           La categorie est requis.
         </mat-error>
       </mat-form-field>
+    </mat-card-content>
 
-      <mat-radio-group formControlName="nouveaute" aria-label="Select an option">
-        <mat-label>Status Nouveaute</mat-label>
+    <mat-card-content>
+      <mat-radio-group formControlName="plusVendu" aria-label="Select an option">
+        <mat-label>Plus Vendu</mat-label>
         <mat-radio-button [value]="true">ACTIVÉ</mat-radio-button>
         <mat-radio-button [value]="false">DÉSACTIVÉ</mat-radio-button>
       </mat-radio-group>
 
       <mat-radio-group formControlName="offreSpeciale" aria-label="Select an option">
-        <mat-label>Status Offre Speciale</mat-label>
+        <mat-label>Offre Speciale</mat-label>
         <mat-radio-button [value]="true">ACTIVÉ</mat-radio-button>
         <mat-radio-button [value]="false">DÉSACTIVÉ</mat-radio-button>
       </mat-radio-group>
 
       <mat-radio-group formControlName="vedette" aria-label="Select an option">
-        <mat-label>Status Vedette</mat-label>
+        <mat-label>Vedette</mat-label>
         <mat-radio-button [value]="true">ACTIVÉ</mat-radio-button>
         <mat-radio-button [value]="false">DÉSACTIVÉ</mat-radio-button>
       </mat-radio-group>
 
+      <mat-radio-group formControlName="publier" aria-label="Select an option">
+        <mat-label>Publier dans le site</mat-label>
+        <mat-radio-button [value]="true">ACTIVÉ</mat-radio-button>
+        <mat-radio-button [value]="false">DÉSACTIVÉ</mat-radio-button>
+      </mat-radio-group>
+    </mat-card-content>
+
+    <mat-card-content>
       <mat-form-field appearance="outline">
         <mat-label>Description</mat-label>
         <textarea matInput formControlName="description" placeholder="Entrez une description" maxlength="255"
@@ -91,10 +101,10 @@
           minlength="2"></textarea>
         <mat-icon matPrefix>description</mat-icon>
       </mat-form-field>
-
     </mat-card-content>
 
-    <div class="upload-container">
+    <mat-card-content>
+      <div class="upload-container">
         <!-- Bouton de sélection -->
         <div class="upload-button-wrapper">
           <button mat-raised-button color="primary" (click)="fileInput.click()">
@@ -117,6 +127,8 @@
           </div>
         </div>
       </div>
+    </mat-card-content>
+
 
     <mat-card-actions>
       <button (click)="annulerProd()" class="annuler" mat-raised-button>Annuler</button>

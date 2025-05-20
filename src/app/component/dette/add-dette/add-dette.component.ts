@@ -14,6 +14,7 @@ import {MatSnackBar} from "@angular/material/snack-bar";
 import {MatPaginator} from "@angular/material/paginator";
 import {MatSort} from "@angular/material/sort";
 import {MatTableDataSource} from "@angular/material/table";
+import { ProduitDAOModel } from '../../../models/produitDAO.model ';
 
 @Component({
   selector: 'app-add-dette',
@@ -23,7 +24,7 @@ import {MatTableDataSource} from "@angular/material/table";
 export class AddDetteComponent implements OnInit{
 
   detteListForm!: FormGroup;
-  listProd!: ProduitModel[];
+  listProd!: ProduitDAOModel[];
   listClient!: ClientModel[];
   produitsSelectionnes: any[] = [];
   spinnerProgress: boolean = false;
@@ -82,7 +83,7 @@ export class AddDetteComponent implements OnInit{
     this.dataSource.sort = this.sort;
   }
 
-  onSelectProduit(prod: ProduitModel) {
+  onSelectProduit(prod: any) {
     // Vérifier si le produit est déjà sélectionné
     const produitExiste = this.produitsSelectionnes.some(produit => produit.idProd === prod.idProd);
 

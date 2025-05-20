@@ -9,6 +9,8 @@ export interface ProduitINPUTModel{
   nouveaute: boolean,
   offreSpeciale: boolean,
   vedette: boolean,
+  plusVendu:boolean,
+  publier:boolean,
   description: string,
   image: any,
   categorieStockProdDTO: CategorieModel,

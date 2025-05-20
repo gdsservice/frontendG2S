@@ -11,6 +11,7 @@ import {ProduitService} from "../../../services/produit.service";
 import {ProduitModel} from "../../../models/produit.model";
 import {ValidDialogApprovComponent} from "../../popup-dialog/valid-dialog-approv/valid-dialog.component";
 import {MatSnackBar} from "@angular/material/snack-bar";
+import { ProduitDAOModel } from '../../../models/produitDAO.model ';
 
 @Component({
   selector: 'app-add-approv',
@@ -21,7 +22,7 @@ export class AddApprovComponent implements OnInit{
 
   approvListForm!: FormGroup;
   spinnerProgress: boolean = false;
-  listProd!: ProduitModel[];
+  listProd!: ProduitDAOModel[];
 
   constructor(
               private prodService: ProduitService,

@@ -1,4 +1,4 @@
-.container-body{
+.container-body {
   height: auto;
   margin: 20px;
 }
@@ -7,58 +7,60 @@ table {
   width: 100%;
 }
 
-mat-divider{
+mat-divider {
   margin: 10px 0;
 }
 
-mat-card-header  {
+mat-card-header {
   margin: 0;
   display: flex;
   align-items: center;
   justify-content: space-between;
 }
 
-mat-card-title{
+mat-card-title {
   font-weight: 550;
   font-size: 25px;
- }
+}
 
 mat-card-actions {
   display: flex;
   gap: 10px;
 }
 
-button{
+button {
   margin: 10px 2px 0 0;
   border-radius: 5px;
   font-weight: 500;
 }
 
-.add{
+.add {
   color: #6B3C5C;
   font-weight: bolder;
   background-color: white;
 }
 
-.add:hover{
+.add:hover {
   color: white;
   font-weight: bold;
   background-color: #6B3C5C;
 }
 
-.modifierIcon{
+.modifierIcon {
   color: blue;
 }
 
-.supprimerIcon{
+.supprimerIcon {
   color: red;
 }
 
-.detailsIcon{
+.detailsIcon {
   color: #de0aff;
 }
 
-.details:hover, .modifier:hover, .supprimer:hover{
+.details:hover,
+.modifier:hover,
+.supprimer:hover {
   color: white;
   width: 100%;
   background-color: rgba(107, 60, 92, 0.75);
@@ -85,6 +87,15 @@ button{
   font-weight: bold;
 }
 
+.image-td {
+  padding: 5px 0 0 5px;
+}
+
+.image-produit {
+  max-width: 100px;
+  max-height: 200px;
+}
+
 
 /*Version mobile*/
 @media (max-width: 768px) {
@@ -92,7 +103,8 @@ button{
     grid-template-columns: 1fr;
   }
 
-  .mat-card-header, .header {
+  .mat-card-header,
+  .header {
     flex-direction: column;
     align-items: flex-start;
   }
@@ -102,7 +114,7 @@ button{
     align-items: stretch;
   }
 
-  mat-card-title{
+  mat-card-title {
     font-size: 25px;
   }
 
@@ -111,5 +123,3 @@ button{
     font-size: 14px;
   }
 }
-
-
