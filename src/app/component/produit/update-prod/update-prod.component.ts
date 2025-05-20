@@ -66,8 +66,6 @@ export class UpdateProdComponent implements OnInit {
       
       
       next: (prod: ProduitDAOModel) => {
-        this.catExist = prod.categorieStockProdDTO?.nom,
-        console.log(this.catExist);
         
         this.existingImageUrl = this.prodService.getImageUrl(prod.idProd!);
         this.prodListForm.patchValue({
@@ -76,7 +74,6 @@ export class UpdateProdComponent implements OnInit {
           prixUnitaire: prod.prixUnitaire,
           prixRegulier: prod.prixRegulier,
           categorieStockProdDTO: prod.categorieStockProdDTO,
-      
           description: prod.description,
           note: prod.note,
           publier: prod.publier,

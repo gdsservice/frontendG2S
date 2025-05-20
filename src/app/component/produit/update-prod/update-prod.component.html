@@ -52,7 +52,7 @@
       <mat-form-field appearance="outline">
         <mat-label>Choisir la categorie</mat-label>
         <mat-select formControlName="categorieStockProdDTO" placeholder="Choisir la categorie" required>
-          <mat-option *ngFor="let cat of listCategorie" [value]="catExist">{{ cat.nom }}</mat-option>
+          <mat-option *ngFor="let cat of listCategorie" [value]="cat">{{ cat.nom }}</mat-option>
         </mat-select>
         <mat-icon matPrefix>category</mat-icon>
         <mat-error *ngIf="prodListForm.get('cat')?.hasError('required') && prodListForm.get('cat')">
@@ -96,14 +96,14 @@
     <mat-card-content>
       <mat-form-field appearance="outline">
         <mat-label>Description</mat-label>
-        <textarea matInput formControlName="description" placeholder="Entrez une description" maxlength="255"
+        <textarea matInput formControlName="description" placeholder="Entrez une description" maxlength="50000"
           minlength="2"></textarea>
         <mat-icon matPrefix>description</mat-icon>
       </mat-form-field>
 
       <mat-form-field appearance="outline">
         <mat-label>Note</mat-label>
-        <textarea matInput formControlName="note" placeholder="Entrez une note" maxlength="255"
+        <textarea matInput formControlName="note" placeholder="Entrez une note" maxlength="50000"
           minlength="2"></textarea>
         <mat-icon matPrefix>description</mat-icon>
       </mat-form-field>
