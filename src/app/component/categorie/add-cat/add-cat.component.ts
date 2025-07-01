@@ -3,7 +3,6 @@ import {Location} from "@angular/common";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {CategorieService} from "../../../services/categorie.service";
 import {CategorieModel} from "../../../models/categorie.model";
-import {ValidDialogComponent} from "../../popup-dialog/valid-dialog/valid-dialog.component";
 import { Router} from "@angular/router";
 import {MatDialog} from "@angular/material/dialog";
 import {ErrorDialogComponent} from "../../popup-dialog/error-dialog/error-dialog.component";
@@ -29,9 +28,11 @@ export class AddCatComponent implements OnInit{
 
   ngOnInit(): void {
     this.catListForm = this.fb.group({
-      nom: ['', Validators.required],
-      description: [''],
-    })
+      nom: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(60)]],
+      slug: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(60)]],
+      publier: [true],
+      description: ['', [Validators.minLength(2), Validators.maxLength(255)]]
+    });
 
     this.annuler();
   }
@@ -43,6 +44,8 @@ export class AddCatComponent implements OnInit{
         idCat: null,
         nom: this.catListForm.value.nom,
         description: this.catListForm.value.description,
+        slug: this.catListForm.value.slug,
+        publier: this.catListForm.value.publier,
       };
       this.catService.ajoutCat(cat).subscribe({
         next: value => {
@@ -83,6 +86,8 @@ export class AddCatComponent implements OnInit{
     this.catListForm = this.fb.group({
       nom: [''],
       description: [''],
+      slug: [''],
+      publier: [],
     })
   }
 }

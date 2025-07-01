@@ -12,6 +12,7 @@
     </mat-card-header>
     <mat-divider></mat-divider>
     <mat-card-content>
+
       <mat-form-field appearance="outline">
         <mat-label>Nom</mat-label>
         <input matInput formControlName="nom" maxlength="60" minlength="2" >
@@ -20,6 +21,22 @@
           La titre est requis.
         </mat-error>
       </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Slug</mat-label>
+        <input matInput formControlName="slug" maxlength="60" minlength="2" >
+        <mat-icon matPrefix>format_align_left</mat-icon>
+        <mat-error *ngIf="catListForm.get('slug')?.hasError('required') && catListForm.get('slug')">
+          La slug est requis.
+        </mat-error>
+      </mat-form-field>
+
+      <mat-radio-group formControlName="publier" aria-label="Select an option">
+        <mat-label>Publier</mat-label>
+        <mat-radio-button [value]="true">ACTIVÉ</mat-radio-button>
+        <mat-radio-button [value]="false">DÉSACTIVÉ</mat-radio-button>
+      </mat-radio-group>
+
     </mat-card-content>
     <mat-form-field class="note" appearance="outline">
       <mat-label>Note</mat-label>

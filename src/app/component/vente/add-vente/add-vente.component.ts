@@ -71,6 +71,7 @@ export class AddVenteComponent implements OnInit {
       quantite: ['', Validators.required],
       note: [''],
       clientInput: [''],
+      produitsVend: [[]],
       // Ajoute les contrôles pour le nouveau client
       nom: [''],
       prenom: [''],
@@ -114,6 +115,7 @@ export class AddVenteComponent implements OnInit {
     // Mettre à jour la dataSource du tableau avec les produits sélectionnés
     this.dataSource = new MatTableDataSource(this.produitsSelectionnes);
     // Mettre à jour les produits sélectionnés dans le formulaire
+    
     this.venteListForm.patchValue({
       produitsVend: this.produitsSelectionnes,
       quantite: this.quantiteProd

@@ -26,6 +26,7 @@
     "igniteui-angular": "^18.1.8",
     "jwt-decode": "^4.0.0",
     "minireset.css": "~0.0.4",
+    "qz-tray": "^2.2.4",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",
     "zone.js": "~0.14.3"
@@ -38,6 +39,7 @@
     "@types/hammerjs": "^2.0.40",
     "@types/jasmine": "~5.1.0",
     "@types/jwt-decode": "^3.1.0",
+    "@types/qz-tray": "^2.2.2",
     "jasmine-core": "~5.1.0",
     "karma": "~6.4.0",
     "karma-chrome-launcher": "~3.2.0",

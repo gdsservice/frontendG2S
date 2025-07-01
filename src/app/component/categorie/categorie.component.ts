@@ -28,7 +28,7 @@ export class CategorieComponent implements OnInit{
 
   public listCategorie: Array<CategorieModel>[] | any;
   public dataSource: any;
-  public displayedColumns = ['nom', 'description', 'date', 'action'];
+  public displayedColumns = ['nom', 'slug', 'publier', 'description', 'date', 'action'];
   spinnerProgress: boolean = false;
   isLoading: boolean = true;
 

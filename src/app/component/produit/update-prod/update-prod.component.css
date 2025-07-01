@@ -34,9 +34,10 @@ mat-form-field{
   max-width: 100%;
 }
 
-.mat-card-actions{
+mat-card-actions {
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-end;
+  margin-top: 20px;
 }
 
 button{
@@ -91,27 +92,30 @@ mat-spinner{
   display: flex;
   flex-direction: column;
   gap: 16px;
-  margin: 20px 0;
+  margin: 20px 10px;
 }
 
 /* Bouton de téléchargement */
 .upload-button-wrapper button {
   display: flex;
-  align-items: center;
-  gap: 8px;
+  justify-content: space-between;
 }
 
 /* Cadre de l'image */
-.image-preview-container {
-  margin-top: 16px;
+.image-previews-container {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 16px;
+  margin-top: 10px;
 }
+
 
 .image-frame {
   position: relative;
   border: 2px dashed #ccc;
   border-radius: 8px;
   padding: 10px;
-  max-width: 300px;
+  width: 200px;
   display: inline-block;
 }
 
@@ -201,5 +205,21 @@ input[type="number"] {
 
   button {
     margin: 10px 20px 10px 0;
+  }
+
+  .image-previews-container {
+    display: flex !important;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+  }
+
+  image-frame {
+    width: 120px;
+    padding: 6px;
+  }
+
+  .preview-image {
+    max-height: 120px;
   }
 }

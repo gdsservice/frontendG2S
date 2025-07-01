@@ -129,6 +129,7 @@ mat-card-actions {
   margin-right: 10px;
 }
 
+
 /* Conteneur principal */
 .upload-container {
   display: flex;
@@ -140,23 +141,24 @@ mat-card-actions {
 /* Bouton de téléchargement */
 .upload-button-wrapper button {
   display: flex;
-  align-items: center;
-  gap: 8px;
+  justify-content: space-between;
 }
 
 /* Cadre de l'image */
-.image-preview-container {
-  margin: 10px 50px;
-  width: auto;
-  height: auto;
+.image-previews-container {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 16px;
+  margin-top: 10px;
 }
+
 
 .image-frame {
   position: relative;
   border: 2px dashed #ccc;
   border-radius: 8px;
   padding: 10px;
-  max-width: 300px;
+  width: 200px;
   display: inline-block;
 }
 
@@ -210,6 +212,8 @@ mat-radio-group>mat-label {
   margin-right: 20px;
   font-weight: bold;
 }
+
+
 
 
 /* Responsivité pour mobiles */

@@ -21,6 +21,15 @@
       </mat-form-field>
 
       <mat-form-field appearance="outline">
+        <mat-label>Nom du slug</mat-label>
+        <input matInput formControlName="slug" placeholder="Entrez une slug" maxlength="60" minlength="2">
+        <mat-icon matPrefix>format_align_left</mat-icon>
+        <mat-error *ngIf="prodListForm.get('slug')?.hasError('required') && prodListForm.get('slug')">
+          La designation est requis.
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
         <mat-label>Quantite</mat-label>
         <input matInput formControlName="quantite" type="number" placeholder="0" min="1" step="1">
         <mat-icon matPrefix>exposure</mat-icon>
@@ -62,7 +71,7 @@
     </mat-card-content>
 
     <mat-card-content>
-            <mat-radio-group formControlName="nouveaute" aria-label="Select an option">
+      <mat-radio-group formControlName="nouveaute" aria-label="Select an option">
         <mat-label>Plus Nouveaute</mat-label>
         <mat-radio-button [value]="true">ACTIVÉ</mat-radio-button>
         <mat-radio-button [value]="false">DÉSACTIVÉ</mat-radio-button>
@@ -111,25 +120,27 @@
 
     <mat-card-content>
       <div class="upload-container">
-        <!-- Bouton de sélection -->
+        <!-- Bouton de sélection multiple -->
         <div class="upload-button-wrapper">
           <button mat-raised-button color="primary" (click)="fileInput.click()">
-            Choisir une image
+            Choisir des images
             <mat-icon>image</mat-icon>
           </button>
-          <input #fileInput type="file" (change)="onFileSelected($event)" accept="image/*" hidden />
+          <input #fileInput type="file" (change)="onFileSelected($event)" accept="image/*" multiple hidden />
         </div>
 
-        <!-- Aperçu de l'image -->
-        <div class="image-preview-container" *ngIf="imagePreview">
-          <div class="image-frame">
-            <img [src]="imagePreview" alt="Aperçu de l'image sélectionnée" class="preview-image">
-            <button mat-icon-button class="remove-button" (click)="removeImage()">
-              <mat-icon>close</mat-icon>
-            </button>
-            <h5 class="image-name">
-              {{selectedFile?.name}}
-            </h5>
+        <!-- Liste des aperçus d'images -->
+        <div class="image-previews-container">
+          <div class="image-preview-wrapper" *ngFor="let preview of imagePreviews; let i = index">
+            <div class="image-frame">
+              <img [src]="preview" alt="Aperçu de l'image" class="preview-image">
+              <button mat-icon-button class="remove-button" (click)="removeImage(i)">
+                <mat-icon>close</mat-icon>
+              </button>
+              <h5 class="image-name">
+                {{selectedFiles[i].name}}
+              </h5>
+            </div>
           </div>
         </div>
       </div>

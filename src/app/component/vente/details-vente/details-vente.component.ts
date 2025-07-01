@@ -21,7 +21,7 @@ export class DetailsVenteComponent {
   venteId: string | null = null;
   dataSource: any;
   displayedColumns = ['designation', 'quantite', 'prixUnitaire', 'montant', 'date', 'categorieStock', 'utilisateurProd'];
-   
+
 
   constructor(
     private location: Location,
@@ -37,17 +37,14 @@ export class DetailsVenteComponent {
         (venteDAO: VenteDAOModel) => {
           this.vente = venteDAO;
           this.dataSource = new MatTableDataSource(this.vente.venteProduitList);
-          // console.table(this.vente.venteProduitList);
-
         },
         error => {
           console.error('Erreur lors du chargement du vente:', error);
         }
       );
     }
-
-
   }
+
 
   imprimerVente() {
     this.venteService.telechargerPdf(this.venteId).subscribe((pdfBlob) => {

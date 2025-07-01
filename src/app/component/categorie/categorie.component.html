@@ -32,6 +32,12 @@
             <td mat-cell *matCellDef="let categorie"> {{categorie.nom}} </td>
           </ng-container>
 
+          <!-- Slug Column -->
+          <ng-container matColumnDef="slug" class="mat-elevation-z8">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Slug </th>
+            <td mat-cell *matCellDef="let categorie"> {{categorie.slug}} </td>
+          </ng-container>
+
           <!-- Description Column -->
           <ng-container matColumnDef="description" class="mat-elevation-z8">
             <th mat-header-cell *matHeaderCellDef mat-sort-header> Description </th>
@@ -42,6 +48,16 @@
           <ng-container matColumnDef="date">
             <th mat-header-cell *matHeaderCellDef mat-sort-header> Date de création </th>
             <td mat-cell *matCellDef="let categorie"> {{formatDate(categorie.date)}} </td>
+          </ng-container>
+
+          <!-- publier Column -->
+          <ng-container matColumnDef="publier" class="mat-elevation-z8">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> PUBLIER </th>
+            <td mat-cell *matCellDef="let categorie">
+              <span [ngClass]="categorie.publier ? 'text-vert' : 'text-rouge'">
+                {{ categorie.publier ? 'ACTIVÉ' : 'DÉSACTIVÉ' }}
+              </span>
+            </td>
           </ng-container>
 
           <!-- Action Column -->

@@ -41,10 +41,12 @@
           </ng-container>
 
           <!-- Ajouter cette colonne -->
-          <ng-container class="image-container" matColumnDef="image">
-            <th mat-header-cell *matHeaderCellDef> IMAGE </th>
-            <td mat-cell *matCellDef="let produit" class="image-td">
-              <img *ngIf="produit.imageUrl" [src]="produit.imageUrl" class="image-produit">
+          <ng-container matColumnDef="image">
+            <th mat-header-cell *matHeaderCellDef>IMAGE</th>
+            <td class="image-td"  mat-cell *matCellDef="let produit">
+              <img *ngIf="produit.imageUrl" [src]="produit.imageUrl" class="image-produit"
+                (error)="produit.imageUrl = 'assets/images/default-product.png'">
+              <img *ngIf="!produit.imageUrl" src="assets/images/default-product.png" class="image-produit">
             </td>
           </ng-container>
 
@@ -163,7 +165,7 @@
                   <mat-icon class="supprimerIcon">delete</mat-icon>
                   <span>Supprimer</span>
                 </button>
-                <button class="details" mat-menu-item (click)="details()">
+                <button class="details" mat-menu-item (click)="details(produit.idProd)">
                   <mat-icon class="detailsIcon">info</mat-icon>
                   <span>Détails</span>
                 </button>

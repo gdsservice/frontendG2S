@@ -13,6 +13,7 @@ import {
 } from "../popup-dialog/confirmation-dialog-supp-prod/confirmation-dialog-supp-prod.component";
 import { ProduitDAOModel } from '../../models/produitDAO.model ';
 import { SelectionModel } from '@angular/cdk/collections';
+import { map } from 'rxjs';
 
 @Component({
   selector: 'app-produit',
@@ -41,11 +42,17 @@ export class ProduitComponent implements OnInit{
 
   ngOnInit(): void {
     this.produitService.listProduit()
+      .pipe(
+        map((produits: ProduitDAOModel[]) => produits.map(produit => ({
+          ...produit,
+          imageUrl: produit.idProd ? this.produitService.getMainImageUrl(produit.idProd) : ''
+        })))
+      )
       .subscribe(
         data => {
           this.listProduits = data.map(produit => ({
             ...produit,
-            imageUrl: this.produitService.getImageUrl(produit.idProd!)
+            imageUrl: this.produitService.getImageUrl(produit.idProd!), 
           }));
           
           this.dataSource = new MatTableDataSource(this.listProduits);
@@ -144,7 +151,8 @@ export class ProduitComponent implements OnInit{
 
   }
 
-  details() {
+  details(idProd: string) {
+    this.router.navigateByUrl(`/admin/detailsProd/${idProd}`);
 
   }
 

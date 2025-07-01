@@ -27,6 +27,7 @@ import {UpdateApprovComponent} from "./component/approvision/update-approv/updat
 import {UpdateDetteComponent} from "./component/dette/update-dette/update-dette.component";
 import {UpdateUserComponent} from "./component/utilisateur/update-user/update-user.component";
 import { DetailsVenteComponent } from './component/vente/details-vente/details-vente.component';
+import { DetailsProduitComponent } from './component/produit/details-produit/details-produit.component';
 
 const routes: Routes = [
   {path: "", component: LoginComponent},
@@ -46,6 +47,7 @@ const routes: Routes = [
       {path: "updateDette/:idDette", component: UpdateDetteComponent},
       {path: "addDette", component: AddDetteComponent},
       {path: "produit", component: ProduitComponent},
+      {path: "detailsProd/:idProd", component: DetailsProduitComponent},
       {path: "updateProd/:idProd", component: UpdateProdComponent},
       {path: "addProd", component: AddProdComponent},
       {path: "categorie", component: CategorieComponent},

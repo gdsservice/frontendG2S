@@ -3,7 +3,7 @@ import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { CategorieModel } from "../../../models/categorie.model";
 import { MatDialog } from "@angular/material/dialog";
 import { ActivatedRoute, Router } from "@angular/router";
-import { Location } from "@angular/common";
+import { Location, SlicePipe } from "@angular/common";
 import { CategorieService } from "../../../services/categorie.service";
 import { ProduitService } from "../../../services/produit.service";
 import { MatSnackBar } from "@angular/material/snack-bar";
@@ -23,7 +23,7 @@ export class UpdateProdComponent implements OnInit {
   prodId: string | null = null;
   selectedFile: File | null = null;
   imagePreview: string | ArrayBuffer | null = null;
-  existingImageUrl: string | null = null;
+  existingImageUrl: string[] | null = null;
   catExist: any | null = null;
 
   constructor(
@@ -38,6 +38,7 @@ export class UpdateProdComponent implements OnInit {
   ) {
     this.prodListForm = this.fb.group({
       designation: ['', Validators.required],
+      slug: ['', Validators.required],
       quantite: [0, [Validators.required, Validators.min(1)]],
       prixUnitaire: [0, [Validators.required, Validators.min(1)]],
       prixRegulier: [0, [Validators.required, Validators.min(1)]],
@@ -67,9 +68,11 @@ export class UpdateProdComponent implements OnInit {
       
       next: (prod: ProduitDAOModel) => {
         
-        this.existingImageUrl = this.prodService.getImageUrl(prod.idProd!);
+        this.existingImageUrl = this.prodService.getImageUrls(prod.idProd!,5);
+        
         this.prodListForm.patchValue({
           designation: prod.designation,
+          slug: prod.slug,
           quantite: prod.quantite,
           prixUnitaire: prod.prixUnitaire,
           prixRegulier: prod.prixRegulier,
@@ -179,21 +182,8 @@ export class UpdateProdComponent implements OnInit {
     });
   }
 
-  annuler(){
-this.prodListForm = this.fb.group({
-      designation: [''],
-      quantite: [0],
-      prixUnitaire: [0],
-      prixRegulier: [0],
-      categorieStockProdDTO: [],
-      description: [''],
-      note: [''],
-      publier: [],
-      nouveaute: [],
-      plusVendu: [],
-      offreSpeciale: [],
-      vedette: [],
-      image: []
-    });
+  annulerProd() {
+    this.router.navigate(['/admin/produit']);
+
   }
 }

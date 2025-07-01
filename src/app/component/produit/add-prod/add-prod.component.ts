@@ -20,8 +20,8 @@ export class AddProdComponent implements OnInit {
   prodListForm!: FormGroup;
   listCategorie!: CategorieModel[];
   spinnerProgress: boolean = false;
-  selectedFile: File | null = null;
-  imagePreview: string | ArrayBuffer | null = null;
+  selectedFiles: File[] = [];
+  imagePreviews: (string | ArrayBuffer)[] = []; 
 
 
   constructor(private dialog: MatDialog,
@@ -62,50 +62,53 @@ export class AddProdComponent implements OnInit {
       image: [''],
       description: [''],
       note: [''],
+      slug: [''],
 
     })
 
     this.annulerProd();
   }
 
-  onFileSelected(event: any): void {
-    const file = event.target.files[0];
-    if (file) {
-      // Vérification du type de fichier (seulement PNG et JPEG/JPG)
-      const allowedTypes = ['image/png', 'image/jpeg', 'image/jpg'];
-      if (!allowedTypes.includes(file.type)) {
-        this.snackBar.open('Seules les images PNG, JPG et JPEG sont autorisées', 'Fermer', { duration: 3000 });
+   onFileSelected(event: any): void {
+    const files = event.target.files;
+    if (files && files.length > 0) {
+      // Vérification du nombre d'images (max 5 par exemple)
+      if (this.selectedFiles.length + files.length > 5) {
+        this.snackBar.open('Maximum 5 images autorisées', 'Fermer', { duration: 3000 });
         return;
       }
 
-      if (file.tyle == '') {
-        this.snackBar.open('Impossible d\'importer. Utilisez une image dans l\'un de ces formats : .jpg, .png, ou .jpeg', 'Fermer', { duration: 4000 });
-        return;
+      for (let i = 0; i < files.length; i++) {
+        const file = files[i];
+        
+        // Vérification du type de fichier
+        const allowedTypes = ['image/png', 'image/jpeg', 'image/jpg'];
+        if (!allowedTypes.includes(file.type)) {
+          this.snackBar.open('Seules les images PNG, JPG et JPEG sont autorisées', 'Fermer', { duration: 3000 });
+          continue;
+        }
+
+        // Vérification de la taille (max 5MB)
+        if (file.size > 5 * 1024 * 1024) {
+          this.snackBar.open(`L'image ${file.name} dépasse 5MB`, 'Fermer', { duration: 3000 });
+          continue;
+        }
+
+        this.selectedFiles.push(file);
+
+        // Création de l'aperçu
+        const reader = new FileReader();
+        reader.onload = (e) => {
+          this.imagePreviews.push(e.target?.result as string | ArrayBuffer);
+        };
+        reader.readAsDataURL(file);
       }
-
-      // Vérification de la taille (max 5MB)
-      if (file.size > 5 * 1024 * 1024) {
-        this.snackBar.open('La taille maximale est de 5MB', 'Fermer', { duration: 3000 });
-        return;
-      }
-
-      this.selectedFile = file;
-
-      // Création de l'aperçu
-      const reader = new FileReader();
-      reader.onload = () => {
-        this.imagePreview = reader.result;
-      };
-      reader.readAsDataURL(file);
     }
   }
 
-  removeImage(): void {
-    this.selectedFile = null;
-    this.imagePreview = null;
-    // Réinitialiser l'input file si nécessaire
-    const fileInput = document.querySelector('input[type="file"]') as HTMLInputElement;
-    if (fileInput) fileInput.value = '';
+   removeImage(index: number): void {
+    this.selectedFiles.splice(index, 1);
+    this.imagePreviews.splice(index, 1);
   }
 
 
@@ -129,15 +132,18 @@ export class AddProdComponent implements OnInit {
         publier: this.prodListForm.value.publier,
         description: this.prodListForm.value.description,
         note: this.prodListForm.value.note,
+        slug: this.prodListForm.value.slug,
         categorieStockProdDTO: this.prodListForm.value.cat,
-        image: null
+        images: this.selectedFiles,
       };
 
       const formData = new FormData();
       formData.append('produit', JSON.stringify(produit));
-      if (this.selectedFile) {
-        formData.append('image', this.selectedFile);
-      }
+
+         // Ajoutez chaque image
+    this.selectedFiles.forEach(file => {
+      formData.append('images', file, file.name);
+    });
 
       this.prodService.ajoutProd(formData).subscribe({
         next: value => {
@@ -188,6 +194,7 @@ export class AddProdComponent implements OnInit {
       image: [''],
       description: [''],
       note: [''],
+      slug: [''],
     })
 
   }

@@ -1,4 +1,6 @@
+import { UtilisateurComponent } from "../component/utilisateur/utilisateur.component";
 import {CategorieModel} from "./categorie.model";
+import { UserModel } from "./user.model";
 
 export interface ProduitDAOModel{
   idProd: string | null,
@@ -9,6 +11,9 @@ export interface ProduitDAOModel{
   categorieStockProdDTO?: CategorieModel,
   note: string,
   imageUrl?: string;
+  utilisateurProd?: UserModel,
+  montant?: number,
+  date?: Date,
 
 
     // Nouveau attribut

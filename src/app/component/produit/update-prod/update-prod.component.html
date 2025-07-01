@@ -20,6 +20,15 @@
         </mat-error>
       </mat-form-field>
 
+           <mat-form-field appearance="outline">
+        <mat-label>Nom du slug</mat-label>
+        <input matInput formControlName="slug" placeholder="Entrez une slug" maxlength="60" minlength="2">
+        <mat-icon matPrefix>format_align_left</mat-icon>
+        <mat-error *ngIf="prodListForm.get('slug')?.hasError('required') && prodListForm.get('slug')">
+          La designation est requis.
+        </mat-error>
+      </mat-form-field>
+
       <mat-form-field appearance="outline">
         <mat-label>Quantite</mat-label>
         <input matInput formControlName="quantite" type="number" placeholder="0" min="1" step="1">
@@ -109,51 +118,58 @@
       </mat-form-field>
     </mat-card-content>
 
-    <mat-card-content>
-      <div class="upload-container">
-        <!-- Bouton de sélection -->
-        <div class="upload-button-wrapper">
-          <button mat-raised-button color="primary" (click)="fileInput.click()">
-            Choisir une image
-            <mat-icon>image</mat-icon>
-          </button>
-          <input #fileInput type="file" (change)="onFileSelected($event)" accept="image/*" hidden />
-        </div>
-  
-        <!-- Aperçu de l'image existante (depuis la BDD) -->
-        <div class="image-preview-container" *ngIf="!imagePreview && existingImageUrl">
+    <!-- ... autres parties du template ... -->
+
+<mat-card-content>
+  <div class="upload-container">
+    <!-- Bouton de sélection -->
+    <div class="upload-button-wrapper">
+      <button mat-raised-button color="primary" (click)="fileInput.click()">
+        Ajouter des images
+        <mat-icon>image</mat-icon>
+      </button>
+      <input #fileInput type="file" (change)="onFileSelected($event)" accept="image/*" multiple hidden />
+    </div>
+
+    <!-- Section des images existantes -->
+    <div *ngIf="(existingImageUrl?.length ?? 0) > 0" class="existing-images-section">
+      <h4>Images existantes</h4>
+      <div class="image-previews-container">
+        <div *ngFor="let image of existingImageUrl; let i = index" class="image-preview-wrapper">
           <div class="image-frame">
-            <img [src]="existingImageUrl" alt="Image existante" class="preview-image">
+            <img [src]="image" alt="Image existante" class="preview-image">
             <button mat-icon-button class="remove-button" (click)="removeExistingImage()">
               <mat-icon>close</mat-icon>
             </button>
-            <h5 class="image-name">
-              <!-- {{selectedFile?.name}} -->
-              Image actuelle
-            </h5>
-          </div>
-        </div>
-  
-        <!-- Aperçu de la nouvelle image sélectionnée -->
-        <div class="image-preview-container" *ngIf="imagePreview">
-          <div class="image-frame">
-            <img [src]="imagePreview" alt="Aperçu de l'image sélectionnée" class="preview-image">
-            <button mat-icon-button class="remove-button" (click)="removeImage()">
-              <mat-icon>close</mat-icon>
-            </button>
-            <h5 class="image-name">
-              {{selectedFile?.name}}
-            </h5>
           </div>
         </div>
       </div>
-    </mat-card-content>
+    </div>
+
+    <!-- Section des nouvelles images sélectionnées -->
+    <div *ngIf="imagePreview" class="new-images-section">
+      <h4>Nouvelles images</h4>
+      <div class="image-previews-container">
+        <div class="image-preview-wrapper">
+          <div class="image-frame">
+            <img [src]="imagePreview" alt="Nouvelle image" class="preview-image">
+            <button mat-icon-button class="remove-button" (click)="removeImage()">
+              <mat-icon>close</mat-icon>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</mat-card-content>
+
+<!-- ... autres parties du template ... -->
 
     <mat-card-actions>
-      <!-- <button (click)="annulerProd()" class="annuler" mat-raised-button>Annuler</button> -->
+      <button (click)="annulerProd()" class="annuler" mat-raised-button>Annuler</button>
       <button (click)="modifierProd()" class="enregistrer" mat-raised-button>
         <div class="save">
-          Enregistrer
+          Modifier
           <div *ngIf="spinnerProgress">
             <app-spinner />
           </div>

@@ -74,6 +74,8 @@ import { DetailsVenteComponent } from './component/vente/details-vente/details-v
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import {MatRadioModule} from '@angular/material/radio';
+import { DetailsProduitComponent } from './component/produit/details-produit/details-produit.component';
+import { FormatCfaPipe } from './pipes/format-cfa.pipe';
 
 
 @NgModule({
@@ -116,6 +118,8 @@ import {MatRadioModule} from '@angular/material/radio';
 		LoadingComponent,
 		SpinnerComponent,
 		DetailsVenteComponent,
+  DetailsProduitComponent,
+  FormatCfaPipe,
 
 	],
 	imports: [BrowserModule,

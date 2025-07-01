@@ -21,14 +21,33 @@ export class ProduitService {
     return this.http.get<Array<ProduitDAOModel>>(`${environment.backendHost}/produit/listeProd`);
   }
 
-  ajoutProd(formData: FormData): Observable<ProduitINPUTModel> {
-    return this.http.post<ProduitINPUTModel>(`${environment.backendHost}/produit/enregistrerProd`, formData);
-  }
+ajoutProd(formData: FormData): Observable<ProduitINPUTModel> {
+  const headers = new HttpHeaders();
+  headers.append('Content-Type', 'multipart/form-data');
+  
+  return this.http.post<ProduitINPUTModel>(
+    `${environment.backendHost}/produit/enregistrerProd`,formData,{ headers }
+  );
+}
   
 
-  getImageUrl(idProd: string): string {
-    return `${environment.backendHost}/produit/image/${idProd}`;
+   getMainImageUrl(idProd: string): string {
+    return `${environment.backendHost}/images/produit/main/${idProd}`;
   }
+
+  getImageUrl(idProd: string): string {
+    return `${environment.backendHost}/images/produit/${idProd}`;
+  }
+
+   getImageUrls(idProd: string, count: number): string[] {
+  const urls: string[] = [];
+  for (let i = 0; i < count; i++) {
+    urls.push(`${environment.backendHost}/images/produit/${idProd}?index=${i}`);
+  }
+  return urls;
+}
+
+  
 
   modifierProdAvecImage(formData: FormData, idProd: string): Observable<any> {
     return this.http.put(`${environment.backendHost}/produit/modifierProd/${idProd}`, formData);

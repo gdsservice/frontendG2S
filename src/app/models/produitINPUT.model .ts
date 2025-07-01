@@ -12,7 +12,9 @@ export interface ProduitINPUTModel{
   plusVendu:boolean,
   publier:boolean,
   description: string,
-  image: any,
+  slug: string,
+  images?: File[];
+  imageUrls?: string[];
   categorieStockProdDTO: CategorieModel,
   note: string,
 }
