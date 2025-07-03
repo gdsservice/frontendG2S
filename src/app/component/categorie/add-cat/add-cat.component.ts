@@ -37,6 +37,7 @@ export class AddCatComponent implements OnInit{
     this.annuler();
   }
 
+  // fonction ajouter
   ajoutUser() {
     if (this.catListForm.valid){
       this.spinnerProgress = true;
