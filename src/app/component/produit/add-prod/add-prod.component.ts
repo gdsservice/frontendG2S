@@ -142,10 +142,10 @@ export class AddProdComponent implements OnInit {
 
          // Ajoutez chaque image
     this.selectedFiles.forEach(file => {
-      formData.append('images', file, file.name);
+    formData.append('images', file, file.name);
     });
 
-      this.prodService.ajoutProd(formData).subscribe({
+     this.prodService.ajoutProd(formData).subscribe({
         next: value => {
           this.spinnerProgress = false;
           this.snackBar.open('Produit ajouté avec succès!', 'Fermer', { duration: 3000 });
@@ -172,7 +172,8 @@ export class AddProdComponent implements OnInit {
           }
           this.spinnerProgress = false;
         },
-      });
+      }
+    );
     } else {
       this.prodListForm.markAllAsTouched();
     }

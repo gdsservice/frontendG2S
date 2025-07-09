@@ -22,11 +22,8 @@ export class ProduitService {
   }
 
 ajoutProd(formData: FormData): Observable<ProduitINPUTModel> {
-  const headers = new HttpHeaders();
-  headers.append('Content-Type', 'multipart/form-data');
-  
   return this.http.post<ProduitINPUTModel>(
-    `${environment.backendHost}/produit/enregistrerProd`,formData,{ headers }
+    `${environment.backendHost}/produit/enregistrerProd`,formData
   );
 }
   
