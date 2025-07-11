@@ -63,7 +63,8 @@ export class AddProdComponent implements OnInit {
       description: [''],
       note: [''],
       slug: [''],
-
+      caracteristique: [''],
+      info: ['']
     })
 
     this.annulerProd();
@@ -117,7 +118,8 @@ export class AddProdComponent implements OnInit {
   }
 
   ajoutProd() {
-    if (this.prodListForm.valid) {     
+    if (this.prodListForm.valid) {  
+      // Vérification de la catégorie sélectionnée  
       this.spinnerProgress = true;
       const produit: ProduitINPUTModel = {
         idProd: null,
@@ -135,6 +137,8 @@ export class AddProdComponent implements OnInit {
         slug: this.prodListForm.value.slug,
         categorieStockProdDTO: this.prodListForm.value.cat,
         images: this.selectedFiles,
+        caracteristique: this.prodListForm.value.caracteristique,
+        info: this.prodListForm.value.info
       };
 
       const formData = new FormData();
@@ -144,7 +148,7 @@ export class AddProdComponent implements OnInit {
     this.selectedFiles.forEach(file => {
     formData.append('images', file, file.name);
     });
-
+    
      this.prodService.ajoutProd(formData).subscribe({
         next: value => {
           this.spinnerProgress = false;
@@ -196,6 +200,8 @@ export class AddProdComponent implements OnInit {
       description: [''],
       note: [''],
       slug: [''],
+      caracteristique: [''],
+      info: ['']
     })
 
   }

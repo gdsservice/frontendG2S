@@ -17,4 +17,6 @@ export interface ProduitINPUTModel{
   imageUrls?: string[];
   categorieStockProdDTO: CategorieModel,
   note: string,
+  info: string,
+  caracteristique: string
 }

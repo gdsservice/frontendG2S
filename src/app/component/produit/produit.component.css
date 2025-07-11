@@ -82,11 +82,22 @@ button {
   font-weight: bold;
 }
 
+.image-cell {
+  padding: 2px !important;
+  margin: 0 !important;
+  text-align: center;
+  vertical-align: middle;
+}
+
 img {
-  width: 100%;
+  width: 80px; 
   height: auto;
   object-fit: contain;
+  margin: 0 !important;
+  padding: 0 !important;
+  display: block;
 }
+
 
 /*Version mobile*/
 @media (max-width: 768px) {

@@ -30,6 +30,9 @@
             <strong>Slug:</strong> {{ produit.slug }}
           </div>
           <div class="info-item">
+            <strong>Caracteristique:</strong> {{ produit.caracteristique }}
+          </div>
+          <div class="info-item">
             <strong>Quantité:</strong> {{ produit.quantite }}
           </div>
           <div class="info-item">
@@ -103,6 +106,9 @@
 
         <h5>Notes</h5>
         <p>{{ produit.note || 'Aucune note disponible' }}</p>
+
+        <h5>Info</h5>
+        <p>{{ produit.info || 'Aucune info disponible' }}</p>
       </mat-card-content>
     </mat-card>
 

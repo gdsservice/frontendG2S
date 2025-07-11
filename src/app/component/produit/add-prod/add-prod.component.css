@@ -236,7 +236,7 @@ mat-radio-group>mat-label {
     margin: 10px 20px 10px 0;
   }
 
-  .upload-container {
+  /* .upload-container {
     margin: 10px 50px;
   }
 
@@ -244,5 +244,20 @@ mat-radio-group>mat-label {
     margin: 0;
     width: 100%;
     height: auto;
+  } */
+     .image-previews-container {
+    display: flex !important;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+  }
+
+  image-frame {
+    width: 120px;
+    padding: 6px;
+  }
+
+  .preview-image {
+    max-height: 120px;
   }
 }

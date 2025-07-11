@@ -13,7 +13,7 @@
 
       <mat-form-field appearance="outline">
         <mat-label>Nom du produit</mat-label>
-        <input matInput formControlName="designation" placeholder="Entrez une Designation" maxlength="60" minlength="2">
+        <input matInput formControlName="designation" placeholder="Entrez une Designation" maxlength="255" minlength="2">
         <mat-icon matPrefix>format_align_left</mat-icon>
         <mat-error *ngIf="prodListForm.get('designation')?.hasError('required') && prodListForm.get('designation')">
           La designation est requis.
@@ -22,7 +22,7 @@
 
       <mat-form-field appearance="outline">
         <mat-label>Nom du slug</mat-label>
-        <input matInput formControlName="slug" placeholder="Entrez une slug" maxlength="60" minlength="2">
+        <input matInput formControlName="slug" placeholder="Entrez une slug" maxlength="255" minlength="2">
         <mat-icon matPrefix>format_align_left</mat-icon>
         <mat-error *ngIf="prodListForm.get('slug')?.hasError('required') && prodListForm.get('slug')">
           La designation est requis.
@@ -66,6 +66,16 @@
         <mat-icon matPrefix>category</mat-icon>
         <mat-error *ngIf="prodListForm.get('cat')?.hasError('required') && prodListForm.get('cat')">
           La categorie est requis.
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Caractéristique</mat-label>
+        <input matInput formControlName="caracteristique" placeholder="Entrez une caractéristique" maxlength="255"
+          minlength="2">
+        <mat-icon matPrefix>description</mat-icon>
+        <mat-error *ngIf="prodListForm.get('caracteristique')?.hasError('required') && prodListForm.get('caracteristique')">
+          La caractéristique est requis.
         </mat-error>
       </mat-form-field>
     </mat-card-content>
@@ -116,6 +126,16 @@
           minlength="2"></textarea>
         <mat-icon matPrefix>description</mat-icon>
       </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Information</mat-label>
+        <textarea matInput formControlName="info" placeholder="Entrez une information" maxlength="50000" minlength="2"></textarea>
+        <mat-icon matPrefix>info</mat-icon>
+        <mat-error *ngIf="prodListForm.get('info')?.hasError('required') && prodListForm.get('info')">
+          L'information est requis.
+        </mat-error>
+      </mat-form-field>
+
     </mat-card-content>
 
     <mat-card-content>

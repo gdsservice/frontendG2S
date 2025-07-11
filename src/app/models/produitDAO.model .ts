@@ -25,4 +25,6 @@ export interface ProduitDAOModel{
     offreSpeciale?: boolean,
     plusVendu?: boolean,
     publier?: boolean,
+    info: string,
+    caracteristique: string
 }

@@ -25,7 +25,7 @@ export class ProduitComponent implements OnInit{
 
   public listProduits!: Array<ProduitDAOModel> ;
   public dataSource: any;
-  public displayedColumns = ['select','image','designation', 'quantite', 'prixUnitaire','prixRegulier', 'montant', 'date', 'cat','utilisateurProd','publier','nouveaute','plusVendu','offreSpeciale','vedette','action']
+  public displayedColumns = ['select','image','designation', 'quantite', 'prixUnitaire','prixRegulier', 'montant', 'date', 'action']
   spinnerProgress: boolean = false;
   isLoading: boolean = true;
   selection = new SelectionModel<ProduitDAOModel>(true, []);

@@ -68,6 +68,17 @@
           La categorie est requis.
         </mat-error>
       </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Caractéristique</mat-label>
+        <input matInput formControlName="caracteristique" placeholder="Entrez une caractéristique" maxlength="255"
+          minlength="2">
+        <mat-icon matPrefix>description</mat-icon>
+        <mat-error *ngIf="prodListForm.get('caracteristique')?.hasError('required') && prodListForm.get('caracteristique')">
+          La caractéristique est requis.
+        </mat-error>
+      </mat-form-field>
+
     </mat-card-content>
 
     <mat-card-content class="radio-group-content">
@@ -116,6 +127,17 @@
           minlength="2"></textarea>
         <mat-icon matPrefix>description</mat-icon>
       </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Information</mat-label>
+        <textarea matInput formControlName="info" placeholder="Entrez une information" maxlength="50000" minlength="2"></textarea>
+        <mat-icon matPrefix>info</mat-icon>
+        <mat-error *ngIf="prodListForm.get('info')?.hasError('required') && prodListForm.get('info')">
+          L'information est requis.
+        </mat-error>
+      </mat-form-field>
+
+
     </mat-card-content>
 
     <!-- ... autres parties du template ... -->

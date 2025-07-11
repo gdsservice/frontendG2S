@@ -3,7 +3,7 @@ import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { CategorieModel } from "../../../models/categorie.model";
 import { MatDialog } from "@angular/material/dialog";
 import { ActivatedRoute, Router } from "@angular/router";
-import { Location, SlicePipe } from "@angular/common";
+import { Location } from "@angular/common";
 import { CategorieService } from "../../../services/categorie.service";
 import { ProduitService } from "../../../services/produit.service";
 import { MatSnackBar } from "@angular/material/snack-bar";
@@ -50,7 +50,9 @@ export class UpdateProdComponent implements OnInit {
       plusVendu: [],
       offreSpeciale: [],
       vedette: [],
-      image: [null]
+      image: [null],
+      caracteristique: [''],
+      info: ['']
     });
   }
 
@@ -83,7 +85,9 @@ export class UpdateProdComponent implements OnInit {
           nouveaute: prod.nouveaute,
           plusVendu: prod.plusVendu,
           offreSpeciale: prod.offreSpeciale,
-          vedette: prod.vedette
+          vedette: prod.vedette,
+          caracteristique: prod.caracteristique,
+          info: prod.info
         });
       },
       error: (err) => {
