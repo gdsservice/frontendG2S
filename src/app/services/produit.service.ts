@@ -44,6 +44,10 @@ ajoutProd(formData: FormData): Observable<ProduitINPUTModel> {
   return urls;
 }
 
+  public getProduitBySlug(slug: string): Observable<ProduitDAOModel> {
+    return this.http.get<ProduitDAOModel>(`${environment.backendHost}/produit/slug/${slug}`);
+  }
+
   
 
   modifierProdAvecImage(formData: FormData, idProd: string): Observable<any> {

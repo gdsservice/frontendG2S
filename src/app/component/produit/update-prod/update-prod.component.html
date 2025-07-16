@@ -13,7 +13,7 @@
 
       <mat-form-field appearance="outline">
         <mat-label>Nom du produit</mat-label>
-        <input matInput formControlName="designation" placeholder="Entrez une Designation" maxlength="60" minlength="2">
+        <input matInput formControlName="designation" placeholder="Entrez une Designation" maxlength="255" minlength="2">
         <mat-icon matPrefix>format_align_left</mat-icon>
         <mat-error *ngIf="prodListForm.get('designation')?.hasError('required') && prodListForm.get('designation')">
           La designation est requis.
@@ -22,7 +22,7 @@
 
            <mat-form-field appearance="outline">
         <mat-label>Nom du slug</mat-label>
-        <input matInput formControlName="slug" placeholder="Entrez une slug" maxlength="60" minlength="2">
+        <input matInput formControlName="slug" placeholder="Entrez une slug" maxlength="255" minlength="2">
         <mat-icon matPrefix>format_align_left</mat-icon>
         <mat-error *ngIf="prodListForm.get('slug')?.hasError('required') && prodListForm.get('slug')">
           La designation est requis.

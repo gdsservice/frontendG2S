@@ -28,6 +28,7 @@ import {UpdateDetteComponent} from "./component/dette/update-dette/update-dette.
 import {UpdateUserComponent} from "./component/utilisateur/update-user/update-user.component";
 import { DetailsVenteComponent } from './component/vente/details-vente/details-vente.component';
 import { DetailsProduitComponent } from './component/produit/details-produit/details-produit.component';
+import { CommandeComponent } from './component/commande/commande.component';
 
 const routes: Routes = [
   {path: "", component: LoginComponent},
@@ -60,6 +61,7 @@ const routes: Routes = [
       {path: "detailsVente/:idVente", component: DetailsVenteComponent},
       {path: "addUser", component: AddUserComponent},
       {path: "updateUser/:id", component: UpdateUserComponent},
+      {path: "commande", component: CommandeComponent},
       {
         path: 'utilisateur', component: UtilisateurComponent,
         canActivate: [AuthorizationGuard],

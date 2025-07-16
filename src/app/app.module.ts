@@ -76,6 +76,9 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import {MatRadioModule} from '@angular/material/radio';
 import { DetailsProduitComponent } from './component/produit/details-produit/details-produit.component';
 import { FormatCfaPipe } from './pipes/format-cfa.pipe';
+import { CommandeComponent } from './component/commande/commande.component';
+import { FormatDatePipe } from './pipes/format-date.pipe';
+import { FormatMontantPipe } from './pipes/format-montant.pipe';
 
 
 @NgModule({
@@ -120,6 +123,9 @@ import { FormatCfaPipe } from './pipes/format-cfa.pipe';
 		DetailsVenteComponent,
   DetailsProduitComponent,
   FormatCfaPipe,
+  CommandeComponent,
+  FormatDatePipe,
+  FormatMontantPipe,
 
 	],
 	imports: [BrowserModule,

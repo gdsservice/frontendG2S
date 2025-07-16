@@ -7,9 +7,10 @@
   </button>
   <span class="logo">G2S Services</span>
   <span class="span-spacer"></span>
-  <button mat-icon-button matBadge="8" matBadgePosition="before">
-    <mat-icon class="mat-icon-menu">notifications</mat-icon>
-  </button>
+  <button mat-icon-button [matBadge]="quantite" matBadgePosition="before" matBadgeColor="warn"
+        [matBadgeHidden]="quantite === 0">
+  <mat-icon class="mat-icon-menu" >notifications</mat-icon>
+</button>
   <button mat-icon-button class="user-icon" [matMenuTriggerFor]="logoutMenu">
     <mat-icon class="mat-icon-menu">person</mat-icon>
   </button>
@@ -40,6 +41,11 @@
       <mat-list-item>
         <button mat-button routerLink="/admin/produit" routerLinkActive="active-link" style="color: black; font-size: 18px" (click)="closeDrawerOnNavigation()">
           <mat-icon>shopping_basket</mat-icon> Produits
+        </button>
+      </mat-list-item>
+      <mat-list-item>
+        <button mat-button routerLink="/admin/commande" routerLinkActive="active-link" style="color: black; font-size: 18px" (click)="closeDrawerOnNavigation()">
+          <mat-icon>assignment</mat-icon> Commandes
         </button>
       </mat-list-item>
       <mat-list-item>

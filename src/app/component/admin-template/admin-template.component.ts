@@ -2,6 +2,9 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { BreakpointObserver, Breakpoints } from "@angular/cdk/layout";
 import { LoginService } from "../../services/login.service";
 import { MatDrawer } from '@angular/material/sidenav';
+import { CommandeDAOModel } from '../../models/commandeDAO.model';
+import { lastValueFrom } from 'rxjs';
+import { CommandeService } from '../../services/commande.service';
 
 @Component({
   selector: 'app-admin-template',
@@ -12,16 +15,31 @@ export class AdminTemplateComponent implements OnInit {
 
   @ViewChild('myDrawer') myDrawer!: MatDrawer;
   isMobile: boolean = false;
+  commandeList: CommandeDAOModel[] = [];
+  quantite: number = 0; 
 
-  constructor(private breakpointObserver: BreakpointObserver,
-              public authService: LoginService) { }
+  constructor(
+              private breakpointObserver: BreakpointObserver,
+              public authService: LoginService,
+              private commandeService: CommandeService,
+            ) { }
 
-  ngOnInit(): void {
+  async ngOnInit() {
     // Détecter si l'écran est de taille mobile
     this.breakpointObserver.observe([Breakpoints.Handset])
       .subscribe(result => {
         this.isMobile = result.matches;
       });
+    
+        const commandeData = await lastValueFrom(this.commandeService.listCommandeTraiter());
+        if (commandeData) {
+          this.commandeList = commandeData;
+          if (this.commandeList.length > 0) {
+          // Calculer la quantité totale de commandes dont traiter est false
+          const commande = this.commandeList.filter(commande => commande.commande.traiter==false);
+          this.quantite  = commande.length;
+          }
+        }
   }
 
   // Méthode pour fermer le drawer après la navigation
