@@ -26,7 +26,7 @@ export class VenteComponent implements OnInit{
   public dataSource: any;
   public listeVente!: VenteDAOModel[];
   spinnerProgress: boolean = false;
-  displayedColumns = ['id','clientNom','clientPrenom','clientTel','designation','quantite','montant','reduction','dateVente','utilisateurVente','status','action']
+  displayedColumns = ['id','clientNom','clientPrenom','clientTel','designation','quantite','montant','reduction','dateVente','status','action']
   isLoading: boolean = true;
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;

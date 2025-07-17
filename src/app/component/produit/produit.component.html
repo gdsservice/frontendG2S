@@ -65,25 +65,25 @@
           <!-- prix Unitaire Column -->
           <ng-container matColumnDef="prixUnitaire" class="mat-elevation-z8">
             <th mat-header-cell *matHeaderCellDef mat-sort-header> PRIX UNITAIRE </th>
-            <td mat-cell *matCellDef="let produit"> {{produit.prixUnitaire}} </td>
+            <td mat-cell *matCellDef="let produit"> {{produit.prixUnitaire | formatMontant}} </td>
           </ng-container>
 
           <!-- prix Regulier Column -->
           <ng-container matColumnDef="prixRegulier" class="mat-elevation-z8">
             <th mat-header-cell *matHeaderCellDef mat-sort-header> PRIX REGULIER </th>
-            <td mat-cell *matCellDef="let produit"> {{produit.prixRegulier}} </td>
+            <td mat-cell *matCellDef="let produit"> {{produit.prixRegulier | formatMontant}} </td>
           </ng-container>
 
           <!-- montant Column -->
           <ng-container matColumnDef="montant" class="mat-elevation-z8">
             <th mat-header-cell *matHeaderCellDef mat-sort-header> MONTANT </th>
-            <td mat-cell *matCellDef="let produit"> {{produit.montant}} </td>
+            <td mat-cell *matCellDef="let produit"> {{produit.montant | formatMontant}} </td>
           </ng-container>
 
           <!-- date Column -->
           <ng-container matColumnDef="date" class="mat-elevation-z8">
             <th mat-header-cell *matHeaderCellDef mat-sort-header> DATE D'AJOUT </th>
-            <td mat-cell *matCellDef="let produit"> {{formatDate(produit.date)}} </td>
+            <td mat-cell *matCellDef="let produit"> {{produit.date | formatDate}} </td>
           </ng-container>
 
           <!-- action Column -->

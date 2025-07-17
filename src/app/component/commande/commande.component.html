@@ -44,7 +44,7 @@
             
             <div class="contact-info">
               <mat-icon>phone</mat-icon>
-              <span>{{cde.commande.clientCde?.telephone || 'Non renseigné'}}</span>
+              <span>{{cde.commande.clientCde?.telephone! | formatPhone }}</span>
             </div>
           </div>
         </div>

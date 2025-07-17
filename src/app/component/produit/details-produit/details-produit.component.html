@@ -36,16 +36,16 @@
             <strong>Quantité:</strong> {{ produit.quantite }}
           </div>
           <div class="info-item">
-            <strong>Prix unitaire:</strong> {{ produit.prixUnitaire +" FCFA" }}
+            <strong>Prix unitaire:</strong> {{ produit.prixUnitaire | formatMontant }}
           </div>
           <div class="info-item">
-            <strong>Prix régulier:</strong> {{ produit.prixRegulier +" FCFA" }}
+            <strong>Prix régulier:</strong> {{ produit.prixRegulier! | formatMontant }}
           </div>
           <div class="info-item">
-            <strong>Montant total:</strong> {{ produit.montant +" FCFA" }}
+            <strong>Montant total:</strong> {{ produit.montant! | formatMontant }}
           </div>
           <div class="info-item">
-            <strong>Date de création:</strong> {{ produit.date | date:'dd/MM/yyyy' }}
+            <strong>Date de création:</strong> {{ produit.date! | formatDate }}
           </div>
           <div class="info-item">
             <strong>Créé par:</strong> {{ produit.utilisateurProd?.nom }} {{ produit.utilisateurProd?.prenom }}

@@ -66,7 +66,7 @@
           <!-- prix Unitaire Column -->
           <ng-container matColumnDef="montant" class="mat-elevation-z8">
             <th mat-header-cell *matHeaderCellDef mat-sort-header> MONTANT TOTAL </th>
-            <td mat-cell *matCellDef="let venteDAO"> {{venteDAO.vente.montant}} </td>
+            <td mat-cell *matCellDef="let venteDAO"> {{venteDAO.vente.montant | formatMontant}} </td>
           </ng-container>
 
           <!-- note Column -->
@@ -77,20 +77,14 @@
 
           <!-- note Column -->
           <ng-container matColumnDef="dateVente" class="mat-elevation-z8">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header> DATE DE VENTE </th>
-            <td mat-cell *matCellDef="let venteDAO"> {{formatDate(venteDAO.vente.dateVente)}} </td>
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> DATE </th>
+            <td mat-cell *matCellDef="let venteDAO"> {{venteDAO.vente.dateVente | formatDate}} </td>
           </ng-container>
 
           <!-- note Column -->
           <ng-container matColumnDef="clientDTO" class="mat-elevation-z8">
             <th mat-header-cell *matHeaderCellDef mat-sort-header> CLIENT </th>
             <td mat-cell *matCellDef="let venteDAO"> {{venteDAO.vente.clientDTO?.nom}} </td>
-          </ng-container>
-
-          <!-- note Column -->
-          <ng-container matColumnDef="utilisateurVente" class="mat-elevation-z8">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header> UTILISATEUR </th>
-            <td mat-cell *matCellDef="let venteDAO"> {{venteDAO.vente.utilisateurVente?.nom}} </td>
           </ng-container>
 
           <!-- note Column -->
