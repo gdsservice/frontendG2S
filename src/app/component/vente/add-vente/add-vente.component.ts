@@ -158,6 +158,7 @@ export class AddVenteComponent implements OnInit {
       adresse: this.venteListForm.value.adresse,
       telephone: this.venteListForm.value.telephone,
       email: this.venteListForm.value.email,
+      dateAjout: null
     };
 
     this.clientService.ajoutClient(nouveauClient).subscribe({

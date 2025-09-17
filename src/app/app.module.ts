@@ -79,6 +79,8 @@ import { CommandeComponent } from './component/commande/commande.component';
 import { FormatDatePipe } from './pipes/format-date.pipe';
 import { FormatMontantPipe } from './pipes/format-montant.pipe';
 import { FormatPhonePipe } from './pipes/format-phone.pipe';
+import { CommandeDetailsComponent } from './component/commande/commande-details/commande-details.component';
+import { ConfirmationDialogTraiterCdeComponent } from './component/popup-dialog/confirmation-dialog-traiter-cde/confirmation-dialog-traiter-cde.component';
 
 
 @NgModule({
@@ -126,6 +128,9 @@ import { FormatPhonePipe } from './pipes/format-phone.pipe';
   FormatDatePipe,
   FormatMontantPipe,
   FormatPhonePipe,
+  CommandeDetailsComponent,
+  ConfirmationDialogTraiterCdeComponent,
+//   CommandeDetailsComponent,
 
 	],
 	imports: [BrowserModule,

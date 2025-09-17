@@ -28,7 +28,7 @@
             <img [src]="cde.commandeProduitList[0].produit!.imageUrl || 'assets/images/default-product.png'" 
                  alt="Produit commandé">
             <span class="produit-count" *ngIf="cde.commandeProduitList.length > 1">
-              +{{cde.commandeProduitList.length - 1}} autres
+              +{{cde.commandeProduitList.length - 1}}
             </span>
           </div>
           
@@ -52,10 +52,10 @@
         <mat-divider></mat-divider>
         
         <mat-card-actions class="card-actions">
-          <button mat-button color="primary">
+          <button mat-button color="primary" (click)="details(cde.commande.idCde)">
             <mat-icon>visibility</mat-icon> DÉTAILS
           </button>
-          <button mat-button [color]="cde.commande.traiter ? 'warn' : 'primary'">
+          <button (click)="traiter(cde.commande)" mat-button [color]="cde.commande.traiter ? 'warn' : 'primary'">
             <mat-icon>{{cde.commande.traiter ? 'cancel' : 'check_circle'}}</mat-icon>
             {{cde.commande.traiter ? 'ANNULER' : 'VALIDER'}}
           </button>

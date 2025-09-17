@@ -1,0 +1,101 @@
+<mat-card-header>
+  <mat-card-title>
+    <button mat-icon-button (click)="retour()">
+      <mat-icon>arrow_back_ios</mat-icon>
+    </button>
+    <span>Détails de la Commande</span>
+  </mat-card-title>
+  <button class="imprimer" mat-raised-button (click)="imprimerVente()">
+    <mat-icon>print</mat-icon> Imprimer la Commande
+  </button>
+</mat-card-header>
+
+<!-- Bloc des informations -->
+<div class="card">
+  <mat-card class="cardClient">
+    <mat-card-content>
+      <mat-card-title>
+        <h6>Informations du Client</h6>
+      </mat-card-title>
+      <div *ngIf="commandeDAO">
+        <p><strong>Nom:</strong> {{ commandeDAO.commande.clientCde!.nom }}</p>
+        <p><strong>Prénom:</strong> {{ commandeDAO.commande.clientCde!.prenom }}</p>
+        <p><strong>Adresse:</strong> {{ commandeDAO.commande.clientCde!.adresse }}</p>
+        <p><strong>Téléphone:</strong> {{ commandeDAO.commande.clientCde!.telephone }}</p>
+        <p><strong>Email:</strong> {{ commandeDAO.commande.clientCde!.email }}</p>
+        <p><strong>Date:</strong> {{ commandeDAO.commande.clientCde!.dateAjout | formatDate }}</p>
+        <p><strong>Créé par:</strong> {{ commandeDAO.commande.clientCde!.nom }}</p>
+      </div>
+    </mat-card-content>
+  </mat-card>
+
+  <mat-card class="cardVente">
+    <mat-card-content>
+      <mat-card-title>
+        <h6>Informations de la Commande</h6>
+      </mat-card-title>
+      <div *ngIf="commandeDAO">
+        <p><strong>Quantité Totale:</strong> {{ commandeDAO.commande.quantite }}</p>
+        <p><strong>Montant Total:</strong> {{ commandeDAO.commande.total | formatMontant }}</p>
+        <p><strong>Statut:</strong></p>
+        <div [ngClass]="{'traite': commandeDAO.commande.traiter, 'non-traite': !commandeDAO.commande.traiter}">
+          {{ commandeDAO.commande.traiter ? 'TRAITÉE' : 'EN ATTENTE'  }}
+        </div>                
+        <p><strong>Date de Commande:</strong> {{ commandeDAO.commande.dateAjout | formatDate }}</p>
+        <p><strong>Note:</strong> {{ commandeDAO.commande.note }}</p>
+      </div>
+    </mat-card-content>
+  </mat-card>
+</div>
+
+<!-- Table des produits -->
+<mat-card class="cardProduit">
+  <mat-card-content>
+    <mat-card-title>
+      <h6>Produits Vendus</h6>
+    </mat-card-title>
+    <table matSort mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+
+      <ng-container matColumnDef="designation">
+        <th mat-header-cell *matHeaderCellDef> Désignation </th>
+        <td mat-cell *matCellDef="let produitVente"> {{ produitVente.produit.designation }} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="quantite">
+        <th mat-header-cell *matHeaderCellDef> Quantité </th>
+        <td mat-cell *matCellDef="let produitVente"> {{ produitVente.quantite! }} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="prixUnitaire">
+        <th mat-header-cell *matHeaderCellDef> Prix Unitaire (FCFA) </th>
+        <td mat-cell *matCellDef="let produitVente"> {{ produitVente.produit.prixUnitaire! | formatMontant }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="montant">
+        <th mat-header-cell *matHeaderCellDef> Montant (FCFA) </th>
+        <td mat-cell *matCellDef="let produitVente"> {{ produitVente.montant! | formatMontant }}  </td>
+      </ng-container>
+
+      <ng-container matColumnDef="date">
+        <th mat-header-cell *matHeaderCellDef> Date </th>
+        <td mat-cell *matCellDef="let produitVente"> {{produitVente.produit.date! | formatDate }} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="categorieStock">
+        <th mat-header-cell *matHeaderCellDef> Catégorie </th>
+        <td mat-cell *matCellDef="let produitVente"> {{ produitVente.produit.categorieStock.nom }} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="utilisateurProd">
+        <th mat-header-cell *matHeaderCellDef> Créé par </th>
+        <td mat-cell *matCellDef="let produitVente"> {{ produitVente.produit.utilisateurProd.nom }} </td>
+      </ng-container>
+
+      <tr mat-header-row
+        *matHeaderRowDef="['quantite', 'prixUnitaire', 'montant', 'date', 'categorieStock', 'utilisateurProd']"></tr>
+      <tr mat-row
+        *matRowDef="let row; columns: ['quantite', 'prixUnitaire', 'montant', 'date', 'categorieStock', 'utilisateurProd'];">
+      </tr>
+    </table>
+  </mat-card-content>
+</mat-card>

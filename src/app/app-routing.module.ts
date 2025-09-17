@@ -29,6 +29,7 @@ import {UpdateUserComponent} from "./component/utilisateur/update-user/update-us
 import { DetailsVenteComponent } from './component/vente/details-vente/details-vente.component';
 import { DetailsProduitComponent } from './component/produit/details-produit/details-produit.component';
 import { CommandeComponent } from './component/commande/commande.component';
+import { CommandeDetailsComponent } from './component/commande/commande-details/commande-details.component';
 
 const routes: Routes = [
   {path: "", component: LoginComponent},
@@ -62,6 +63,7 @@ const routes: Routes = [
       {path: "addUser", component: AddUserComponent},
       {path: "updateUser/:id", component: UpdateUserComponent},
       {path: "commande", component: CommandeComponent},
+      {path: "commandeDetails/:idCde", component: CommandeDetailsComponent},
       {
         path: 'utilisateur', component: UtilisateurComponent,
         canActivate: [AuthorizationGuard],

@@ -1,10 +1,13 @@
 import { ClientModel } from "./client.model";
 
 export interface CommandeModel {
-    _id?: string;
+    idCde: string;
     total: number;
     quantite: number;
     traiter: boolean;
     dateAjout: Date;
-    clientCde?: ClientModel,
+    clientCde?: ClientModel;
+    note: string;
+    montant?: number;
+    reduction?: number;
 }

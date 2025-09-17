@@ -1,8 +1,6 @@
 import { Component } from '@angular/core';
 import { DatePipe, Location } from "@angular/common";
 import { VenteService } from '../../../services/vente.service';
-import { FormGroup } from '@angular/forms';
-import { VenteModel } from '../../../models/vente.model';
 import { ActivatedRoute } from '@angular/router';
 import { VenteDAOModel } from '../../../models/venteDAO.model';
 import { MatTableDataSource } from '@angular/material/table';
@@ -37,6 +35,8 @@ export class DetailsVenteComponent {
         (venteDAO: VenteDAOModel) => {
           this.vente = venteDAO;
           this.dataSource = new MatTableDataSource(this.vente.venteProduitList);
+          console.log(this.vente);
+          
         },
         error => {
           console.error('Erreur lors du chargement du vente:', error);

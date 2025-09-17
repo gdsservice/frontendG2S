@@ -65,6 +65,7 @@ export class AddClientComponent implements OnInit {
         email: this.clientListForm.value.email,
         telephone: this.clientListForm.value.telephone,
         adresse: this.clientListForm.value.adresse,
+        dateAjout: null
       };
       this.clientService.ajoutClient(client).subscribe({
         next: value => {

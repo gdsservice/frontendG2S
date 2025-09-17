@@ -6,6 +6,6 @@ export interface ClientModel{
   adresse: string,
   telephone: string,
   email: string,
-  dateAjout?: string,
+  dateAjout: string | null ,
   utilisateurClient?: ClientModel,
 }

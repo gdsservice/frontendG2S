@@ -26,7 +26,7 @@ export class ClientService {
   }
 
 
-  public modifierClient(client: ClientModel): Observable<ClientModel> {
+  modifierClient(client: ClientModel): Observable<ClientModel> {
     return this.http.put<ClientModel>(`${environment.backendHost}/client/modifierClient/${client.idClient}`, client, {
       headers: new HttpHeaders().set('Content-Type', 'application/json')
     });
