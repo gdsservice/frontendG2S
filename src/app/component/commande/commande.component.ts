@@ -59,6 +59,7 @@ export class CommandeComponent {
                 this.ngOnInit();
                 this.snackBar.open('Cette commande a ete traite avec succès!', 'Fermer', { duration: 3500 });
                 this.router.navigateByUrl("/admin/commande");
+                // test
               },
               error => {
                 if (error.status === 409) {
