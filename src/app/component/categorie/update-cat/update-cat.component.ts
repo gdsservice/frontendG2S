@@ -32,6 +32,8 @@ export class UpdateCatComponent implements OnInit{
     this.categorieForm = this.fb.group({
       nom: [''],
       description: [''],
+      slug: [''],
+      publier: ['']
     })
   }
 
