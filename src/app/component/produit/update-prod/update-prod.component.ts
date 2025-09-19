@@ -42,7 +42,7 @@ export class UpdateProdComponent implements OnInit {
       quantite: [0, [Validators.required, Validators.min(1)]],
       prixUnitaire: [0, [Validators.required, Validators.min(1)]],
       prixRegulier: [0, [Validators.required, Validators.min(1)]],
-      categorieStockProdDTO: [null, Validators.required],
+      categorieStockProdDTO: [''],
       description: [''],
       note: [''],
       publier: [],
@@ -67,10 +67,10 @@ export class UpdateProdComponent implements OnInit {
   loadProduct(id: string): void {
     this.prodService.afficher(id).subscribe({
       
-      
       next: (prod: ProduitDAOModel) => {
         
         this.existingImageUrl = this.prodService.getImageUrls(prod.idProd!,5);
+        console.log(prod.categorieStockProdDTO?.nom);
         
         this.prodListForm.patchValue({
           designation: prod.designation,
@@ -106,6 +106,11 @@ export class UpdateProdComponent implements OnInit {
       }
     });
   }
+
+  compareCategorie(c1: any, c2: any): boolean {
+  return c1 && c2 ? c1.nom === c2.nom : c1 === c2;
+}
+
 
   onFileSelected(event: any): void {
     const file = event.target.files[0];

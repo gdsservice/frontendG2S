@@ -13,14 +13,15 @@
 
       <mat-form-field appearance="outline">
         <mat-label>Nom du produit</mat-label>
-        <input matInput formControlName="designation" placeholder="Entrez une Designation" maxlength="255" minlength="2">
+        <input matInput formControlName="designation" placeholder="Entrez une Designation" maxlength="255"
+          minlength="2">
         <mat-icon matPrefix>format_align_left</mat-icon>
         <mat-error *ngIf="prodListForm.get('designation')?.hasError('required') && prodListForm.get('designation')">
           La designation est requis.
         </mat-error>
       </mat-form-field>
 
-           <mat-form-field appearance="outline">
+      <mat-form-field appearance="outline">
         <mat-label>Nom du slug</mat-label>
         <input matInput formControlName="slug" placeholder="Entrez une slug" maxlength="255" minlength="2">
         <mat-icon matPrefix>format_align_left</mat-icon>
@@ -58,27 +59,28 @@
         </mat-error>
       </mat-form-field>
 
-      <mat-form-field appearance="outline">
-        <mat-label>Choisir la categorie</mat-label>
-        <mat-select formControlName="categorieStockProdDTO" placeholder="Choisir la categorie" required>
-          <mat-option *ngFor="let cat of listCategorie" [value]="cat">{{ cat.nom }}</mat-option>
-        </mat-select>
-        <mat-icon matPrefix>category</mat-icon>
-        <mat-error *ngIf="prodListForm.get('cat')?.hasError('required') && prodListForm.get('cat')">
-          La categorie est requis.
-        </mat-error>
-      </mat-form-field>
+<mat-form-field appearance="outline">
+  <mat-select
+    formControlName="categorieStockProdDTO"
+    placeholder="Choisir la categorie"
+    required
+    [compareWith]="compareCategorie"
+  >
+    <mat-option *ngFor="let cat of listCategorie" [value]="cat">
+      {{ cat.nom }}
+    </mat-option>
+  </mat-select>
+  <mat-icon matPrefix>category</mat-icon>
+</mat-form-field>
+
+
 
       <mat-form-field appearance="outline">
         <mat-label>Caractéristique</mat-label>
         <input matInput formControlName="caracteristique" placeholder="Entrez une caractéristique" maxlength="255"
           minlength="2">
         <mat-icon matPrefix>description</mat-icon>
-        <mat-error *ngIf="prodListForm.get('caracteristique')?.hasError('required') && prodListForm.get('caracteristique')">
-          La caractéristique est requis.
-        </mat-error>
       </mat-form-field>
-      <!-- test  -->
 
     </mat-card-content>
 
@@ -131,7 +133,8 @@
 
       <mat-form-field appearance="outline">
         <mat-label>Information</mat-label>
-        <textarea matInput formControlName="info" placeholder="Entrez une information" maxlength="50000" minlength="2"></textarea>
+        <textarea matInput formControlName="info" placeholder="Entrez une information" maxlength="50000"
+          minlength="2"></textarea>
         <mat-icon matPrefix>info</mat-icon>
         <mat-error *ngIf="prodListForm.get('info')?.hasError('required') && prodListForm.get('info')">
           L'information est requis.
@@ -143,50 +146,50 @@
 
     <!-- ... autres parties du template ... -->
 
-<mat-card-content>
-  <div class="upload-container">
-    <!-- Bouton de sélection -->
-    <div class="upload-button-wrapper">
-      <button mat-raised-button color="primary" (click)="fileInput.click()">
-        Ajouter des images
-        <mat-icon>image</mat-icon>
-      </button>
-      <input #fileInput type="file" (change)="onFileSelected($event)" accept="image/*" multiple hidden />
-    </div>
+    <mat-card-content>
+      <div class="upload-container">
+        <!-- Bouton de sélection -->
+        <div class="upload-button-wrapper">
+          <button mat-raised-button color="primary" (click)="fileInput.click()">
+            Ajouter des images
+            <mat-icon>image</mat-icon>
+          </button>
+          <input #fileInput type="file" (change)="onFileSelected($event)" accept="image/*" multiple hidden />
+        </div>
 
-    <!-- Section des images existantes -->
-    <div *ngIf="(existingImageUrl?.length ?? 0) > 0" class="existing-images-section">
-      <h4>Images existantes</h4>
-      <div class="image-previews-container">
-        <div *ngFor="let image of existingImageUrl; let i = index" class="image-preview-wrapper">
-          <div class="image-frame">
-            <img [src]="image" alt="Image existante" class="preview-image">
-            <button mat-icon-button class="remove-button" (click)="removeExistingImage()">
-              <mat-icon>close</mat-icon>
-            </button>
+        <!-- Section des images existantes -->
+        <div *ngIf="(existingImageUrl?.length ?? 0) > 0" class="existing-images-section">
+          <h4>Images existantes</h4>
+          <div class="image-previews-container">
+            <div *ngFor="let image of existingImageUrl; let i = index" class="image-preview-wrapper">
+              <div class="image-frame">
+                <img [src]="image" alt="Image existante" class="preview-image">
+                <button mat-icon-button class="remove-button" (click)="removeExistingImage()">
+                  <mat-icon>close</mat-icon>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Section des nouvelles images sélectionnées -->
+        <div *ngIf="imagePreview" class="new-images-section">
+          <h4>Nouvelles images</h4>
+          <div class="image-previews-container">
+            <div class="image-preview-wrapper">
+              <div class="image-frame">
+                <img [src]="imagePreview" alt="Nouvelle image" class="preview-image">
+                <button mat-icon-button class="remove-button" (click)="removeImage()">
+                  <mat-icon>close</mat-icon>
+                </button>
+              </div>
+            </div>
           </div>
         </div>
       </div>
-    </div>
+    </mat-card-content>
 
-    <!-- Section des nouvelles images sélectionnées -->
-    <div *ngIf="imagePreview" class="new-images-section">
-      <h4>Nouvelles images</h4>
-      <div class="image-previews-container">
-        <div class="image-preview-wrapper">
-          <div class="image-frame">
-            <img [src]="imagePreview" alt="Nouvelle image" class="preview-image">
-            <button mat-icon-button class="remove-button" (click)="removeImage()">
-              <mat-icon>close</mat-icon>
-            </button>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</mat-card-content>
-
-<!-- ... autres parties du template ... -->
+    <!-- ... autres parties du template ... -->
 
     <mat-card-actions>
       <button (click)="annulerProd()" class="annuler" mat-raised-button>Annuler</button>
