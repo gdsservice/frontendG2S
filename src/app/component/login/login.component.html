@@ -1,0 +1,50 @@
+<mat-toolbar class="toolbar">
+  <button mat-icon-button class="menu-icon">
+    <mat-icon class="mat-icon-menu">menu</mat-icon>
+  </button>
+  <span class="logo">G2S Services</span>
+  <span class="span-spacer"></span>
+</mat-toolbar>
+
+<div class="container">
+  <!-- Contenu principal -->
+  <div class="container-body">
+    <mat-card [formGroup]="loginForm">
+      <mat-card-header>
+        <mat-card-title class="header-log">Bienvenue sur G2S</mat-card-title>
+      </mat-card-header>
+      <mat-divider style="color:#fff;"></mat-divider>
+      <mat-card-content>
+        <mat-form-field appearance="outline" style="color:#fff;">
+          <mat-label>Nom d'utilisateur</mat-label>
+          <input matInput formControlName="username">
+          <mat-icon matSuffix>person</mat-icon>
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+          <mat-label>Mot de passe</mat-label>
+          <input matInput type="password" formControlName="password">
+          <mat-icon matSuffix>key</mat-icon>
+        </mat-form-field>
+        <button class="password">
+          <span>Mot de passe oublié</span>
+        </button>
+  
+        <!-- Zone pour afficher les erreurs -->
+        <div *ngIf="errorMessage" class="error-message">
+          {{ errorMessage }}
+        </div>
+  
+        <mat-card-actions>
+          <button class="btn" (click)="login()" mat-raised-button>
+            <div class="button-content">
+              Se connecter
+              <div *ngIf="spinnerProgress">
+                <app-spinner/>
+              </div>
+            </div>
+          </button>
+        </mat-card-actions>
+      </mat-card-content>
+    </mat-card>
+  </div>
+</div>

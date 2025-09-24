@@ -1,0 +1,66 @@
+<div class="container-body">
+  <mat-card class="commandes-container">
+    <mat-card-header class="header-section">
+      <mat-card-title class="main-title">COMMANDES</mat-card-title>
+      <mat-form-field appearance="outline" class="search-field">
+        <mat-label>Rechercher une commande</mat-label>
+        <input matInput placeholder="N° commande, client...">
+        <mat-icon matSuffix>search</mat-icon>
+      </mat-form-field>
+    </mat-card-header>
+    
+    <mat-divider></mat-divider>
+    
+    <mat-card-content class="cards-grid">
+      <mat-card *ngFor="let cde of commandeList" class="commande-card" appearance="outlined">
+        <div class="card-header" [ngClass]="{'traite': cde.commande.traiter, 'non-traite': !cde.commande.traiter}">
+          <div class="status-badge">
+            {{ cde.commande.traiter ? 'TRAITÉE' : 'EN ATTENTE' }}
+          </div>
+          <div class="commande-id">{{cde.idCommande}}</div>
+          <div class="commande-date">{{cde.commande.dateAjout | formatDate}}</div>
+        </div>
+        
+        <mat-divider></mat-divider>
+        
+        <div class="card-content">
+          <div class="produit-image">
+            <img [src]="cde.commandeProduitList[0].produit!.imageUrl || 'assets/images/default-product.png'" 
+                 alt="Produit commandé">
+            <span class="produit-count" *ngIf="cde.commandeProduitList.length > 1">
+              +{{cde.commandeProduitList.length - 1}}
+            </span>
+          </div>
+          
+          <div class="commande-details">
+            <div class="total-amount">
+              {{cde.commande.total | formatMontant}}
+            </div>
+            
+            <div class="client-info">
+              <mat-icon>person</mat-icon>
+              <span>{{cde.commande.clientCde?.nom}} {{cde.commande.clientCde?.prenom}}</span>
+            </div>
+            
+            <div class="contact-info">
+              <mat-icon>phone</mat-icon>
+              <span>{{cde.commande.clientCde?.telephone! | formatPhone }}</span>
+            </div>
+          </div>
+        </div>
+        
+        <mat-divider></mat-divider>
+        
+        <mat-card-actions class="card-actions">
+          <button mat-button color="primary" (click)="details(cde.commande.idCde)">
+            <mat-icon>visibility</mat-icon> DÉTAILS
+          </button>
+          <button (click)="traiter(cde.commande)" mat-button [color]="cde.commande.traiter ? 'warn' : 'primary'">
+            <mat-icon>{{cde.commande.traiter ? 'cancel' : 'check_circle'}}</mat-icon>
+            {{cde.commande.traiter ? 'ANNULER' : 'VALIDER'}}
+          </button>
+        </mat-card-actions>
+      </mat-card>
+    </mat-card-content>
+  </mat-card>
+</div>

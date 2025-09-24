@@ -1,0 +1,116 @@
+.drawer-height {
+  overflow: inherit;
+}
+
+mat-drawer-container {
+  background-color: rgba(74, 114, 116, 0.1);
+}
+
+.span-spacer {
+  flex: 1 1 auto;
+}
+
+mat-icon {
+  color: black;
+}
+
+.mat-icon-menu {
+  color: white;
+}
+
+span {
+  color: white;
+  cursor: pointer;
+}
+
+.toolbar {
+  background-color: #5A497D;
+}
+
+.user-icon, .logout-icon {
+  color: white;
+}
+
+.name {
+  font-size: 15px;
+}
+
+.container {
+  background-color: white;
+  max-width: 210px;
+}
+
+.icon-side {
+  color: black;
+  font-size: 120px;
+}
+
+.drawer-height {
+  height: 680px;
+}
+
+mat-drawer mat-list-item button:hover {
+  background-color: rgba(90, 73, 125, 0.3);
+  font-weight: 300;
+}
+
+mat-drawer mat-list-item button.active-link {
+  background-color: rgba(90, 73, 125, 0.8);
+  font-weight: bold;
+  color: white !important;
+  /*border-radius: 5px;*/
+  width: 100%;
+}
+
+mat-list-item button.active-link mat-icon {
+  color: white !important;
+}
+
+mat-list-item button.active-link span {
+  color: white !important;
+}
+
+/* Mat-form-field styles */
+mat-form-field {
+  flex: 1;
+  margin: 20px 20px 0 0;
+  max-width: 20%;
+  color: black;
+}
+
+.profile {
+  color: white;
+  display: grid;
+  justify-content: center;
+  align-content: start;
+}
+
+mat-card-subtitle {
+  font-size: 16px;
+}
+
+/* Mobile Styles */
+@media (max-width: 600px) {
+  .container {
+    max-width: 220px;
+  }
+
+  .logo{
+    font-size: 15px;
+  }
+
+  .mat-icon-menu{
+    font-size: 20px;
+  }
+
+  .profile{
+    font-size: 12px;
+  }
+  .name {
+    font-size: 12px;
+  }
+
+  mat-form-field.search-bar {
+    max-width: 100%;
+  }
+}

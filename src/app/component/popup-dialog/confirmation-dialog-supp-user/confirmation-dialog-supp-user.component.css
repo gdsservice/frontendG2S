@@ -1,0 +1,37 @@
+.mat-card-actions{
+  display: flex;
+  justify-content: space-between;
+}
+
+button{
+  margin: 10px;
+  border-radius: 5px;
+  font-weight: 500;
+}
+
+.non {
+  color: white;
+  font-weight: bolder;
+  background-color: red;
+  width: 60px;
+  height: 30px;
+  border: none;
+}
+
+.oui {
+  color: white;
+  font-weight: bolder;
+  background-color: #6B3C5C;
+  width: 60px;
+  height: 30px;
+  border: none;
+}
+
+mat-card{
+  height: auto;
+  border-radius: 1px;
+}
+
+mat-icon{
+  color: blue;
+}

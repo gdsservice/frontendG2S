@@ -1,0 +1,41 @@
+<div class="container-body">
+  <mat-card mat-card [formGroup]="detteListForm">
+    <mat-card-header>
+      <mat-card-title>
+        <button mat-icon-button (click)="retour()">
+          <mat-icon>arrow_back_ios</mat-icon>
+        </button>
+        Modifier Dette
+      </mat-card-title>
+    </mat-card-header>
+    <mat-divider></mat-divider>
+    <mat-card-content>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Titre</mat-label>
+        <input matInput formControlName="titre" maxlength="120" minlength="2">
+        <mat-icon matPrefix>category</mat-icon>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Note</mat-label>
+        <input matInput formControlName="note" maxlength="100" minlength="2">
+        <mat-icon matPrefix>description</mat-icon>
+      </mat-form-field>
+
+
+    </mat-card-content>
+
+    <mat-card-actions>
+      <button (click)="retour()" class="annuler" mat-raised-button>Annuler</button>
+      <button (click)="modifierDette()" class="enregistrer" mat-raised-button>
+        <div class="save">
+          Enregistrer
+          <div *ngIf="spinnerProgress">
+            <app-spinner/>
+          </div>
+        </div>
+      </button>
+    </mat-card-actions>
+  </mat-card>
+</div>

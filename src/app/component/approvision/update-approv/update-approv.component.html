@@ -1,0 +1,76 @@
+<div class="container-body">
+  <mat-card [formGroup]="approvListForm">
+    <mat-card-header>
+      <mat-card-title>
+        <button mat-icon-button (click)="retour()">
+          <mat-icon>arrow_back_ios</mat-icon>
+        </button>
+        Modifier approvision
+      </mat-card-title>
+    </mat-card-header>
+    <mat-divider></mat-divider>
+    <mat-card-content>
+
+      <mat-form-field appearance="outline">
+        <mat-label>TITRE</mat-label>
+        <input matInput formControlName="designation" placeholder="Entrez un titre" maxlength="160" minlength="2" >
+        <mat-icon matPrefix>format_align_left</mat-icon>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>FOURNISSEUR</mat-label>
+        <input matInput formControlName="adresseFrs" maxlength="100" minlength="2" >
+        <mat-icon matPrefix>format_align_left</mat-icon>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>QUANTITE</mat-label>
+        <input matInput formControlName="quantite" type="number"
+               placeholder="0" min="1"
+               step="1" maxlength="100" minlength="1" >
+        <mat-icon matPrefix>exposure</mat-icon>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>CBM</mat-label>
+        <input matInput formControlName="cbm" type="number"
+               placeholder="0.0" step="1" maxlength="100" minlength="1" >
+        <mat-icon matPrefix>exposure</mat-icon>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>PRIX UNITAIRE</mat-label>
+        <input matInput formControlName="prixUnitaire"  type="number"
+               placeholder="0" min="1"
+               step="1" maxlength="100" minlength="1" >
+        <mat-icon matPrefix>account_balance_walle</mat-icon>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Image</mat-label>
+        <input matInput formControlName="image" maxlength="100" minlength="2" >
+        <mat-icon matPrefix>account_balance_walle</mat-icon>
+      </mat-form-field>
+
+    </mat-card-content>
+
+    <mat-form-field class="note" appearance="outline">
+      <mat-label>Note</mat-label>
+      <textarea matInput formControlName="description" maxlength="100" minlength="2" ></textarea>
+      <mat-icon matPrefix>description</mat-icon>
+    </mat-form-field>
+
+    <mat-card-actions>
+      <button (click)="retour()" class="annuler" mat-raised-button>Annuler</button>
+      <button (click)="modifierApprov()" class="enregistrer" mat-raised-button>
+        <div class="save">
+          Enregistrer
+          <div *ngIf="spinnerProgress">
+            <app-spinner/>
+          </div>
+         </div>
+      </button>
+    </mat-card-actions>
+  </mat-card>
+
+</div>

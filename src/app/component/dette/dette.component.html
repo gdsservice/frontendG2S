@@ -1,0 +1,121 @@
+<div class="container-body">
+  <mat-card>
+    <mat-card-header>
+      <mat-card-title>DETTES</mat-card-title>
+      <mat-card-actions>
+        <button class="addDette" (click)="ajouterDette()" mat-raised-button>NOUVELLE</button>
+      </mat-card-actions>
+    </mat-card-header>
+    <mat-divider></mat-divider>
+    <mat-card-content>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Rechercher</mat-label>
+        <input matInput (keyup)="applyFilter($event)" placeholder="Rechercher une dette">
+        <mat-icon matSuffix>search</mat-icon>
+      </mat-form-field>
+
+      <div class="mat-elevation-z8">
+        <app-loading *ngIf="isLoading"/>
+        <table *ngIf="!isLoading" matSort mat-table [dataSource]="dataSource">
+
+          <!-- designation Column -->
+          <ng-container matColumnDef="titre" class="mat-elevation-z8">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> TITRE</th>
+            <td mat-cell *matCellDef="let dette"> {{ dette.titre }}</td>
+          </ng-container>
+
+          <!-- note Column -->
+          <ng-container matColumnDef="quantite" class="mat-elevation-z8">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> QUANTITE</th>
+            <td mat-cell *matCellDef="let dette"> {{ dette.quantite }}</td>
+          </ng-container>
+
+          <!-- note Column -->
+          <ng-container matColumnDef="reduction" class="mat-elevation-z8">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> REDUCTION</th>
+            <td mat-cell *matCellDef="let dette"> {{ dette.reduction }}</td>
+          </ng-container>
+
+          <!-- note Column -->
+          <ng-container matColumnDef="montant" class="mat-elevation-z8">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> MONTANT</th>
+            <td mat-cell *matCellDef="let dette"> {{ dette.montant }}</td>
+          </ng-container>
+
+          <!-- note Column -->
+          <ng-container matColumnDef="dateDebut" class="mat-elevation-z8">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> date de debut</th>
+            <td mat-cell *matCellDef="let dette"> {{ formatDate(dette.dateDebut) }}</td>
+          </ng-container>
+
+          <!-- note Column -->
+          <ng-container matColumnDef="dateFin" class="mat-elevation-z8">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> date de fin</th>
+            <td mat-cell *matCellDef="let dette"> {{ formatDate(dette.dateFin) }}</td>
+          </ng-container>
+
+          <!-- note Column -->
+          <ng-container matColumnDef="clientDTO" class="mat-elevation-z8">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Client</th>
+            <td mat-cell *matCellDef="let dette"> {{ dette.clientDTO?.nom }}</td>
+          </ng-container>
+
+          <!-- note Column -->
+          <ng-container matColumnDef="utilisateurDette" class="mat-elevation-z8">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> UTILISATEUR</th>
+            <td mat-cell *matCellDef="let dette"> {{ dette.utilisateurDette?.nom }}</td>
+          </ng-container>
+
+          <!-- note Column -->
+          <ng-container matColumnDef="status" class="mat-elevation-z8">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Status</th>
+            <td mat-cell *matCellDef="let dette" >
+              <div [ngClass]="{'non-paye': dette.status === 'NON_PAYER', 'paye': dette.status === 'PAYER'}">
+                {{ dette.status }}
+              </div>
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="action" class="mat-elevation-z8">
+            <th mat-header-cell *matHeaderCellDef> ACTION </th>
+            <td mat-cell *matCellDef="let dette">
+              <button mat-icon-button [matMenuTriggerFor]="menu">
+                <mat-icon>more_vert</mat-icon>
+              </button>
+              <mat-menu #menu="matMenu">
+                <button class="payerdette" mat-menu-item (click)="payerDette(dette.idDette)">
+                  <mat-icon class="payer">account_balance_wallet</mat-icon>
+                  <span>Payer</span>
+                </button>
+                <button class="modifierdette" mat-menu-item (click)="modifier(dette.idDette)">
+                  <mat-icon class="modifier">edit</mat-icon>
+                  <span>Modifier</span>
+                </button>
+                <button class="supprimerdette" mat-menu-item (click)="supprimer(dette.idDette)">
+                  <mat-icon class="supprimer">delete</mat-icon>
+                  <span>Supprimer</span>
+                </button>
+                <button class="detailsdette" mat-menu-item (click)="details()">
+                  <mat-icon class="details">info</mat-icon>
+                  <span>Détails</span>
+                </button>
+              </mat-menu>
+            </td>
+          </ng-container>
+
+
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        </table>
+
+        <app-loading *ngIf="isLoading"/>
+        <mat-paginator *ngIf="!isLoading" [pageSizeOptions]="[5, 10, 20]"
+                       showFirstLastButtons
+                       aria-label="Select page of periodic elements">
+        </mat-paginator>
+      </div>
+
+    </mat-card-content>
+  </mat-card>
+</div>

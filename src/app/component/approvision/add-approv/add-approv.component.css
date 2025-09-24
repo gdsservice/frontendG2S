@@ -1,0 +1,119 @@
+.ajout {
+  opacity: 0.75;
+  font-size: 0.75em;
+}
+
+.container-body{
+  height: auto;
+  margin: 20px;;
+}
+
+mat-card-title {
+  margin: 0;
+  padding: 0;
+  font-weight: 480;
+  font-size: 25px;
+}
+
+mat-card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+mat-divider{
+  margin: 20px 0;
+}
+
+mat-card-content{
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-gap: 20px;
+}
+
+mat-form-field{
+  max-width: 100%;
+}
+
+.mat-card-actions{
+  display: flex;
+  justify-content: space-between;
+}
+
+button{
+  margin: 10px;
+  border-radius: 5px;
+  font-weight: 500;
+}
+
+.annuler {
+  color: red;
+  font-weight: bold;
+  background-color: white;
+}
+
+.enregistrer {
+  color: #6B3C5C;
+  font-weight: bold;
+  background-color: white;
+}
+
+.save{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.annuler:hover {
+  color: white;
+  font-weight: bold;
+  background-color: red;
+}
+
+.enregistrer:hover {
+  color: white;
+  font-weight: bold;
+  background-color: #6B3C5C;
+}
+
+mat-spinner{
+  margin: 0 0 0 10px;
+  color: #6B3C5C;
+}
+
+.note{
+  margin: 15px;
+}
+
+/* Cacher les flèches dans Chrome, Edge, et Safari */
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Cacher les flèches dans Firefox */
+input[type="number"] {
+  -moz-appearance: textfield;
+}
+
+/* Responsivité pour mobiles */
+@media (max-width: 768px) {
+  .container-body {
+    margin: 10px;
+  }
+
+  mat-card-content {
+    grid-template-columns: 1fr;
+    grid-gap: 10px;
+  }
+
+  .mat-card-actions {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  button {
+    margin: 10px 20px 10px 0;
+  }
+}

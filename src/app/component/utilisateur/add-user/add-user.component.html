@@ -1,0 +1,98 @@
+<div class="container-body">
+  <mat-card [formGroup]="userListForm">
+    <mat-card-header>
+      <mat-card-title>
+        <button mat-icon-button (click)="retour()">
+          <mat-icon>arrow_back_ios</mat-icon>
+        </button>
+        Ajouter Utilisateur
+      </mat-card-title>
+    </mat-card-header>
+    <mat-divider></mat-divider>
+
+    <mat-card-content>
+      <mat-form-field appearance="outline">
+        <mat-label>Nom</mat-label>
+        <input matInput formControlName="nom" maxlength="50" minlength="2" required>
+        <mat-icon matPrefix>person</mat-icon>
+        <mat-error *ngIf="userListForm.get('nom')?.hasError('required') && userListForm.get('nom')">
+          Le nom est requis.
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Prenom</mat-label>
+        <input matInput formControlName="prenom" maxlength="50" minlength="2" required>
+        <mat-icon matPrefix>person</mat-icon>
+        <mat-error *ngIf="userListForm.get('prenom')?.hasError('required') && userListForm.get('prenom')">
+          Le prénom est requis.
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Email</mat-label>
+        <input matInput formControlName="email" maxlength="80" minlength="2"
+          pattern="[a-zA-Z0-9._-]+@[a-zA-Z.-]+\.[a-zA-Z]{2,}" required>
+        <mat-icon matPrefix>email</mat-icon>
+        <mat-error *ngIf="userListForm.get('email')?.hasError('required') && userListForm.get('email')">
+          L'email est requis.
+        </mat-error>
+        <mat-error *ngIf="userListForm.get('email')?.hasError('pattern')">
+          Entrer un email valide. Exp: stock&#64;gmail.com
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Mot de passe</mat-label>
+        <input matInput [type]="hide ? 'password' : 'text'" formControlName="password" required
+          pattern="^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{6,}$" minlength="6" maxlength="80">
+        <mat-icon matPrefix>key</mat-icon>
+        <button mat-icon-button matSuffix type="button" (click)="togglePasswordVisibility()">
+          <mat-icon>{{ hide ? 'visibility_off' : 'visibility' }}</mat-icon>
+        </button>
+        <mat-error *ngIf="userListForm.get('password')?.hasError('required') && userListForm.get('password')">
+          Le mot de passe est requis.
+        </mat-error>
+        <mat-error *ngIf="userListForm.get('password')?.hasError('pattern')">
+          Le mot de passe doit comporter au moins 6 caractères, incluant des lettres et des chiffres.
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Telephone</mat-label>
+        <span matTextPrefix>+223 &nbsp;</span>
+        <input type="tel" matInput placeholder="83-52-28-56" formControlName="telephone"
+          (input)="formatTelephone($event)" required>
+        <mat-icon matSuffix>phone</mat-icon>
+        <mat-error *ngIf="userListForm.get('telephone')?.hasError('required') && userListForm.get('telephone')">
+          Le téléphone est requis.
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Choisir le rôle</mat-label>
+        <mat-select formControlName="role" required>
+          <mat-option *ngFor="let role of roleList" [value]="role">{{ role.name }}</mat-option>
+        </mat-select>
+        <mat-icon matPrefix>admin_panel_settings</mat-icon>
+        <mat-error *ngIf="userListForm.get('role')?.hasError('required') && userListForm.get('role')">
+          Le rôle est requis.
+        </mat-error>
+      </mat-form-field>
+    </mat-card-content>
+
+    <mat-card-content>
+      <mat-card-actions>
+        <button (click)="retour()" class="annuler" mat-raised-button>Annuler</button>
+        <button (click)="ajoutUser()" class="enregistrer" mat-raised-button>
+          <div class="save">
+            Enregistrer
+            <div *ngIf="spinnerProgress">
+              <app-spinner />
+            </div>
+          </div>
+        </button>
+      </mat-card-actions>
+    </mat-card-content>
+  </mat-card>
+</div>

@@ -1,0 +1,301 @@
+.ajout {
+  opacity: 0.75;
+  font-size: 0.75em;
+}
+
+.container-body {
+  height: auto;
+  margin: 20px;
+  ;
+}
+
+mat-card-title {
+  margin: 0;
+  padding: 0;
+  font-weight: 550;
+}
+
+mat-card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+mat-divider {
+  margin: 20px 0;
+}
+
+mat-card-content {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-gap: 20px;
+}
+
+mat-form-field {
+  max-width: 100%;
+}
+
+.mat-card-actions {
+  display: flex;
+  justify-content: space-between;
+}
+
+button {
+  margin: 10px;
+  border-radius: 5px;
+  font-weight: 500;
+}
+
+.annuler {
+  color: red;
+  font-weight: bold;
+  background-color: white;
+}
+
+.enregistrer {
+  color: #6B3C5C;
+  font-weight: bold;
+  background-color: white;
+}
+
+.save {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.annuler:hover {
+  color: white;
+  font-weight: bold;
+  background-color: red;
+}
+
+.enregistrer:hover {
+  color: white;
+  font-weight: bold;
+  background-color: #6B3C5C;
+}
+
+mat-spinner {
+  margin: 0 0 0 10px;
+  color: #6B3C5C;
+}
+
+.note {
+  margin: 15px;
+}
+
+/* Cacher les flèches dans Chrome, Edge, et Safari */
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Cacher les flèches dans Firefox */
+input[type="number"] {
+  -moz-appearance: textfield;
+}
+
+.container-body {
+  padding: 20px;
+}
+
+.form-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 16px;
+  align-items: start;
+}
+
+.image-preview img {
+  max-width: 200px;
+  max-height: 200px;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+}
+
+.note-field {
+  grid-column: span 2;
+}
+
+mat-card-actions {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 20px;
+}
+
+.annuler {
+  margin-right: 10px;
+}
+
+
+/* Conteneur principal */
+.upload-container {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin: 20px 10px;
+}
+
+/* Bouton de téléchargement */
+.upload-button-wrapper button {
+  display: flex;
+  justify-content: space-between;
+}
+
+/* Cadre de l'image */
+.image-previews-container {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 16px;
+  margin-top: 10px;
+}
+
+
+.image-frame {
+  position: relative;
+  border: 2px dashed #ccc;
+  border-radius: 8px;
+  padding: 10px;
+  width: 200px;
+  display: inline-block;
+}
+
+.preview-image {
+  max-width: 100%;
+  max-height: 200px;
+  display: block;
+  border-radius: 4px;
+}
+
+/* Bouton de suppression */
+.remove-button {
+  position: absolute;
+  top: -10px;
+  right: -10px;
+  background-color: white;
+  border-radius: 50%;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.remove-button mat-icon {
+  font-size: 18px;
+  color: #f44336;
+  /* Rouge Material */
+}
+
+/* Champ du nom de fichier */
+.file-name-field {
+  width: 100%;
+  max-width: 400px;
+}
+
+/* Animation au survol */
+.image-frame:hover {
+  border-color: #3f51b5;
+  /* Bleu Material */
+  transition: border-color 0.3s ease;
+}
+
+.file-icon {
+  font-size: 18px;
+  vertical-align: middle;
+  margin-right: 8px;
+  color: #6B3C5C;
+  /* Couleur Material primary */
+}
+
+mat-radio-group>mat-label {
+  display: flex;
+  align-items: center;
+  margin-right: 20px;
+  font-weight: bold;
+}
+
+
+/* Conteneur Quill */
+.quill-container {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 16px;
+  margin-top: 20px;
+  margin-bottom: 50px;
+}
+
+/* Chaque section Quill */
+.quill-section {
+  display: flex;
+  flex-direction: column;
+  margin: 20px 0;
+}
+
+.quill-section mat-label {
+  font-weight: bold;
+  margin-bottom: 8px;
+}
+
+quill-editor {
+  height: 200px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.quill-label{
+  margin: 10px;
+}
+
+
+/* Responsivité pour mobiles */
+@media (max-width: 768px) {
+  .container-body {
+    margin: 10px;
+  }
+
+  mat-card-content {
+    grid-template-columns: 1fr;
+    grid-gap: 10px;
+  }
+
+  .mat-card-actions {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  button {
+    margin: 10px 20px 10px 0;
+  }
+
+  /* .upload-container {
+    margin: 10px 50px;
+  }
+
+  .image-preview-container {
+    margin: 0;
+    width: 100%;
+    height: auto;
+  } */
+     .image-previews-container {
+    display: flex !important;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+  }
+
+  image-frame {
+    width: 120px;
+    padding: 6px;
+  }
+
+  .preview-image {
+    max-height: 120px;
+  }
+
+      quill-editor {
+    height: 150px;
+  }
+  
+  .quill-label{
+  margin: 10px;
+}
+}

@@ -1,0 +1,102 @@
+<div class="container-body">
+  <mat-card>
+    <mat-card-header>
+      <mat-card-title>CLIENTS</mat-card-title>
+      <mat-card-actions>
+        <button class="addClient" (click)="ajouterClient()" mat-raised-button>NOUVEAU</button>
+      </mat-card-actions>
+    </mat-card-header>
+    <mat-divider></mat-divider>
+    <mat-card-content>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Rechercher</mat-label>
+        <input matInput (keyup)="applyFilter($event)" placeholder="Rechercher un client">
+        <mat-icon matSuffix>search</mat-icon>
+      </mat-form-field>
+
+      <div class="mat-elevation-z8">
+        <app-loading *ngIf="isLoading"/>
+        <table matSort [dataSource]="dataSource" *ngIf="!isLoading" mat-table>
+
+          <!-- designation Column -->
+          <ng-container matColumnDef="nom" class="mat-elevation-z8">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Nom </th>
+            <td mat-cell *matCellDef="let client"> {{client.nom}} </td>
+          </ng-container>
+
+          <!-- quantite Column -->
+          <ng-container matColumnDef="prenom" class="mat-elevation-z8">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Prenom </th>
+            <td mat-cell *matCellDef="let client"> {{client.prenom}} </td>
+          </ng-container>
+
+          <!-- prix Unitaire Column -->
+          <ng-container matColumnDef="adresse" class="mat-elevation-z8">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Adresse </th>
+            <td mat-cell *matCellDef="let client"> {{client.adresse}} </td>
+          </ng-container>
+
+          <!-- date Column -->
+          <ng-container matColumnDef="telephone" class="mat-elevation-z8">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Telephone </th>
+            <td mat-cell *matCellDef="let client"> {{client.telephone}} </td>
+          </ng-container>
+          
+
+          <!-- note Column -->
+          <ng-container matColumnDef="email" class="mat-elevation-z8">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Email </th>
+            <td mat-cell *matCellDef="let client"> {{client.email}} </td>
+          </ng-container>
+
+          <!-- image Column -->
+          <ng-container matColumnDef="dateAjout" class="mat-elevation-z8">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Date de creation </th>
+            <td mat-cell *matCellDef="let client"> {{formatDate(client.dateAjout)}} </td>
+          </ng-container>
+
+          <!-- note Column -->
+          <ng-container matColumnDef="utilisateurClient" class="mat-elevation-z8">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> UTILSATEUR </th>
+            <td mat-cell *matCellDef="let client"> {{client.utilisateurClient?.nom}} </td>
+          </ng-container>
+
+          <ng-container matColumnDef="action" class="mat-elevation-z8">
+            <th mat-header-cell *matHeaderCellDef> ACTION </th>
+            <td mat-cell *matCellDef="let client">
+              <button mat-icon-button [matMenuTriggerFor]="menu">
+                <mat-icon>more_vert</mat-icon>
+              </button>
+              <mat-menu #menu="matMenu">
+                <button class="modifierClient" mat-menu-item (click)="modifier(client.idClient)">
+                  <mat-icon class="modifier">edit</mat-icon>
+                  <span>Modifier</span>
+                </button>
+                <button class="supprimerClient" mat-menu-item (click)="supprimer(client.idClient)">
+                  <mat-icon class="supprimer">delete</mat-icon>
+                  <span>Supprimer</span>
+                </button>
+                <button class="detailsClient" mat-menu-item (click)="details()">
+                  <mat-icon class="details">info</mat-icon>
+                  <span>Détails</span>
+                </button>
+              </mat-menu>
+            </td>
+          </ng-container>
+
+
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        </table>
+
+        <app-loading *ngIf="isLoading"/>
+        <mat-paginator *ngIf="!isLoading" [pageSizeOptions]="[5, 10, 20]"
+                       showFirstLastButtons
+                       aria-label="Select page of periodic elements">
+        </mat-paginator>
+      </div>
+
+    </mat-card-content>
+  </mat-card>
+</div>

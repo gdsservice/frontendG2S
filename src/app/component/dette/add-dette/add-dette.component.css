@@ -1,0 +1,116 @@
+mat-card {
+  margin: 10px;
+  border-radius: 5px;
+  height: auto;
+}
+
+mat-divider {
+  margin: 10px 0;
+}
+
+.card1, .card2 {
+  border-top: 10px solid #6B3C5C;
+  margin: 10px 0;
+}
+
+.content1 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-gap: 20px;
+}
+
+mat-card-title{
+  font-weight: 550;
+}
+
+.input-produit {
+  width: 100%;
+}
+
+.input {
+  margin-top: 10px;
+}
+
+.supprimer {
+  color: red;
+}
+
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+input[type="number"] {
+  -moz-appearance: textfield;
+}
+
+button {
+  margin: 10px;
+  border-radius: 5px;
+  font-weight: 500;
+}
+
+.annuler {
+  color: red;
+  font-weight: bold;
+  background-color: white;
+}
+
+.enregistrer {
+  color: #6B3C5C;
+  font-weight: bold;
+  background-color: white;
+}
+
+.save{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.annuler:hover {
+  color: white;
+  font-weight: bold;
+  background-color: red;
+}
+
+.enregistrer:hover {
+  color: white;
+  font-weight: bold;
+  background-color: #6B3C5C;
+}
+
+.note {
+  margin: 15px;
+}
+
+/* Responsive design pour les écrans de moins de 768px */
+@media only screen and (max-width: 768px) {
+  /* Afficher les champs en une seule colonne */
+  .content1 {
+    grid-template-columns: 1fr;
+  }
+
+  /* Réduire la marge des cartes pour un meilleur affichage sur mobile */
+  .card1, .card2 {
+    margin: 5px;
+  }
+
+  /* Réduire la taille des boutons pour un meilleur ajustement */
+  button {
+    font-size: 12px;
+    margin: 5px;
+  }
+
+  /* Adapter la taille des champs de texte */
+  .note {
+    margin: 0 18px;
+  }
+
+  /* Champ de produit plein écran sur mobile */
+  .input-produit {
+    width: 100%;
+    margin-bottom: 10px;
+  }
+}

@@ -1,0 +1,100 @@
+<div class="container-body">
+  <mat-card>
+    <mat-card-header>
+      <mat-card-title>
+        <button mat-icon-button (click)="retour()">
+          <mat-icon>arrow_back_ios</mat-icon>
+        </button>
+        CATEGORIE
+      </mat-card-title>
+      <mat-card-actions>
+        <button class="addCat" (click)="ajouterCategorie()" mat-raised-button>
+          <mat-icon class="add">library_add</mat-icon>
+          NOUVEAU
+        </button>
+      </mat-card-actions>
+    </mat-card-header>
+    <mat-divider></mat-divider>
+    <mat-card-content>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Rechercher</mat-label>
+        <input matInput (keyup)="applyFilter($event)" placeholder="Rechercher une catégorie">
+        <mat-icon matSuffix>search</mat-icon>
+      </mat-form-field>
+
+      <div class="mat-elevation-z8">
+        <app-loading *ngIf="isLoading"/>
+        <table matSort [dataSource]="dataSource" *ngIf="!isLoading" mat-table>
+          <!-- Nom Column -->
+          <ng-container matColumnDef="nom" class="mat-elevation-z8">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Nom </th>
+            <td mat-cell *matCellDef="let categorie"> {{categorie.nom}} </td>
+          </ng-container>
+
+          <!-- Slug Column -->
+          <ng-container matColumnDef="slug" class="mat-elevation-z8">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Slug </th>
+            <td mat-cell *matCellDef="let categorie"> {{categorie.slug}} </td>
+          </ng-container>
+
+          <!-- Description Column -->
+          <ng-container matColumnDef="description" class="mat-elevation-z8">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Description </th>
+            <td mat-cell *matCellDef="let categorie"> {{categorie.description}} </td>
+          </ng-container>
+
+          <!-- Date Column -->
+          <ng-container matColumnDef="date">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Date de création </th>
+            <td mat-cell *matCellDef="let categorie"> {{formatDate(categorie.date)}} </td>
+          </ng-container>
+
+          <!-- publier Column -->
+          <ng-container matColumnDef="publier" class="mat-elevation-z8">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> PUBLIER </th>
+            <td mat-cell *matCellDef="let categorie">
+              <span [ngClass]="categorie.publier ? 'text-vert' : 'text-rouge'">
+                {{ categorie.publier ? 'ACTIVÉ' : 'DÉSACTIVÉ' }}
+              </span>
+            </td>
+          </ng-container>
+
+          <!-- Action Column -->
+          <ng-container matColumnDef="action" class="mat-elevation-z8">
+            <th mat-header-cell *matHeaderCellDef> ACTION </th>
+            <td mat-cell *matCellDef="let categorie">
+              <button mat-icon-button [matMenuTriggerFor]="menu">
+                <mat-icon>more_vert</mat-icon>
+              </button>
+              <mat-menu #menu="matMenu">
+                <button class="modifier" mat-menu-item (click)="modifier(categorie.idCat)">
+                  <mat-icon class="modifierIcon">edit</mat-icon>
+                  <span>Modifier</span>
+                </button>
+                <button class="supprimer" mat-menu-item (click)="supprimer(categorie.idCat)">
+                  <mat-icon class="supprimerIcon">delete</mat-icon>
+                  <span>Supprimer</span>
+                </button>
+                <button class="details" mat-menu-item (click)="details()">
+                  <mat-icon class="detailsIcon">info</mat-icon>
+                  <span>Détails</span>
+                </button>
+              </mat-menu>
+            </td>
+          </ng-container>
+
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        </table>
+
+        <app-loading *ngIf="isLoading"/>
+        <mat-paginator *ngIf="!isLoading" [pageSizeOptions]="[5, 10, 20]"
+                       showFirstLastButtons
+                       aria-label="Select page of periodic elements">
+        </mat-paginator>
+      </div>
+
+    </mat-card-content>
+  </mat-card>
+</div>

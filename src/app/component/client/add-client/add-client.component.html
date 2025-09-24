@@ -1,0 +1,79 @@
+<div class="container-body">
+  <mat-card [formGroup]="clientListForm">
+    <mat-card-header>
+      <mat-card-title>
+        <button mat-icon-button (click)="retour()">
+          <mat-icon>arrow_back_ios</mat-icon>
+        </button>
+        Ajouter Client
+      </mat-card-title>
+    </mat-card-header>
+    <mat-divider></mat-divider>
+    <mat-card-content>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Nom</mat-label>
+        <input matInput formControlName="nom" maxlength="120" minlength="2">
+        <mat-icon matPrefix>category</mat-icon>
+        <mat-error *ngIf="clientListForm.get('nom')?.hasError('required') && clientListForm.get('nom')">
+          Le nom est requis.
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Prenom</mat-label>
+        <input matInput formControlName="prenom" maxlength="100" minlength="1">
+        <mat-icon matPrefix>description</mat-icon>
+        <mat-error *ngIf="clientListForm.get('prenom')?.hasError('required') && clientListForm.get('prenom')">
+          Le prénom est requis.
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Email</mat-label>
+        <input matInput formControlName="email" maxlength="100" minlength="2">
+        <mat-icon matPrefix>description</mat-icon>
+        <mat-error *ngIf="clientListForm.get('email')?.hasError('required') && clientListForm.get('email')">
+          L'email est requis.
+        </mat-error>
+        <mat-error *ngIf="clientListForm.get('email')?.hasError('pattern')">
+          Entrer un email valide. Exp: stock&#64;gmail.com
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Telephone</mat-label>
+        <span matTextPrefix>+223 &nbsp;</span>
+        <input type="tel" matInput placeholder="83-52-28-56" formControlName="telephone"
+          (input)="formatTelephone($event)" required>
+        <mat-icon matSuffix>phone</mat-icon>
+        <mat-error *ngIf="clientListForm.get('telephone')?.hasError('required') && clientListForm.get('telephone')">
+          Le téléphone est requis.
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field class="adresse-form" appearance="outline">
+        <mat-label>Adresse</mat-label>
+        <input matInput formControlName="adresse" maxlength="100" minlength="1">
+        <mat-icon matPrefix>description</mat-icon>
+        <mat-error *ngIf="clientListForm.get('adresse')?.hasError('required') && clientListForm.get('adresse')">
+          L'adresse est requis.
+        </mat-error>
+      </mat-form-field>
+
+    </mat-card-content>
+
+    <mat-card-actions>
+      <button (click)="annuler()" class="annuler" mat-raised-button>Annuler</button>
+      <button (click)="ajoutClient()" class="enregistrer" mat-raised-button>
+        <div class="save">
+          Enregistrer
+          <div *ngIf="spinnerProgress">
+            <app-spinner />
+          </div>
+        </div>
+      </button>
+    </mat-card-actions>
+  </mat-card>
+
+</div>

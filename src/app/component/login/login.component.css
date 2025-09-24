@@ -1,0 +1,251 @@
+.drawer-height {
+  overflow: inherit;
+}
+
+mat-drawer-container {
+  background-color: rgba(74, 114, 116, 0.1);
+}
+
+.span-spacer {
+  flex: 1 1 auto;
+}
+
+mat-icon {
+  color: black;
+}
+
+.mat-icon-menu {
+  color: white;
+}
+
+span {
+  color: white;
+}
+
+.logo{
+  cursor: default;
+}
+
+.toolbar {
+  background-color: #5A497D;
+}
+
+.user-icon, .logout-icon {
+  color: white;
+}
+
+.name {
+  font-size: 15px;
+}
+
+.container {
+  background-image: url("/assets/background.jpg");
+  background-size: cover;
+  background-position: center; 
+  background-repeat: no-repeat; 
+  height: 91vh; 
+  width: 100vw; 
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+
+.container-body {
+  width: 30%; 
+  height: auto; 
+  background-color: #5A497D; 
+  border-radius: 5px; 
+}
+
+mat-card-title{
+  font-weight: 550;
+  font-size: 25px;
+  color: white;
+}
+
+mat-label{
+  color: white;
+}
+
+mat-spinner{
+ font-size: 10px;
+}
+
+mat-card{
+  padding: 2% 0;
+  /*background-color: #4A7274;*/
+  /*background-color: #624D4A;*/
+  /*background-color: #6B3C5C;*/
+  background-color: #5A497D;
+}
+
+mat-card-header{
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  text-align: center;
+}
+
+mat-divider{
+  margin: 20px 0 30px 0;
+  color: white;
+}
+
+mat-form-field{
+  display: block;
+  margin: 0;
+  color: white;
+}
+
+mat-icon{
+  color: white;
+}
+
+.btn{
+  border-radius: 5px;
+  width: 50%;
+  margin: 0;
+  background-color: white;
+}
+
+.btn:hover{
+  font-Size: 16px;
+}
+
+mat-card-actions{
+  display: flex;
+  justify-content: space-between;
+}
+
+#card-head{
+  width: 10%;
+  background-color: #624D4A;
+}
+
+.password{
+  background: none;
+  border: none;
+  color: white;
+  font-weight: bold;
+  margin-bottom: 15px;
+}
+
+.button-content {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  font-weight: 600;
+}
+
+.btn:hover {
+  color: white;
+  background-color: #624D4A;
+  font-weight: 600;
+}
+
+mat-progress-spinner {
+  margin-left: 10px;
+}
+
+
+/* Superposition pour le spinner */
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+/* Conteneur du spinner */
+.cube-spinner {
+  width: 50px;
+  height: 50px;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: repeat(2, 1fr);
+  gap: 5px;
+}
+
+/* Cube individuel */
+.cube {
+  width: 20px;
+  height: 20px;
+  background-color: #3f51b5; 
+  animation: cube-animation 1.2s infinite ease-in-out;
+}
+
+/* Animations des cubes */
+.cube:nth-child(1) {
+  animation-delay: 0s;
+}
+.cube:nth-child(2) {
+  animation-delay: 0.3s;
+}
+.cube:nth-child(3) {
+  animation-delay: 0.6s;
+}
+.cube:nth-child(4) {
+  animation-delay: 0.9s;
+}
+
+@keyframes cube-animation {
+  0%, 100% {
+    transform: scale(1);
+    background-color: #3f51b5;
+  }
+  50% {
+    transform: scale(1.5);
+    background-color: #ff4081;
+  }
+}
+
+mat-spinner {
+  color: white;
+}
+
+
+
+/*Mobile*/
+@media (max-width: 600px) {
+  .container-body {
+    width: 90%;
+    height: auto;
+    padding-top: 30%;
+  }
+
+  .header-log{
+    font-weight: 550;
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    font-size: 100%;
+  }
+
+  mat-form-field{
+    display: block;
+    margin: 10px 0 20px 0;
+  }
+}
+
+.error-message {
+  border-radius: 5px;
+  background-color: white;
+  color: red;
+  font-weight: bold;
+  font-size: 16px;
+  margin-top: 10px;
+  text-align: center;
+}
+
+
+
+
+

@@ -1,0 +1,163 @@
+<mat-card mat-card [formGroup]="detteListForm">
+  <mat-card-header>
+    <mat-card-title>
+      <button mat-icon-button (click)="retour()">
+        <mat-icon>arrow_back_ios</mat-icon>
+      </button>
+      Ajouter Dette
+    </mat-card-title>
+  </mat-card-header>
+  <mat-divider></mat-divider>
+  <mat-card-content>
+    <mat-card class="card1">
+      <mat-card-content class="content1">
+
+        <mat-form-field appearance="outline">
+          <mat-label>TITRE</mat-label>
+          <input matInput formControlName="titre" maxlength="120" minlength="2">
+          <mat-icon matPrefix>format_align_left</mat-icon>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>CLIENT</mat-label>
+          <mat-select formControlName="clientDTO" required>
+            <mat-option *ngFor="let client of listClient" [value]="client">{{ client.nom + ': ' + client.prenom }}</mat-option>
+          </mat-select>
+          <mat-icon matPrefix>person</mat-icon>
+          <mat-error *ngIf="detteListForm.get('clientDTO')?.hasError('required') && detteListForm.get('clientDTO')">
+            Le client est requis.
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field>
+          <mat-label>Entrer le delai</mat-label>
+          <mat-date-range-input [rangePicker]="rangePicker">
+            <input formControlName="dateDebut" matStartDate placeholder="Date Debut" />
+            <input formControlName="dateFin" matEndDate placeholder="Date Fin" />
+          </mat-date-range-input>
+          <mat-hint>DD/MM/YYYY – DD/MM/YYYY</mat-hint>
+          <mat-datepicker-toggle matIconSuffix [for]="rangePicker"></mat-datepicker-toggle>
+          <mat-date-range-picker #rangePicker>
+            <mat-date-range-picker-actions>
+              <button mat-button matDateRangePickerCancel>Annuler</button>
+              <button mat-raised-button matDateRangePickerApply>Appliquer</button>
+            </mat-date-range-picker-actions>
+          </mat-date-range-picker>
+        </mat-form-field>
+      </mat-card-content>
+
+      <mat-form-field class="note" appearance="outline">
+        <mat-label>NOTE</mat-label>
+        <textarea matInput formControlName="note" maxlength="100" minlength="2"></textarea>
+        <mat-icon matPrefix>description</mat-icon>
+      </mat-form-field>
+
+    </mat-card>
+    <mat-card class="card2">
+      <mat-card-content>
+        <div>
+          <mat-form-field class="input-produit full-width" appearance="outline">
+            <mat-label>Selectionner les produits</mat-label>
+            <mat-select formControlName="produitDTOS" required>
+              <mat-option *ngFor="let prod of listProd" [value]="prod" (click)="onSelectProduit(prod)">
+                {{ prod.designation }}
+              </mat-option>
+            </mat-select>
+            <mat-icon matPrefix>shopping_cart</mat-icon>
+            <mat-error *ngIf="detteListForm.get('produitDTOS')?.hasError('required')">
+              Le produit est requis.
+            </mat-error>
+          </mat-form-field>
+        </div>
+
+        <!-- Afficher le tableau seulement si la liste des produits n'est pas vide -->
+        <div *ngIf="dataSource.data.length > 0">
+          <div class="mat-elevation-z8">
+            <table matSort mat-table [dataSource]="dataSource">
+
+              <!-- Designation Column -->
+              <ng-container matColumnDef="designation">
+                <th mat-header-cell *matHeaderCellDef> PRODUIT </th>
+                <td mat-cell *matCellDef="let produit"> {{ produit.designation }} </td>
+              </ng-container>
+
+              <!-- Quantite Column -->
+              <ng-container matColumnDef="quantite">
+                <th mat-header-cell *matHeaderCellDef> QUANTITÉ </th>
+                <td mat-cell *matCellDef="let produit">
+                  <mat-form-field class="input" appearance="outline">
+                    <input matInput formControlName="quantite" type="number" min="1" placeholder="0" maxlength="100" minlength="1" >
+                  </mat-form-field>
+                </td>
+              </ng-container>
+
+              <!-- Prix Unitaire Column -->
+              <ng-container matColumnDef="prixUnitaire">
+                <th mat-header-cell *matHeaderCellDef> PRIX UNITAIRE </th>
+                <td mat-cell *matCellDef="let produit">
+                  <mat-form-field class="input" appearance="outline">
+                    <input  matInput [value]="produit.prixUnitaire" type="number" readonly>
+                  </mat-form-field>
+                </td>
+              </ng-container>
+
+              <!-- Reduction Column -->
+              <ng-container matColumnDef="reduction">
+                <th mat-header-cell *matHeaderCellDef> REDUCTION </th>
+                <td mat-cell *matCellDef="let produit">
+                  <mat-form-field class="input" appearance="outline">
+                    <input  matInput formControlName="reduction" type="number"
+                            placeholder="0" min="1"
+                            step="1" maxlength="100" minlength="1" >
+                  </mat-form-field>
+                </td>
+              </ng-container>
+
+              <!-- Montant Column -->
+              <ng-container matColumnDef="montant">
+                <th mat-header-cell *matHeaderCellDef> MONTANT </th>
+                <td mat-cell *matCellDef="let produit">
+                  <mat-form-field class="input" appearance="outline">
+                    <input matInput type="number" readonly>
+                  </mat-form-field>
+                </td>
+              </ng-container>
+
+              <!-- Action Column -->
+              <ng-container matColumnDef="action">
+                <th mat-header-cell *matHeaderCellDef> ACTION </th>
+                <td mat-cell *matCellDef="let produit">
+                  <button class="supprimer" mat-icon-button (click)="supprimer(produit.idProd)">
+                    <mat-icon>delete</mat-icon>
+                  </button>
+                </td>
+              </ng-container>
+
+              <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+              <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+            </table>
+
+            <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+          </div>
+        </div>
+
+        <!-- Message si la liste est vide -->
+        <!--<div *ngIf="dataSource.data.length === 0" class="empty-table-message">
+          Aucun produit sélectionné.
+        </div>-->
+
+      </mat-card-content>
+    </mat-card>
+    <mat-card-actions>
+      <button (click)="annuler()" class="annuler" mat-raised-button>Annuler</button>
+      <button (click)="ajoutDette()" class="enregistrer" mat-raised-button>
+        <div class="save">
+          Enregistrer
+          <div *ngIf="spinnerProgress">
+            <app-spinner/>
+          </div>
+        </div>
+      </button>
+    </mat-card-actions>
+  </mat-card-content>
+</mat-card>

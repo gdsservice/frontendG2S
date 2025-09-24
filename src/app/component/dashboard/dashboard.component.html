@@ -1,0 +1,57 @@
+<div class="container-body">
+  <mat-card>
+    <mat-card-header>
+      <mat-card-title><h4>Dashboard</h4></mat-card-title>
+      <mat-card-actions>
+        <button class="add" (click)="ajouterVente()" mat-raised-button>
+          <mat-icon>add_shopping_cart</mat-icon> NOUVELLE VENTE
+        </button>
+      </mat-card-actions>
+    </mat-card-header>
+    <mat-divider></mat-divider>
+    <mat-card-content>
+      <mat-card class="card-vente">
+        <mat-card-header>
+          <div class="avatar">
+            <mat-icon class="icon">shopping_cart</mat-icon>
+          </div>
+          <mat-card-title class="header-vente">
+             Ventes
+          </mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+          <h1 class="content-vente">{{ totalVente }}</h1>
+        </mat-card-content>
+      </mat-card>
+
+      <mat-card class="card-budget">
+        <mat-card-header>
+          <div class="avatar">
+            <mat-icon class="icon">account_balance_wallet</mat-icon>
+          </div>
+          <mat-card-title class="header-budget">
+             Budget
+          </mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+          <h1 class="content-budget">{{ totalMontantVentes }} <span>f</span></h1>
+        </mat-card-content>
+      </mat-card>
+
+      <mat-card class="card-client">
+        <mat-card-header>
+          <div class="avatar">
+            <mat-icon class="icon">group</mat-icon>
+          </div>
+          <mat-card-title class="header-client">
+             Clients
+          </mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+          <h1 class="content-client">{{ totalClient }}</h1>
+        </mat-card-content>
+      </mat-card>
+
+    </mat-card-content>
+  </mat-card>
+</div>

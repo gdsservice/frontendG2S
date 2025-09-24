@@ -1,0 +1,100 @@
+<mat-card-header>
+  <mat-card-title>
+    <button mat-icon-button (click)="retour()">
+      <mat-icon>arrow_back_ios</mat-icon>
+    </button>
+    <span>Détails de la Vente</span>
+  </mat-card-title>
+  <button class="imprimer" mat-raised-button (click)="imprimerVente()">
+    <mat-icon>print</mat-icon> Imprimer la Vente
+  </button>
+</mat-card-header>
+
+<!-- Bloc des informations -->
+<div class="card">
+  <mat-card class="cardClient">
+    <mat-card-content>
+      <mat-card-title>
+        <h6>Informations du Client</h6>
+      </mat-card-title>
+      <div *ngIf="vente"> 
+        <p><strong>Nom:</strong> {{ vente.vente.clientsVente.nom }}</p>
+        <p><strong>Prénom:</strong> {{ vente.vente.clientsVente.prenom }}</p>
+        <p><strong>Adresse:</strong> {{ vente.vente.clientsVente.adresse }}</p>
+        <p><strong>Téléphone:</strong> {{ vente.vente.clientsVente.telephone }}</p>
+        <p><strong>Email:</strong> {{ vente.vente.clientsVente.email }}</p>
+        <p><strong>Date:</strong> {{ vente.vente.clientsVente.dateAjout | date: 'dd/MM/yyyy' }}</p>
+        <p><strong>Créé par:</strong> {{ vente.vente.clientsVente.utilisateurClient?.nom }}</p>
+      </div>
+    </mat-card-content>
+  </mat-card>
+
+  <mat-card class="cardVente">
+    <mat-card-content>
+      <mat-card-title>
+        <h6>Informations de la Vente</h6>
+      </mat-card-title>
+      <div *ngIf="vente">
+        <p><strong>Quantité Totale:</strong> {{ vente.vente.quantite }} f</p>
+        <p><strong>Reduction Totale:</strong> {{ vente.vente.reduction }} f</p>
+        <p><strong>Montant Total:</strong> {{ vente.vente.montant | formatMontant }} f</p>
+        <p><strong>Statut:</strong></p>
+        <div [ngClass]="{'traiter': vente.vente.status === 'TRAITER', 'annuler': vente.vente.status === 'ANNULER'}">
+          {{ vente.vente.status }}
+        </div>                
+        <p><strong>Date de Vente:</strong> {{ vente.vente.dateVente! | formatDate }}</p>
+        <p><strong>Créé par:</strong> {{ vente.vente.utilisateurVente?.nom }}</p>
+        <p><strong>Note:</strong> {{ vente.vente.note }}</p>
+      </div>
+    </mat-card-content>
+  </mat-card>
+</div>
+
+<!-- Table des produits -->
+<mat-card class="cardProduit">
+  <mat-card-content>
+    <mat-card-title>
+      <h6>Produits Vendus</h6>
+    </mat-card-title>
+    <table matSort mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+      
+      <ng-container matColumnDef="designation">
+        <th mat-header-cell *matHeaderCellDef> Désignation </th>
+        <td mat-cell *matCellDef="let produitVente"> {{ produitVente.produit.designation }} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="quantite">
+        <th mat-header-cell *matHeaderCellDef> Quantité </th>
+        <td mat-cell *matCellDef="let produitVente"> {{ produitVente.quantite }} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="prixUnitaire">
+        <th mat-header-cell *matHeaderCellDef> Prix Unitaire (FCFA) </th>
+        <td mat-cell *matCellDef="let produitVente"> {{ produitVente.produit.prixUnitaire | formatMontant }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="montant">
+        <th mat-header-cell *matHeaderCellDef> Montant (FCFA) </th>
+        <td mat-cell *matCellDef="let produitVente"> {{ produitVente.montant | formatMontant }}  </td>
+      </ng-container>
+
+      <ng-container matColumnDef="date">
+        <th mat-header-cell *matHeaderCellDef> Date </th>
+        <td mat-cell *matCellDef="let produitVente"> {{produitVente.produit.date! | formatDate }} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="categorieStock">
+        <th mat-header-cell *matHeaderCellDef> Catégorie </th>
+        <td mat-cell *matCellDef="let produitVente"> {{ produitVente.produit.categorieStock.nom }} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="utilisateurProd">
+        <th mat-header-cell *matHeaderCellDef> Créé par </th>
+        <td mat-cell *matCellDef="let produitVente"> {{ produitVente.produit.utilisateurProd.nom }} </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="['designation', 'quantite', 'prixUnitaire', 'montant', 'date', 'categorieStock', 'utilisateurProd']"></tr>
+      <tr mat-row *matRowDef="let row; columns: ['designation', 'quantite', 'prixUnitaire', 'montant', 'date', 'categorieStock', 'utilisateurProd'];"></tr>
+    </table>
+  </mat-card-content>
+</mat-card>

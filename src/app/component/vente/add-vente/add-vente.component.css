@@ -1,0 +1,136 @@
+/* Styles généraux */
+mat-card {
+  margin: 10px;
+  border-radius: 5px;
+  height: auto;
+}
+
+mat-divider {
+  margin: 10px 0;
+}
+
+mat-card-title {
+  font-weight: 550;
+}
+
+/* Conteneur principal */
+.content-container {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* Cartes */
+.card1, .card2 {
+  border-top: 10px solid #6B3C5C;
+  margin: 10px 0;
+  padding: 15px;
+}
+
+/* Grille pour les champs de formulaire */
+.form-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+}
+
+/* Champ de note */
+.note {
+  margin: 20px 0;
+}
+
+/* Champ de sélection de produits */
+.input-produit {
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+/* Tableau des produits */
+.product-table {
+  margin-top: 20px;
+}
+
+button{
+  margin: 10px;
+  border-radius: 5px;
+  font-weight: 500;
+}
+
+.annuler {
+  color: red;
+  font-weight: bold;
+  background-color: white;
+}
+
+.enregistrer {
+  color: #6B3C5C;
+  font-weight: bold;
+  background-color: white;
+}
+
+.save{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.annuler:hover {
+  color: white;
+  font-weight: bold;
+  background-color: red;
+}
+
+.enregistrer:hover {
+  color: white;
+  font-weight: bold;
+  background-color: #6B3C5C;
+}
+
+#search-input {
+  width: 100%;
+  margin: 5px 0 5px 30px;
+  border-bottom: #6B3C5C 2px solid;
+  background-color: none;
+  color: #6B3C5C;
+  font-weight: bold;
+  width: 97%;
+
+}
+
+#icon{
+  margin: 2px 30px -40px -170px; 
+
+}
+
+#label{
+  margin: 5px 10px;
+
+}
+
+.fixed {
+  background-color: white;
+  position: sticky;
+  top: 0; 
+  z-index: 1; 
+}
+
+/* Responsive design */
+@media only screen and (max-width: 768px) {
+  .form-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .card1, .card2 {
+    margin: 5px;
+    padding: 10px;
+  }
+
+  .button-container {
+    flex-direction: column;
+    gap: 5px;
+  }
+
+  .note {
+    margin: 10px 0;
+  }
+}

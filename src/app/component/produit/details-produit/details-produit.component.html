@@ -1,0 +1,128 @@
+<mat-card>
+  <mat-card-header>
+    <mat-card-title>
+      <button mat-icon-button (click)="retour()">
+        <mat-icon>arrow_back_ios</mat-icon>
+      </button>
+      <span>Détails du Produit</span>
+    </mat-card-title>
+    <button class="imprimer" mat-raised-button (click)="imprimerDetails()" *ngIf="produit">
+      <mat-icon>print</mat-icon> Imprimer les détails
+    </button>
+  </mat-card-header>
+
+  <mat-divider></mat-divider>
+
+  <div *ngIf="isLoading" class="loading-spinner">
+    <mat-spinner></mat-spinner>
+  </div>
+
+  <div *ngIf="produit && !isLoading" class="details-container">
+    <!-- Section Informations de base -->
+    <mat-card class="info-section">
+      <mat-card-content>
+        <h5>Informations de base</h5>
+        <div class="info-grid">
+          <div class="info-item">
+            <strong>Désignation:</strong> {{ produit.designation }}
+          </div>
+          <div class="info-item">
+            <strong>Slug:</strong> {{ produit.slug }}
+          </div>
+          <div class="info-item">
+            <strong>Caracteristique:</strong> {{ produit.caracteristique }}
+          </div>
+          <div class="info-item">
+            <strong>Quantité:</strong> {{ produit.quantite }}
+          </div>
+          <div class="info-item">
+            <strong>Prix unitaire:</strong> {{ produit.prixUnitaire | formatMontant }}
+          </div>
+          <div class="info-item">
+            <strong>Prix régulier:</strong> {{ produit.prixRegulier! | formatMontant }}
+          </div>
+          <div class="info-item">
+            <strong>Montant total:</strong> {{ produit.montant! | formatMontant }}
+          </div>
+          <div class="info-item">
+            <strong>Date de création:</strong> {{ produit.date! | formatDate }}
+          </div>
+          <div class="info-item">
+            <strong>Créé par:</strong> {{ produit.utilisateurProd?.nom }} {{ produit.utilisateurProd?.prenom }}
+          </div>
+        </div>
+      </mat-card-content>
+    </mat-card>
+
+    <!-- Section Catégorie -->
+    <mat-card class="info-section" *ngIf="produit.categorieStockProdDTO">
+      <mat-card-content>
+        <h5>Catégorie</h5>
+        <div class="info-grid">
+          <div class="info-item">
+            <strong>Nom:</strong> {{ produit.categorieStockProdDTO.nom }}
+          </div>
+          <div class="info-item">
+            <strong>Description:</strong> {{ produit.categorieStockProdDTO.description || 'Non renseignée' }}
+          </div>
+        </div>
+      </mat-card-content>
+    </mat-card>
+
+    <!-- Section Statuts -->
+    <mat-card class="info-section">
+      <mat-card-content>
+        <h5>Statuts</h5>
+        <div class="status-grid">
+          <div class="status-item" [class.active]="produit.nouveaute">
+            <mat-icon>{{ produit.nouveaute ? 'check_circle' : 'cancel' }}</mat-icon>
+            <span>Nouveauté</span>
+          </div>
+          <div class="status-item" [class.active]="produit.plusVendu">
+            <mat-icon>{{ produit.plusVendu ? 'check_circle' : 'cancel' }}</mat-icon>
+            <span>Plus vendu</span>
+          </div>
+          <div class="status-item" [class.active]="produit.offreSpeciale">
+            <mat-icon>{{ produit.offreSpeciale ? 'check_circle' : 'cancel' }}</mat-icon>
+            <span>Offre spéciale</span>
+          </div>
+          <div class="status-item" [class.active]="produit.vedette">
+            <mat-icon>{{ produit.vedette ? 'check_circle' : 'cancel' }}</mat-icon>
+            <span>Vedette</span>
+          </div>
+          <div class="status-item" [class.active]="produit.publier">
+            <mat-icon>{{ produit.publier ? 'check_circle' : 'cancel' }}</mat-icon>
+            <span>Publié</span>
+          </div>
+        </div>
+      </mat-card-content>
+    </mat-card>
+
+<!-- Section Description et Notes -->
+<mat-card class="info-section">
+  <mat-card-content>
+    <h5>Description</h5>
+    <div [innerHTML]="produit.description || '<p>Aucune description disponible</p>'"></div>
+
+    <h5>Notes</h5>
+    <p>{{ produit.note || 'Aucune note disponible' }}</p>
+
+    <h5>Informations</h5>
+    <div [innerHTML]="produit.info || '<p>Aucune info disponible</p>'"></div>
+  </mat-card-content>
+</mat-card>
+
+
+    <!-- Section Images -->
+    <mat-card class="info-section" *ngIf="existingImageUrl">
+      <mat-card-content>
+        <h5>Images du produit</h5>
+        <div class="images-grid">
+          <div *ngFor="let image of existingImageUrl" class="image-container">
+            <img [src]="image" alt="Image du produit" class="product-image">
+          </div>
+        </div>
+      </mat-card-content>
+    </mat-card>
+  </div>
+</mat-card>

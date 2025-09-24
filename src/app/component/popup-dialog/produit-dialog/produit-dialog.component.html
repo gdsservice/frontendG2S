@@ -1,0 +1,20 @@
+<div mat-dialog-header>
+  <h1 mat-dialog-title>Configurer le produit</h1>
+</div>
+<div mat-dialog-content>
+  <form [formGroup]="produitForm">
+    <mat-form-field appearance="outline">
+      <mat-label>Quantité</mat-label>
+      <input matInput formControlName="quantite" type="number" min="1">
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Réduction</mat-label>
+      <input matInput formControlName="reduction" type="number" min="0">
+    </mat-form-field>
+  </form>
+</div>
+<div class="btn" mat-dialog-actions>
+  <button mat-button class="annuler" (click)="onNoClick()">Annuler</button>
+  <button mat-raised-button class="enregistrer" color="primary" (click)="onSave()">Enregistrer</button>
+</div>

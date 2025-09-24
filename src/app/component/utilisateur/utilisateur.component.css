@@ -1,0 +1,164 @@
+.container-body{
+  overflow: inherit;
+  height: auto;
+  margin: 20px;
+  border-radius: 5px;
+  background-color: rgba(255, 255, 255, 0.6);
+}
+
+mat-divider{
+  margin: 10px 0;
+}
+
+.add{
+  color: #6B3C5C;
+  font-weight: bold;
+  background-color: white;
+}
+
+.add:hover{
+  color: white;
+  font-weight: bolder;
+  background-color: #6B3C5C;
+}
+
+mat-slide-toggle{
+  color: #6bc700;
+}
+
+.mat-card-header{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  align-content: center;
+  font-weight: 550;
+  font-size: 25px;
+}
+
+.card-content{
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  justify-content: space-between;
+  align-content: center;
+  text-align: start;
+}
+
+mat-card{
+}
+
+.card{
+  margin: 20px 10px;
+  background-color: white;
+}
+
+.header{
+  display: flex;
+  justify-content: start;
+  align-items: center;
+  align-content: center;
+}
+
+mat-slide-toggle{
+  position: absolute;
+  right: 10px;
+}
+
+mat-card-title{
+  font-weight: 480;
+  font-size: 25px;
+}
+
+.mat-card-title{
+  font-weight: 420;
+  font-size: 20px;
+}
+
+/*mat-card-avatar*/
+
+mat-card-actions{
+  margin-top: 10px;
+  display: flex;
+  justify-content: space-around;
+}
+
+button{
+  margin: 10px 2px 0 0;
+  border-radius: 5px;
+  font-weight: 500;
+  /*border: 1px solid #b0b0b0;*/
+}
+
+.delete {
+  color: red;
+  background-color: white;
+}
+
+.update {
+  color: blue;
+  font-weight: bolder;
+  background-color: white;
+}
+
+.info{
+  color: #de0aff;
+  font-weight: bolder;
+  background-color: white;
+}
+
+.avatar{
+  width: 65px;
+  height: 65px;
+  border-radius: 50%;
+  background-color: #5A497D;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.iconPerson{
+  color: white;
+}
+
+.update:hover{
+  color: white;
+  font-weight: bold;
+  background-color: blue;
+}
+
+.delete:hover{
+  color: white;
+  font-weight: bold;
+  background-color: red;
+}
+
+.info:hover{
+  color: white;
+  font-weight: bolder;
+  background-color: #de0aff;
+}
+
+/*Version mobile*/
+@media (max-width: 768px) {
+  .card-content {
+    grid-template-columns: 1fr;
+  }
+
+  .mat-card-header, .header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  mat-card-title {
+    font-size: 18px;
+  }
+
+  mat-card-actions {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  button {
+    margin: 5px 0;
+  }
+}
+

@@ -1,0 +1,13 @@
+<mat-card>
+  <mat-card-header>
+      <h4>Erreur</h4>
+      <mat-icon color="warn">info</mat-icon>
+  </mat-card-header>
+  <div mat-dialog-content>
+    <p>{{data.message}}</p>
+  </div>
+  <div class="mat-dialog-actions">
+    <button class="fermer" (click)="onClose()">Fermer</button>
+  </div>
+</mat-card>
+

@@ -1,0 +1,82 @@
+<!-- menu -->
+<mat-toolbar class="toolbar">
+  <!-- Bouton de menu : pas besoin de closeDrawerOnNavigation() ici -->
+<!--  djsk-->
+  <button mat-icon-button class="menu-icon" (click)="myDrawer.toggle()">
+    <mat-icon class="mat-icon-menu">menu</mat-icon>
+  </button>
+  <span class="logo">G2S Services</span>
+  <span class="span-spacer"></span>
+  <button mat-icon-button [matBadge]="quantite" matBadgePosition="before" matBadgeColor="warn"
+        [matBadgeHidden]="quantite === 0">
+  <mat-icon class="mat-icon-menu" >notifications</mat-icon>
+</button>
+  <button mat-icon-button class="user-icon" [matMenuTriggerFor]="logoutMenu">
+    <mat-icon class="mat-icon-menu">person</mat-icon>
+  </button>
+  <mat-card-subtitle class="profile" *ngIf="authService.isAuthen">{{ authService.listUser?.nom }}</mat-card-subtitle>
+  <mat-menu #logoutMenu>
+    <button mat-menu-item (click)="logout()">
+      <mat-icon>logout</mat-icon> Se déconnecter
+    </button>
+  </mat-menu>
+</mat-toolbar>
+<!-- fin menu-->
+
+<!-- body -->
+<mat-drawer-container>
+  <!-- side -->
+  <mat-drawer #myDrawer [mode]="isMobile ? 'over' : 'side'" position="start" class="container">
+    <mat-list>
+      <mat-list-item>
+        <button mat-button routerLink="/admin/dashboard" routerLinkActive="active-link" style="color: black; font-size: 18px;" (click)="closeDrawerOnNavigation()">
+          <mat-icon>dashboard</mat-icon> Dashboard
+        </button>
+      </mat-list-item>
+      <mat-list-item *ngIf="authService.roles?.includes('SUPER_ADMIN','ADMIN')">
+        <button mat-button routerLink="/admin/utilisateur" routerLinkActive="active-link" style="color: black; font-size: 18px" (click)="closeDrawerOnNavigation()">
+          <mat-icon>supervisor_account</mat-icon> Utilisateurs
+        </button>
+      </mat-list-item>
+      <mat-list-item>
+        <button mat-button routerLink="/admin/produit" routerLinkActive="active-link" style="color: black; font-size: 18px" (click)="closeDrawerOnNavigation()">
+          <mat-icon>shopping_basket</mat-icon> Produits
+        </button>
+      </mat-list-item>
+      <mat-list-item>
+        <button mat-button routerLink="/admin/commande" routerLinkActive="active-link" style="color: black; font-size: 18px" (click)="closeDrawerOnNavigation()">
+          <mat-icon>assignment</mat-icon> Commandes
+        </button>
+      </mat-list-item>
+      <mat-list-item>
+        <button mat-button routerLink="/admin/vente" routerLinkActive="active-link" style="color: black; font-size: 18px" (click)="closeDrawerOnNavigation()">
+          <mat-icon>sell</mat-icon> Ventes
+        </button>
+      </mat-list-item>
+      <mat-list-item>
+        <button mat-button routerLink="/admin/client" routerLinkActive="active-link" style="color: black; font-size: 18px" (click)="closeDrawerOnNavigation()">
+          <mat-icon>face</mat-icon> Clients
+        </button>
+      </mat-list-item>
+      <mat-list-item *ngIf="authService.roles?.includes('SUPER_ADMIN')">
+        <button mat-button routerLink="/admin/approvision" routerLinkActive="active-link" style="color: black; font-size: 18px" (click)="closeDrawerOnNavigation()">
+          <mat-icon>local_shipping</mat-icon> Approvisions
+        </button>
+      </mat-list-item>
+      <mat-list-item>
+        <button mat-button routerLink="/admin/dette" routerLinkActive="active-link" style="color: black; font-size: 18px" (click)="closeDrawerOnNavigation()">
+          <mat-icon>account_balance</mat-icon> Dettes
+        </button>
+      </mat-list-item>
+    </mat-list>
+  </mat-drawer>
+  <!-- fin side -->
+
+  <!-- contenu de side -->
+  <mat-drawer-content>
+    <div class="drawer-height">
+      <router-outlet></router-outlet>
+    </div>
+  </mat-drawer-content>
+  <!-- fin contenu de side -->
+</mat-drawer-container>

@@ -1,0 +1,55 @@
+<div>
+  <mat-card class="container-body">
+    <mat-card-header class="mat-card-header">
+        <mat-card-title>UTILISATEURS</mat-card-title>
+      <mat-card-actions>
+        <button class="add" (click)="ajouter()" mat-raised-button>
+          <mat-icon class="icon">library_add</mat-icon>
+          ENREGISTRER
+        </button>
+      </mat-card-actions>
+    </mat-card-header>
+    <mat-divider></mat-divider>
+    <mat-card-content class="card-content">
+      <mat-card class="card" *ngFor="let user of listUser">
+        <mat-card-header class="header">
+          <div class="avatar" mat-card-avatar>
+            <mat-icon class="iconPerson">person</mat-icon>
+          </div>
+          <mat-card-title class="mat-card-title">{{user.nom}}</mat-card-title>
+          <mat-card-subtitle>{{user.prenom}}</mat-card-subtitle>
+          <mat-slide-toggle [checked]="user.activation != 'ACTIVER'" (change)="onToggleChange(user, $event)"></mat-slide-toggle>
+        </mat-card-header>
+        <mat-divider></mat-divider>
+        <mat-card-content>
+          <p>Email: <span>{{user.email}}</span></p>
+          <p>Téléphone: <span>{{user.telephone}}</span></p>
+          <p>Role:
+            <span *ngFor="let role of user.roles; let i = index">
+              {{ role.name }}<span *ngIf="i < user.roles.length - 1">, </span>
+            </span>
+          </p>
+          <p>Status:
+            <span [ngStyle]="{'color': user.activation === 'ACTIVER' ? '#6bc700' : '#ff0000', 'font-weight': 'bold'}">
+              {{ user.activation === "ACTIVER" ? 'ACTIVER' : 'DESACTIVER' }}
+            </span>
+          </p>
+        </mat-card-content>
+        <mat-card-actions>
+          <button class="update" (click)="modifier(user.id)" mat-raised-button>
+            <mat-icon class="modifier">edit</mat-icon>
+            Modifier
+          </button>
+          <button class="info" (click)="detail(user)" mat-raised-button>
+            <mat-icon class="details">info</mat-icon>
+            Details
+          </button>
+          <button class="delete" (click)="supprimer(user)" mat-raised-button>
+            <mat-icon class="supprimer">delete</mat-icon>
+            Supprimer
+          </button>
+        </mat-card-actions>
+      </mat-card>
+    </mat-card-content>
+  </mat-card>
+</div>

@@ -1,0 +1,52 @@
+<div class="container-body">
+  <mat-card mat-card [formGroup]="categorieForm">
+    <mat-card-header>
+      <mat-card-title>
+        <button mat-icon-button (click)="retour()">
+          <mat-icon>arrow_back_ios</mat-icon>
+        </button>
+        Modifier Categorie
+      </mat-card-title>
+    </mat-card-header>
+    <mat-divider></mat-divider>
+    <mat-card-content>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Titre</mat-label>
+        <input matInput formControlName="nom" placeholder="Entrez la designation" maxlength="120" minlength="2">
+        <mat-icon matPrefix>format_align_left</mat-icon>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Slug</mat-label>
+        <input matInput formControlName="slug" maxlength="60" minlength="2">
+        <mat-icon matPrefix>format_align_left</mat-icon>
+      </mat-form-field>
+
+      <mat-radio-group formControlName="publier" aria-label="Select an option">
+        <mat-label>Publier</mat-label>
+        <mat-radio-button [value]="true">ACTIVÉ</mat-radio-button>
+        <mat-radio-button [value]="false">DÉSACTIVÉ</mat-radio-button>
+      </mat-radio-group>
+
+    </mat-card-content>
+    <mat-form-field class="note" appearance="outline">
+      <mat-label>Note</mat-label>
+      <textarea matInput formControlName="description" placeholder="Entrez une note" maxlength="255"
+        minlength="2"></textarea>
+      <mat-icon matPrefix>description</mat-icon>
+    </mat-form-field>
+    <mat-card-actions>
+      <button (click)="retour()" class="annuler" mat-raised-button>Annuler</button>
+      <button (click)="modifierCat()" class="enregistrer" mat-raised-button>
+        <div class="save">
+          Modifier
+          <div *ngIf="spinnerProgress">
+            <app-spinner />
+          </div>
+        </div>
+      </button>
+    </mat-card-actions>
+  </mat-card>
+
+</div>

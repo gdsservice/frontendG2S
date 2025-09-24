@@ -1,0 +1,43 @@
+.placeholder-glow {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  
+  .placeholder {
+    background: rgba(0, 0, 0, 0.1);
+    border-radius: 4px;
+    animation: glow 1.5s infinite;
+  }
+  
+  .placeholder-line {
+    height: 1rem;
+  }
+  
+  .col-7 {
+    width: 70%;
+  }
+  
+  .col-4 {
+    width: 40%;
+  }
+  
+  .col-6 {
+    width: 60%;
+  }
+  
+  .col-8 {
+    width: 80%;
+  }
+  
+  @keyframes glow {
+    0% {
+      opacity: 0.5;
+    }
+    50% {
+      opacity: 1;
+    }
+    100% {
+      opacity: 0.5;
+    }
+  }

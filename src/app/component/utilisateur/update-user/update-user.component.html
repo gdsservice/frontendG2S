@@ -1,0 +1,68 @@
+<div class="container-body">
+  <mat-card [formGroup]="userListForm">
+    <mat-card-header>
+      <mat-card-title>
+        <button mat-icon-button (click)="retour()">
+          <mat-icon>arrow_back_ios</mat-icon>
+        </button>
+        Modifier Utilisateur
+      </mat-card-title>
+    </mat-card-header>
+    <mat-divider></mat-divider>
+
+    <mat-card-content>
+      <mat-form-field appearance="outline">
+        <mat-label>Nom</mat-label>
+        <input matInput formControlName="nom" maxlength="50" minlength="2" required>
+        <mat-icon matPrefix>person</mat-icon>
+        <mat-error *ngIf="userListForm.get('nom')?.hasError('required') && userListForm.get('nom')">
+          Le nom est requis.
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Prenom</mat-label>
+        <input matInput formControlName="prenom" maxlength="50" minlength="2" required>
+        <mat-icon matPrefix>person</mat-icon>
+        <mat-error *ngIf="userListForm.get('prenom')?.hasError('required') && userListForm.get('prenom')">
+          Le prénom est requis.
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Email</mat-label>
+        <input matInput formControlName="email" maxlength="80" minlength="2" pattern="[a-zA-Z0-9.-_]{1,}@[a-zA-Z.-]{2,}[.]{1}[a-zA-Z]{2,}" required>
+        <mat-icon matPrefix>email</mat-icon>
+        <mat-error *ngIf="userListForm.get('email')?.hasError('required') && userListForm.get('email')">
+          L'email est requis.
+        </mat-error>
+        <mat-error *ngIf="userListForm.get('email')?.hasError('pattern')">
+          Entrer un email valide. Exp: stock&#64;gmail.com
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Telephone</mat-label>
+        <span matTextPrefix>+223 &nbsp;</span>
+        <input type="tel" matInput placeholder="83-52-28-56" formControlName="telephone"
+               (input)="formatTelephone($event)" required>
+        <mat-icon matSuffix>phone</mat-icon>
+        <mat-error *ngIf="userListForm.get('telephone')?.hasError('required') && userListForm.get('telephone')">
+          Le téléphone est requis.
+        </mat-error>
+      </mat-form-field>
+    </mat-card-content>
+
+    <mat-card-content>
+      <mat-card-actions>
+        <button (click)="retour()" class="annuler" mat-raised-button>Annuler</button>
+        <button (click)="modifier()" class="enregistrer" mat-raised-button>
+          <div class="save">
+            Enregistrer
+            <mat-progress-spinner *ngIf="spinnerProgress" [diameter]="30" mode="indeterminate"></mat-progress-spinner>
+          </div>
+        </button>
+      </mat-card-actions>
+    </mat-card-content>
+  </mat-card>
+</div>
