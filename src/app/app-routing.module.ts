@@ -30,6 +30,8 @@ import { DetailsVenteComponent } from './component/vente/details-vente/details-v
 import { DetailsProduitComponent } from './component/produit/details-produit/details-produit.component';
 import { CommandeComponent } from './component/commande/commande.component';
 import { CommandeDetailsComponent } from './component/commande/commande-details/commande-details.component';
+import { BannerComponent } from './component/banner/banner.component';
+import { AddBannerComponent } from './component/banner/add-banner/add-banner.component';
 
 const routes: Routes = [
   {path: "", component: LoginComponent},
@@ -64,6 +66,8 @@ const routes: Routes = [
       {path: "updateUser/:id", component: UpdateUserComponent},
       {path: "commande", component: CommandeComponent},
       {path: "commandeDetails/:idCde", component: CommandeDetailsComponent},
+      {path: "banner", component: BannerComponent},
+      {path: "addBanner", component: AddBannerComponent},
       {
         path: 'utilisateur', component: UtilisateurComponent,
         canActivate: [AuthorizationGuard],

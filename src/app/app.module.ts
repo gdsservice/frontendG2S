@@ -82,6 +82,8 @@ import { FormatPhonePipe } from './pipes/format-phone.pipe';
 import { CommandeDetailsComponent } from './component/commande/commande-details/commande-details.component';
 import { ConfirmationDialogTraiterCdeComponent } from './component/popup-dialog/confirmation-dialog-traiter-cde/confirmation-dialog-traiter-cde.component';
 import { QuillModule } from 'ngx-quill';
+import { BannerComponent } from './component/banner/banner.component';
+import { AddBannerComponent } from './component/banner/add-banner/add-banner.component';
 
 
 
@@ -132,6 +134,8 @@ import { QuillModule } from 'ngx-quill';
   FormatPhonePipe,
   CommandeDetailsComponent,
   ConfirmationDialogTraiterCdeComponent,
+  BannerComponent,
+  AddBannerComponent,
 //   CommandeDetailsComponent,
 
 	],

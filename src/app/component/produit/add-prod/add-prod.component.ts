@@ -22,6 +22,7 @@ export class AddProdComponent implements OnInit {
   spinnerProgress: boolean = false;
   selectedFiles: File[] = [];
   imagePreviews: (string | ArrayBuffer)[] = []; 
+  listSite: any;
 
 
   constructor(private dialog: MatDialog,
@@ -31,7 +32,8 @@ export class AddProdComponent implements OnInit {
     private location: Location,
     private fb: FormBuilder,
     private catService: CategorieService,
-    private prodService: ProduitService) {
+    private prodService: ProduitService,
+  ) {
   }
 
   quillConfig = {
