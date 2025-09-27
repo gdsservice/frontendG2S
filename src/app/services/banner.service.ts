@@ -40,4 +40,6 @@ export class BannerService {
   modifierBannerAvecImage(formData: FormData, idBanner: string): Observable<any> {
     return this.http.put(`${environment.backendHost}/banner/modifierBanner/${idBanner}`, formData);
   }
+
+  // tes
 }
