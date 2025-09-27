@@ -32,4 +32,12 @@ export class BannerService {
   getImageUrl(idBanner: string): string {
     return `${environment.backendHost}/images/banner/${idBanner}`;
   }
+
+  afficher(idBanner: string): Observable<BannerDAO> {
+    return this.http.get<BannerDAO>(`${environment.backendHost}/banner/afficherBanner/${idBanner}`);
+  }
+
+  modifierBannerAvecImage(formData: FormData, idBanner: string): Observable<any> {
+    return this.http.put(`${environment.backendHost}/banner/modifierBanner/${idBanner}`, formData);
+  }
 }

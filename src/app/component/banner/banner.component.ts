@@ -1,6 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
-import {ActivatedRoute, Router} from "@angular/router";
 import { BannerService } from '../../services/banner.service';
 import { BannerModel } from '../../models/banner-model';
 import { SelectionModel } from '@angular/cdk/collections';
@@ -9,6 +8,7 @@ import { MatSort } from '@angular/material/sort';
 import { map } from 'rxjs';
 import { MatTableDataSource } from '@angular/material/table';
 import { BannerDAO } from '../../models/banner-dao';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-banner',
@@ -29,7 +29,6 @@ export class BannerComponent {
 
   constructor(
     private router: Router,
-    private route: ActivatedRoute,
     private fb: FormBuilder,
     private bannerService: BannerService,
   ) { }
@@ -98,7 +97,9 @@ export class BannerComponent {
     this.router.navigateByUrl("/admin/addBanner")
   }
 
-  modifier() { }
+  modifier(idBanner: string) {
+    this.router.navigateByUrl(`/admin/updateBanner/${idBanner}`)
+   }
 
   supprimer() { }
 

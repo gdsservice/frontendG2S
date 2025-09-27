@@ -1,0 +1,121 @@
+<div class="container-body">
+    <mat-card mat-card [formGroup]="bannerListForm">
+        <mat-card-header>
+            <mat-card-title>
+                <button mat-icon-button (click)="retour()">
+                    <mat-icon>arrow_back_ios</mat-icon>
+                </button>
+                Ajouter Banner
+            </mat-card-title>
+        </mat-card-header>
+        <mat-divider></mat-divider>
+
+        <mat-card-content>
+            <mat-form-field appearance="outline">
+                <mat-label>Titre</mat-label>
+                <input matInput formControlName="titre" placeholder="Entrez un titre" maxlength="255" minlength="2">
+                <mat-icon matPrefix>format_align_left</mat-icon>
+                <mat-error *ngIf="bannerListForm.get('titre')?.hasError('required') && bannerListForm.get('titre')">
+                    Le titre est requis.
+                </mat-error>
+            </mat-form-field>
+
+            <mat-form-field appearance="outline">
+                <mat-label>Sous Titre</mat-label>
+                <input matInput formControlName="sous_titre" placeholder="Entrez un sous titre" maxlength="255"
+                    minlength="2">
+                <mat-icon matPrefix>format_align_left</mat-icon>
+                <mat-error
+                    *ngIf="bannerListForm.get('sous_titre')?.hasError('required') && bannerListForm.get('sous_titre')">
+                    Le sous titre est requis.
+                </mat-error>
+            </mat-form-field>
+
+            <mat-form-field appearance="outline">
+                <mat-label>Texte de Bouton</mat-label>
+                <input matInput formControlName="btn_text" placeholder="Entrez un texte pour le bouton" maxlength="255"
+                    minlength="2">
+                <mat-icon matPrefix>format_align_left</mat-icon>
+                <mat-error
+                    *ngIf="bannerListForm.get('btn_text')?.hasError('required') && bannerListForm.get('btn_text')">
+                    Le texte de bouton est requis.
+                </mat-error>
+            </mat-form-field>
+
+            <mat-form-field appearance="outline">
+                <mat-label>Lien de Bouton</mat-label>
+                <input matInput formControlName="btn_link" placeholder="Entrez un lien pour le bouton" maxlength="255"
+                    minlength="2">
+                <mat-icon matPrefix>format_align_left</mat-icon>
+                <mat-error
+                    *ngIf="bannerListForm.get('btn_link')?.hasError('required') && bannerListForm.get('btn_link')">
+                    Le lien de bouton est requis.
+                </mat-error>
+            </mat-form-field>
+
+            <mat-radio-group formControlName="publier" aria-label="Select an option">
+                <mat-label>Publier dans le site</mat-label>
+                <mat-radio-button [value]="true">ACTIVÉ</mat-radio-button>
+                <mat-radio-button [value]="false">DÉSACTIVÉ</mat-radio-button>
+            </mat-radio-group>
+        </mat-card-content>
+
+        <mat-card-content>
+            <div class="upload-container">
+                <!-- Bouton de sélection -->
+                <div class="upload-button-wrapper">
+                    <button mat-raised-button color="primary" (click)="fileInput.click()">
+                        Ajouter des images
+                        <mat-icon>image</mat-icon>
+                    </button>
+                    <input #fileInput type="file" (change)="onFileSelected($event)" accept="image/*" multiple hidden />
+                </div>
+
+                <!-- Section des images existantes -->
+                <div *ngIf="(existingImageUrl?.length ?? 0) > 0" class="existing-images-section">
+                    <h4>Images existantes</h4>
+                    <div class="image-previews-container">
+                        <div *ngIf="existingImageUrl" class="image-preview-wrapper">
+                            <div class="image-frame">
+                                <img [src]="existingImageUrl" alt="Image existante" class="preview-image">
+                                <button mat-icon-button class="remove-button" (click)="removeExistingImage()">
+                                    <mat-icon>close</mat-icon>
+                                </button>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+                <!-- Section des nouvelles images sélectionnées -->
+                <div *ngIf="imagePreview" class="new-images-section">
+                    <h4>Nouvelles images</h4>
+                    <div class="image-previews-container">
+                        <div class="image-preview-wrapper">
+                            <div class="image-frame">
+                                <img [src]="imagePreview" alt="Nouvelle image" class="preview-image">
+                                <button mat-icon-button class="remove-button" (click)="removeImage()">
+                                    <mat-icon>close</mat-icon>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </mat-card-content>
+
+
+        <mat-card-actions>
+            <button class="annuler" (click)="annulerBanner()" mat-raised-button>Annuler</button>
+            <button (click)="modifierBanner()" class="enregistrer" mat-raised-button>
+                <div class="save">
+                    Enregistrer
+                    <div *ngIf="spinnerProgress">
+                        <app-spinner />
+                    </div>
+                </div>
+            </button>
+        </mat-card-actions>
+    </mat-card>
+
+</div>

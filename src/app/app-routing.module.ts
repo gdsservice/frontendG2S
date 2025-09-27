@@ -32,6 +32,7 @@ import { CommandeComponent } from './component/commande/commande.component';
 import { CommandeDetailsComponent } from './component/commande/commande-details/commande-details.component';
 import { BannerComponent } from './component/banner/banner.component';
 import { AddBannerComponent } from './component/banner/add-banner/add-banner.component';
+import { UpdateBannerComponent } from './component/banner/update-banner/update-banner.component';
 
 const routes: Routes = [
   {path: "", component: LoginComponent},
@@ -68,6 +69,7 @@ const routes: Routes = [
       {path: "commandeDetails/:idCde", component: CommandeDetailsComponent},
       {path: "banner", component: BannerComponent},
       {path: "addBanner", component: AddBannerComponent},
+      {path: "updateBanner/:idBanner", component: UpdateBannerComponent},
       {
         path: 'utilisateur', component: UtilisateurComponent,
         canActivate: [AuthorizationGuard],

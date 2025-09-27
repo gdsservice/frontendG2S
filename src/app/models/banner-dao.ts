@@ -7,5 +7,6 @@ export class BannerDAO {
     btn_text?: string;
     btn_link?: string;
     imageUrl?: string;
-    utilisateurBanner?: UserModel;
+    publier?: string;
+    // utilisateurBanner?: UserModel;
 }
