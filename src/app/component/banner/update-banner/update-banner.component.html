@@ -5,60 +5,68 @@
                 <button mat-icon-button (click)="retour()">
                     <mat-icon>arrow_back_ios</mat-icon>
                 </button>
-                Ajouter Banner
+                Modifier Banner
             </mat-card-title>
         </mat-card-header>
         <mat-divider></mat-divider>
 
         <mat-card-content>
+            <!-- Champ titre -->
             <mat-form-field appearance="outline">
                 <mat-label>Titre</mat-label>
                 <input matInput formControlName="titre" placeholder="Entrez un titre" maxlength="255" minlength="2">
-                <mat-icon matPrefix>format_align_left</mat-icon>
-                <mat-error *ngIf="bannerListForm.get('titre')?.hasError('required') && bannerListForm.get('titre')">
+                <mat-icon matPrefix>title</mat-icon>
+                <mat-error *ngIf="bannerListForm.get('titre')?.hasError('required')">
                     Le titre est requis.
                 </mat-error>
             </mat-form-field>
 
+            <!-- Champ sous-titre -->
             <mat-form-field appearance="outline">
                 <mat-label>Sous Titre</mat-label>
                 <input matInput formControlName="sous_titre" placeholder="Entrez un sous titre" maxlength="255"
                     minlength="2">
-                <mat-icon matPrefix>format_align_left</mat-icon>
-                <mat-error
-                    *ngIf="bannerListForm.get('sous_titre')?.hasError('required') && bannerListForm.get('sous_titre')">
+                <mat-icon matPrefix>subtitles</mat-icon>
+                <mat-error *ngIf="bannerListForm.get('sous_titre')?.hasError('required')">
                     Le sous titre est requis.
                 </mat-error>
             </mat-form-field>
 
+            <!-- Champ texte du bouton -->
             <mat-form-field appearance="outline">
                 <mat-label>Texte de Bouton</mat-label>
                 <input matInput formControlName="btn_text" placeholder="Entrez un texte pour le bouton" maxlength="255"
                     minlength="2">
-                <mat-icon matPrefix>format_align_left</mat-icon>
-                <mat-error
-                    *ngIf="bannerListForm.get('btn_text')?.hasError('required') && bannerListForm.get('btn_text')">
+                <mat-icon matPrefix>touch_app</mat-icon>
+                <mat-error *ngIf="bannerListForm.get('btn_text')?.hasError('required')">
                     Le texte de bouton est requis.
                 </mat-error>
             </mat-form-field>
 
+            <!-- Sélection du lien (slug produit) -->
             <mat-form-field appearance="outline">
-                <mat-label>Lien de Bouton</mat-label>
-                <input matInput formControlName="btn_link" placeholder="Entrez un lien pour le bouton" maxlength="255"
-                    minlength="2">
-                <mat-icon matPrefix>format_align_left</mat-icon>
-                <mat-error
-                    *ngIf="bannerListForm.get('btn_link')?.hasError('required') && bannerListForm.get('btn_link')">
-                    Le lien de bouton est requis.
-                </mat-error>
+                <mat-label>Choisir Lien du Bouton</mat-label>
+                <mat-select formControlName="btn_link" placeholder="Choisir lien du bouton" required
+                    [compareWith]="compareProd">
+                    <mat-option *ngFor="let prod of listProduit" [value]="prod.slug">
+                        {{ prod.designation }}
+                    </mat-option>
+                </mat-select>
+                <mat-icon matPrefix>link</mat-icon>
             </mat-form-field>
 
+            <!-- Radio publier -->
             <mat-radio-group formControlName="publier" aria-label="Select an option">
                 <mat-label>Publier dans le site</mat-label>
-                <mat-radio-button [value]="true">ACTIVÉ</mat-radio-button>
-                <mat-radio-button [value]="false">DÉSACTIVÉ</mat-radio-button>
+                <mat-radio-button [value]="true">
+                     ACTIVÉ
+                </mat-radio-button>
+                <mat-radio-button [value]="false">
+                     DÉSACTIVÉ
+                </mat-radio-button>
             </mat-radio-group>
         </mat-card-content>
+
 
         <mat-card-content>
             <div class="upload-container">

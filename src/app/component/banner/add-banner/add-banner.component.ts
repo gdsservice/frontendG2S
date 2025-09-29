@@ -6,6 +6,9 @@ import { BannerService } from '../../../services/banner.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { BannerINPUT } from '../../../models/banner-input';
 import { ErrorDialogComponent } from '../../popup-dialog/error-dialog/error-dialog.component';
+import { ProduitDAOModel } from '../../../models/produitDAO.model ';
+import { ProduitService } from '../../../services/produit.service';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-add-banner',
@@ -18,6 +21,7 @@ export class AddBannerComponent {
   spinnerProgress: boolean = false;
   selectedFiles: File[] = [];
   imagePreviews: (string | ArrayBuffer)[] = [];
+  listProduit!: ProduitDAOModel[];
 
   constructor(
     private dialog: MatDialog,
@@ -25,9 +29,21 @@ export class AddBannerComponent {
     private snackBar: MatSnackBar,
     private fb: FormBuilder,
     private bannerService: BannerService,
+    private prodService: ProduitService,
+    private location: Location,
   ) { }
 
   ngOnInit(): void {
+
+    this.prodService.listProduit()
+      .subscribe(
+        data => {
+          this.listProduit = data;
+        },
+        error => {
+          // console.log(error)
+        }
+      )
 
     this.bannerListForm = this.fb.group({
       idBanner: null,
@@ -84,7 +100,7 @@ export class AddBannerComponent {
 
 
   retour() {
-    // this.location.back()
+    this.location.back()
   }
 
   addBanner() {

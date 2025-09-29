@@ -9,6 +9,10 @@ import { map } from 'rxjs';
 import { MatTableDataSource } from '@angular/material/table';
 import { BannerDAO } from '../../models/banner-dao';
 import { Router } from '@angular/router';
+import { ConfirmationDialogSuppBannerComponent } from '../popup-dialog/confirmation-dialog-supp-banner/confirmation-dialog-supp-banner.component';
+import { MatDialog } from '@angular/material/dialog';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { ErrorDialogComponent } from '../popup-dialog/error-dialog/error-dialog.component';
 
 @Component({
   selector: 'app-banner',
@@ -31,6 +35,8 @@ export class BannerComponent {
     private router: Router,
     private fb: FormBuilder,
     private bannerService: BannerService,
+    private dialog: MatDialog,
+    private snackBar: MatSnackBar,
   ) { }
 
   ngOnInit(): void {
@@ -101,7 +107,45 @@ export class BannerComponent {
     this.router.navigateByUrl(`/admin/updateBanner/${idBanner}`)
    }
 
-  supprimer() { }
+  supprimer(idBanner: string) { 
+    const dialogRef = this.dialog.open(ConfirmationDialogSuppBannerComponent, {
+          width: '400px',
+        });
+    
+        dialogRef.afterClosed().subscribe(result => {
+          if (result) {
+            this.spinnerProgress = true;
+            this.bannerService.supprimerBanner(idBanner).subscribe(
+              response => {
+                this.spinnerProgress = false;
+                this.ngOnInit();
+                this.snackBar.open('Banner a ete supprimer avec succès!', 'Fermer', { duration: 3500 });
+                this.router.navigateByUrl("/admin/produit");
+              },
+              error => {
+                if (error.status === 409) {
+                  this.dialog.open(ErrorDialogComponent, {
+                    data: { message: error.error }
+                  });
+                  //  EmptyException
+                } else if(error.status === 404) {
+                  this.dialog.open(ErrorDialogComponent, {
+                    data: { message: error.error }
+                  });
+                  // MontantQuantiteNullException
+                }else if(error.status === 400) {
+                  this.dialog.open(ErrorDialogComponent, {
+                    data: {message: error.error}
+                  });
+                }else{
+                  // console.log(error);
+                }
+                this.spinnerProgress = false;
+              }
+            );
+          }
+        });
+  }
 
   details() { }
 

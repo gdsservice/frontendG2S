@@ -136,7 +136,7 @@ export class UpdateProdComponent implements OnInit {
       }
     });
   }
-// test
+  
   compareCategorie(c1: any, c2: any): boolean {
   return c1 && c2 ? c1.nom === c2.nom : c1 === c2;
 }

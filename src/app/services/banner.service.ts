@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { BannerINPUT } from '../models/banner-input';
@@ -41,5 +41,10 @@ export class BannerService {
     return this.http.put(`${environment.backendHost}/banner/modifierBanner/${idBanner}`, formData);
   }
 
-  // tes
+    supprimerBanner(idBanner: string) {
+      return this.http.put<BannerINPUT>(`${environment.backendHost}/banner/supprimerBanner`, (idBanner), {
+        headers: new HttpHeaders().set('Content-Type', 'application/json')
+      });
+    }
+
 }

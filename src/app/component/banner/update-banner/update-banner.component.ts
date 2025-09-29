@@ -7,6 +7,9 @@ import { BannerService } from '../../../services/banner.service';
 import { BannerDAO } from '../../../models/banner-dao';
 import { ErrorDialogComponent } from '../../popup-dialog/error-dialog/error-dialog.component';
 import { BannerINPUT } from '../../../models/banner-input';
+import { ProduitService } from '../../../services/produit.service';
+import { ProduitDAOModel } from '../../../models/produitDAO.model ';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-update-banner',
@@ -21,6 +24,7 @@ export class UpdateBannerComponent {
   selectedFile: File | null = null;
   imagePreview: string | ArrayBuffer | null = null;
   existingImageUrl: string | null = null;
+  listProduit!: ProduitDAOModel[];
 
   constructor(
     private dialog: MatDialog,
@@ -29,6 +33,8 @@ export class UpdateBannerComponent {
     private snackBar: MatSnackBar,
     private fb: FormBuilder,
     private bannerService: BannerService,
+    private prodService: ProduitService,
+    private location: Location,
   ) {
     this.bannerListForm = this.fb.group({
       idBanner: null,
@@ -42,11 +48,25 @@ export class UpdateBannerComponent {
   }
 
   ngOnInit(): void {
+    this.prodService.listProduit()
+      .subscribe(
+        data => {
+          this.listProduit = data;
+        },
+        error => {
+          // console.log(error)
+        }
+      )
+
     this.bannerId = this.route.snapshot.paramMap.get('idBanner');
     if (this.bannerId) {
       this.loadBanner(this.bannerId);
     }
   }
+
+    compareProd(c1: any, c2: any): boolean {
+  return c1 && c2 ? c1.nom === c2.nom : c1 === c2;
+}
 
   loadBanner(id: string): void {
     this.bannerService.afficher(id).subscribe({
@@ -110,49 +130,49 @@ export class UpdateBannerComponent {
   }
 
   retour(): void {
-    // this.location.back();
+    this.location.back();
   }
 
   modifierBanner(): void {
-      if (this.bannerListForm.invalid || !this.bannerId) {
-        this.bannerListForm.markAllAsTouched();
-        return;
-      }
-  
-      this.spinnerProgress = true;
-      const banner: BannerINPUT = {
-        ...this.bannerListForm.value,
-        idBanner: this.bannerId
-      };
-  
-      const formData = new FormData();
-      formData.append('banner', JSON.stringify(banner));
-      if (this.selectedFile) {
-        formData.append('image', this.selectedFile);
-      }
-  
-      this.bannerService.modifierBannerAvecImage(formData, this.bannerId).subscribe({
-        next: () => {
-          this.snackBar.open('Banner mis à jour avec succès!', 'Fermer', { duration: 3000 });
-          this.router.navigate(['/admin/banner']);
-        },
-        error: (err) => {
-          this.spinnerProgress = false;
-          let errorMessage = 'Erreur lors de la mise à jour du banner';
-          
-          if (err.status === 409 || err.status === 404 || err.status === 400) {
-            errorMessage = err.error;
-          }
-  
-          this.dialog.open(ErrorDialogComponent, {
-            data: { message: errorMessage }
-          });
+    if (this.bannerListForm.invalid || !this.bannerId) {
+      this.bannerListForm.markAllAsTouched();
+      return;
+    }
+
+    this.spinnerProgress = true;
+    const banner: BannerINPUT = {
+      ...this.bannerListForm.value,
+      idBanner: this.bannerId
+    };
+
+    const formData = new FormData();
+    formData.append('banner', JSON.stringify(banner));
+    if (this.selectedFile) {
+      formData.append('image', this.selectedFile);
+    }
+
+    this.bannerService.modifierBannerAvecImage(formData, this.bannerId).subscribe({
+      next: () => {
+        this.snackBar.open('Banner mis à jour avec succès!', 'Fermer', { duration: 3000 });
+        this.router.navigate(['/admin/banner']);
+      },
+      error: (err) => {
+        this.spinnerProgress = false;
+        let errorMessage = 'Erreur lors de la mise à jour du banner';
+
+        if (err.status === 409 || err.status === 404 || err.status === 400) {
+          errorMessage = err.error;
         }
-      });
-    }
-  
-    annulerBanner() {
-      this.router.navigate(['/admin/banner']);
-    }
+
+        this.dialog.open(ErrorDialogComponent, {
+          data: { message: errorMessage }
+        });
+      }
+    });
+  }
+
+  annulerBanner() {
+    this.router.navigate(['/admin/banner']);
+  }
 
 }

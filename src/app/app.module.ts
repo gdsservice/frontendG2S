@@ -85,6 +85,7 @@ import { QuillModule } from 'ngx-quill';
 import { BannerComponent } from './component/banner/banner.component';
 import { AddBannerComponent } from './component/banner/add-banner/add-banner.component';
 import { UpdateBannerComponent } from './component/banner/update-banner/update-banner.component';
+import { ConfirmationDialogSuppBannerComponent } from './component/popup-dialog/confirmation-dialog-supp-banner/confirmation-dialog-supp-banner.component';
 
 
 
@@ -138,6 +139,7 @@ import { UpdateBannerComponent } from './component/banner/update-banner/update-b
   BannerComponent,
   AddBannerComponent,
   UpdateBannerComponent,
+  ConfirmationDialogSuppBannerComponent,
 //   CommandeDetailsComponent,
 
 	],
