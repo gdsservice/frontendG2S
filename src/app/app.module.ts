@@ -86,6 +86,10 @@ import { BannerComponent } from './component/banner/banner.component';
 import { AddBannerComponent } from './component/banner/add-banner/add-banner.component';
 import { UpdateBannerComponent } from './component/banner/update-banner/update-banner.component';
 import { ConfirmationDialogSuppBannerComponent } from './component/popup-dialog/confirmation-dialog-supp-banner/confirmation-dialog-supp-banner.component';
+import { CollectionsComponent } from './component/collections/collections.component';
+import { ConfirmationDialogSuppCollectionComponent } from './component/popup-dialog/confirmation-dialog-supp-collection/confirmation-dialog-supp-collection.component';
+import { AddCollectionComponent } from './component/collections/add-collection/add-collection.component';
+import { UpdateCollectionComponent } from './component/collections/update-collection/update-collection.component';
 
 
 
@@ -140,6 +144,10 @@ import { ConfirmationDialogSuppBannerComponent } from './component/popup-dialog/
   AddBannerComponent,
   UpdateBannerComponent,
   ConfirmationDialogSuppBannerComponent,
+  CollectionsComponent,
+  ConfirmationDialogSuppCollectionComponent,
+  AddCollectionComponent,
+  UpdateCollectionComponent,
 //   CommandeDetailsComponent,
 
 	],

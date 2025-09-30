@@ -1,0 +1,127 @@
+.container-body {
+  height: auto;
+  margin: 20px;
+}
+
+table {
+  width: 100%;
+}
+
+mat-divider {
+  margin: 10px 0;
+}
+
+td{
+  padding: 5px;
+  margin: 10px;
+  text-align: center;
+}
+
+mat-card-header {
+  margin: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+mat-card-title {
+  font-weight: 550;
+  font-size: 25px;
+}
+
+mat-card-actions {
+  display: flex;
+  gap: 10px;
+}
+
+button {
+  margin: 10px 2px 0 0;
+  border-radius: 5px;
+  font-weight: 500;
+}
+
+.add {
+  color: #6B3C5C;
+  font-weight: bolder;
+  background-color: white;
+}
+
+.add:hover {
+  color: white;
+  font-weight: bold;
+  background-color: #6B3C5C;
+}
+
+.modifierIcon {
+  color: blue;
+}
+
+.supprimerIcon {
+  color: red;
+}
+
+.detailsIcon {
+  color: #de0aff;
+}
+
+.details:hover,
+.modifier:hover,
+.supprimer:hover {
+  color: white;
+  width: 100%;
+  background-color: rgba(107, 60, 92, 0.75);
+}
+
+.text-vert {
+  color: green;
+  font-weight: bold;
+}
+
+.text-rouge {
+  color: red;
+  font-weight: bold;
+}
+
+.image-cell {
+  padding: 2px !important;
+  margin: 0 !important;
+  text-align: center;
+  vertical-align: middle;
+}
+
+img {
+  width: 80px; 
+  height: auto;
+  object-fit: contain;
+  margin: 0 !important;
+  padding: 0 !important;
+  display: block;
+}
+
+
+/*Version mobile*/
+@media (max-width: 768px) {
+  .card-content {
+    grid-template-columns: 1fr;
+  }
+
+  .mat-card-header,
+  .header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  mat-card-actions {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  mat-card-title {
+    font-size: 25px;
+  }
+
+  button {
+    margin: 0;
+    font-size: 14px;
+  }
+}

@@ -10,8 +10,6 @@ import { BannerDAO } from '../models/banner-dao';
 })
 export class BannerService {
 
-  banners: BannerDAO[] = [];
-
   constructor(private http: HttpClient) { }
 
   addBanner(formData: FormData): Observable<BannerINPUT> {

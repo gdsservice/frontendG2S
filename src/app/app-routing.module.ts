@@ -33,6 +33,9 @@ import { CommandeDetailsComponent } from './component/commande/commande-details/
 import { BannerComponent } from './component/banner/banner.component';
 import { AddBannerComponent } from './component/banner/add-banner/add-banner.component';
 import { UpdateBannerComponent } from './component/banner/update-banner/update-banner.component';
+import { CollectionsComponent } from './component/collections/collections.component';
+import { AddCollectionComponent } from './component/collections/add-collection/add-collection.component';
+import { UpdateCollectionComponent } from './component/collections/update-collection/update-collection.component';
 
 const routes: Routes = [
   {path: "", component: LoginComponent},
@@ -70,6 +73,9 @@ const routes: Routes = [
       {path: "banner", component: BannerComponent},
       {path: "addBanner", component: AddBannerComponent},
       {path: "updateBanner/:idBanner", component: UpdateBannerComponent},
+      {path: "collection", component: CollectionsComponent},
+      {path: "addCollection", component: AddCollectionComponent},
+      {path: "updateCollection/:idCollection", component: UpdateCollectionComponent},
       {
         path: 'utilisateur', component: UtilisateurComponent,
         canActivate: [AuthorizationGuard],

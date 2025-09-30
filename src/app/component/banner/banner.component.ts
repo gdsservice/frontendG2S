@@ -120,7 +120,7 @@ export class BannerComponent {
                 this.spinnerProgress = false;
                 this.ngOnInit();
                 this.snackBar.open('Banner a ete supprimer avec succès!', 'Fermer', { duration: 3500 });
-                this.router.navigateByUrl("/admin/produit");
+                this.router.navigateByUrl("/admin/banner");
               },
               error => {
                 if (error.status === 409) {

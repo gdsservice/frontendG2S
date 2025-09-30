@@ -2,7 +2,7 @@
   <mat-card>
     <mat-card-header>
       <mat-card-title>
-        BANNERS
+        COLLECTIONS
       </mat-card-title>
       <mat-card-actions>
         <button class="add" (click)="addBanner()" mat-raised-button>
@@ -16,7 +16,7 @@
 
       <mat-form-field appearance="outline">
         <mat-label>Rechercher</mat-label>
-        <input matInput (keyup)="applyFilter($event)" placeholder="Rechercher un banner">
+        <input matInput (keyup)="applyFilter($event)" placeholder="Rechercher une collection">
         <mat-icon matSuffix>search</mat-icon>
       </mat-form-field>
 
@@ -42,50 +42,50 @@
           <!-- Ajouter cette colonne -->
           <ng-container matColumnDef="image">
             <th mat-header-cell *matHeaderCellDef>IMAGE</th>
-            <td class="image-cell"  mat-cell *matCellDef="let banner">
-              <img *ngIf="banner.imageUrl" [src]="banner.imageUrl" class="image-produit"
-                (error)="banner.imageUrl = 'assets/images/default-banner.png'">
-              <img *ngIf="!banner.imageUrl" src="assets/images/default-banner.png" class="image-produit">
+            <td class="image-cell"  mat-cell *matCellDef="let collections">
+              <img *ngIf="collections.imageUrl" [src]="collections.imageUrl" class="image-produit"
+                (error)="collections.imageUrl = 'assets/images/default-collections.png'">
+              <img *ngIf="!collections.imageUrl" src="assets/images/default-collections.png" class="image-produit">
             </td>
           </ng-container>
 
           <!-- Titre Column -->
           <ng-container matColumnDef="titre" class="mat-elevation-z8">
             <th mat-header-cell *matHeaderCellDef mat-sort-header> TITRE </th>
-            <td mat-cell *matCellDef="let banner"> {{banner.titre}} </td>
+            <td mat-cell *matCellDef="let collections"> {{collections.titre}} </td>
           </ng-container>
 
           <!-- Sous Titre Column -->
           <ng-container matColumnDef="sous_titre" class="mat-elevation-z8">
             <th mat-header-cell *matHeaderCellDef mat-sort-header> SOUS TITRE </th>
-            <td mat-cell *matCellDef="let banner"> {{banner.sous_titre}} </td>
+            <td mat-cell *matCellDef="let collections"> {{collections.sous_titre}} </td>
           </ng-container>
 
           <!-- texte btn Column -->
           <ng-container matColumnDef="btn_text" class="mat-elevation-z8">
             <th mat-header-cell *matHeaderCellDef mat-sort-header> TEXTE BOUTON </th>
-            <td mat-cell *matCellDef="let banner"> {{banner.btn_text}} </td>
+            <td mat-cell *matCellDef="let collections"> {{collections.btn_text}} </td>
           </ng-container>
 
           <!-- Lien btn Column -->
           <ng-container matColumnDef="btn_link" class="mat-elevation-z8">
             <th mat-header-cell *matHeaderCellDef mat-sort-header> LIEN BOUTON </th>
-            <td mat-cell *matCellDef="let banner"> {{banner.btn_link}} </td>
+            <td mat-cell *matCellDef="let collections"> {{collections.btn_link}} </td>
           </ng-container>
 
           <!-- action Column -->
           <ng-container matColumnDef="action" class="mat-elevation-z8">
             <th mat-header-cell *matHeaderCellDef> ACTION </th>
-            <td mat-cell *matCellDef="let banner">
+            <td mat-cell *matCellDef="let collections">
               <button mat-icon-button [matMenuTriggerFor]="menu">
                 <mat-icon>more_vert</mat-icon>
               </button>
               <mat-menu #menu="matMenu">
-                <button class="modifier" mat-menu-item (click)="modifier(banner.idBanner)">
+                <button class="modifier" mat-menu-item (click)="modifier(collections.idCollection)">
                   <mat-icon class="modifierIcon">edit</mat-icon>
                   <span>Modifier</span>
                 </button>
-                <button class="supprimer" mat-menu-item (click)="supprimer(banner.idBanner)">
+                <button class="supprimer" mat-menu-item (click)="supprimer(collections.idCollection)">
                   <mat-icon class="supprimerIcon">delete</mat-icon>
                   <span>Supprimer</span>
                 </button>
